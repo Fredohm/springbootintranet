@@ -1,12 +1,10 @@
 package org.fredohm.springbootintranet.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "meeting")
+@Table(name = "meetings")
 public class Meeting extends BaseEntity {
 
     @Column(name = "title")
@@ -39,11 +37,13 @@ public class Meeting extends BaseEntity {
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "meeting_room_id")
-    private Long meetingRoomId;
+    @ManyToOne
+    @JoinColumn(name = "meeting_room_id")
+    private MeetingRoom meetingRoom;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public String getMeetingTitle() {
         return meetingTitle;
@@ -125,19 +125,19 @@ public class Meeting extends BaseEntity {
         this.notes = notes;
     }
 
-    public Long getMeetingRoomId() {
-        return meetingRoomId;
+    public MeetingRoom getMeetingRoom() {
+        return meetingRoom;
     }
 
-    public void setMeetingRoomId(Long meetingRoomId) {
-        this.meetingRoomId = meetingRoomId;
+    public void setMeetingRoom(MeetingRoom meetingRoom) {
+        this.meetingRoom = meetingRoom;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,11 +1,11 @@
 package org.fredohm.springbootintranet.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "meeting_room")
+@Table(name = "meeting_rooms")
 public class MeetingRoom extends BaseEntity {
 
     @Column(name = "name")
@@ -22,6 +22,9 @@ public class MeetingRoom extends BaseEntity {
 
     @Column(name = "available")
     private Boolean available;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingRoom")
+    private Set<Meeting> meetings = new HashSet<>();
 
     public String getName() {
         return name;
@@ -61,5 +64,13 @@ public class MeetingRoom extends BaseEntity {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Set<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(Set<Meeting> meetings) {
+        this.meetings = meetings;
     }
 }
