@@ -7,9 +7,9 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "meeting")
-public class Booking extends BaseEntity {
+public class Meeting extends BaseEntity {
 
-    @Column(name = "itle")
+    @Column(name = "title")
     private String meetingTitle;
 
     @Column(name = "leader")
