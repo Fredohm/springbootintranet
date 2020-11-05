@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.fredohm</groupId>
-    <artifactId>springbootintranet</artifactId>
+    <groupId>org.springbootintranet.fredohm</groupId>
+    <artifactId>org.springbootintranet</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
@@ -14,7 +14,7 @@
 
     <packaging>pom</packaging>
 
-    <name>springbootintranet</name>
+    <name>org.springbootintranet</name>
     <description>New version of intranet using SpringBoot</description>
 
     <parent>
@@ -52,7 +52,7 @@
 
     <scm>
         <developerConnection>
-            scm:git:https://github.com/Fredohm/springbootintranet.git
+            scm:git:https://github.com/Fredohm/org.springbootintranet.git
         </developerConnection>
         <tag>sfg-pet-clinic-0.0.5</tag>
     </scm>
@@ -60,8 +60,8 @@
     <distributionManagement>
         <repository>
             <id>internal.repo</id>
-            <name>Internal repo for springbootintranet</name>
-            <url>file:d:/temp/repo/springbootintranet</url>
+            <name>Internal repo for org.springbootintranet</name>
+            <url>file:d:/temp/repo/org.springbootintranet</url>
         </repository>
     </distributionManagement>
 
