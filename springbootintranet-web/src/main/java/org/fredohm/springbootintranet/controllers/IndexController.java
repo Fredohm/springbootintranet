@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.controller;
+package org.fredohm.springbootintranet.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
