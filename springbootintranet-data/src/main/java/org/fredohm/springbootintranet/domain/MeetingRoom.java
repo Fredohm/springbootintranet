@@ -12,7 +12,7 @@ public class MeetingRoom extends BaseEntity {
     private String name;
 
     @Column(name = "capacity")
-    private String capacity;
+    private Integer capacity;
 
     @Column(name = "location")
     private String location;
@@ -34,11 +34,11 @@ public class MeetingRoom extends BaseEntity {
         this.name = name;
     }
 
-    public String getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
