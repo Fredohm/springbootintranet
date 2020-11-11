@@ -5,8 +5,31 @@
     <title>Meeting-rooms list</title>
 </head>
 <body>
-    <h2>Intranet - Booking</h2>
-    <h3>List of Meeting rooms</h3>
+    <div>
+        <h2>Intranet - Booking</h2>
+        <h3>List of meeting-rooms</h3>
+    </div>
+
+    <br />
+    <hr>
+
+    <div>
+        <table>
+            <tr>
+                <th>Meeting-room</th>
+                <th>Number of places</th>
+                <th>Link</th>
+            </tr>
+            <tr th:each="meetingRoom : ${meetingRooms}">
+                <td th:text="${meetingRoom.name}">name</td>
+                <td th:text="${meetingRoom.capacity}">capacity</td>
+                <td>
+                    <a th:text="'view'" th:href="@{/meeting-room/display}">view</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <br />
     <hr>
 

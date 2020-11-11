@@ -5,8 +5,31 @@
     <title>Users list</title>
 </head>
 <body>
-    <h2>Intranet - Booking</h2>
-    <h3>List of users</h3>
+    <div>
+        <h2>Intranet - Booking</h2>
+        <h3>List of users</h3>
+    </div>
+
+    <br />
+    <hr>
+
+    <div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Link</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}">name</td>
+                <td th:text="${user.email}">capacity</td>
+                <td>
+                    <a th:text="'view'" th:href="@{/user/display}">view</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <br />
     <hr>
 
