@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Meeting-rooms list</title>
@@ -9,6 +9,7 @@
     <h3>List of Meeting rooms</h3>
     <br />
     <hr>
-    <a href="/index">Back to home page</a>
+
+    <a href="/index" th:href="@{/index}">Back to home page</a>
 </body>
 </html>
