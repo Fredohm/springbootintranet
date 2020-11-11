@@ -2,9 +2,11 @@ package org.fredohm.springbootintranet.services.map;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class MeetingRoomMapService extends AbstractMapService<MeetingRoom, Long> implements MeetingRoomService {
 
     @Override

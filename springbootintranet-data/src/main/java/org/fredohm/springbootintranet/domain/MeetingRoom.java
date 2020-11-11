@@ -73,4 +73,16 @@ public class MeetingRoom extends BaseEntity {
     public void setMeetings(Set<Meeting> meetings) {
         this.meetings = meetings;
     }
+
+    @Override
+    public String toString() {
+        return "MeetingRoom{" +
+                "name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", available=" + available +
+                ", meetings=" + meetings +
+                '}';
+    }
 }

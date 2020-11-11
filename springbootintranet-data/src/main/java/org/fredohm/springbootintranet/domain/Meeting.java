@@ -140,4 +140,22 @@ public class Meeting extends BaseEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "meetingTitle='" + meetingTitle + '\'' +
+                ", meetingLeader='" + meetingLeader + '\'' +
+                ", membersNb=" + membersNb +
+                ", meetingDate=" + meetingDate +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", drinks=" + drinks +
+                ", food=" + food +
+                ", projection=" + projection +
+                ", notes='" + notes + '\'' +
+                ", meetingRoom=" + meetingRoom.getName() +
+                ", user=" + user.getUsername() +
+                '}';
+    }
 }

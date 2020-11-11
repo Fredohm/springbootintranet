@@ -1,6 +1,10 @@
 package org.fredohm.springbootintranet.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,8 +26,8 @@ public class User extends BaseEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "user")
-    private Set<Meeting> meetings;
+    @OneToMany(mappedBy = "user")
+    private Set<Meeting> meetings = new HashSet<>();
 
     public String getUsername() {
         return username;
@@ -71,5 +75,17 @@ public class User extends BaseEntity {
 
     public void setMeetings(Set<Meeting> meetings) {
         this.meetings = meetings;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", meetings=" + meetings +
+                '}';
     }
 }
