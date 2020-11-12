@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Meeting-room display</title>
@@ -10,6 +10,13 @@
         <h3>Meeting-room</h3>
         <br />
         <hr>
+
+        <h3><span th:text="${meetingRoom.name}">Nom de la salle</span></h3>
+        <p th:text="${meetingRoom.capacity}">capacity</p>
+        <p th:text="${meetingRoom.location}">location</p>
+        <p th:text="${meetingRoom.description}">description</p>
+        <p th:text="${meetingRoom.available ? 'Libre' : 'Indisponibe'}">available</p>
+        <p th:text="Liste des meetings">meetings</p>
     </div>
 </body>
 </html>
