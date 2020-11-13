@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User display</title>
@@ -8,8 +8,26 @@
     <div>
         <h2>Intranet - Booking</h2>
         <h3>User</h3>
-        <br />
+    </div>
+    <br />
+    <hr>
+
+    <div>
+        <h3><span th:text="${user.username}">Username</span></h3>
+        <hr>
+        <p th:text="'First name: ' + ${user.firstName}">First name</p>
+        <p th:text="'Last name: ' + ${user.lastName}">Last name</p>
+        <p th:text="'Email: ' + ${user.email}">Email</p>
+        <table>
+            <th>List of meetings</th>
+            <tr th:each="meeting : ${user.meetings}">
+                <td th:text="${meeting.meetingTitle}">Meeting</td>
+            </tr>
+        </table>
         <hr>
     </div>
+    <br />
+    <hr>
+    <a href="/user/list" th:href="@{/user/list}">back</a>
 </body>
 </html>

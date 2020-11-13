@@ -8,15 +8,26 @@
     <div>
         <h2>Intranet - Booking</h2>
         <h3>Meeting-room</h3>
-        <br />
-        <hr>
-
-        <h3><span th:text="${meetingRoom.name}">Nom de la salle</span></h3>
-        <p th:text="${meetingRoom.capacity}">capacity</p>
-        <p th:text="${meetingRoom.location}">location</p>
-        <p th:text="${meetingRoom.description}">description</p>
-        <p th:text="${meetingRoom.available ? 'Libre' : 'Indisponibe'}">available</p>
-        <p th:text="Liste des meetings">meetings</p>
     </div>
+    <br />
+    <hr>
+
+    <div>
+        <h3><span th:text="${meetingRoom.name}">Nom de la salle</span></h3>
+        <hr>
+        <p th:text="'Number of places: ' + ${meetingRoom.capacity}">capacity</p>
+        <p th:text="'Location: ' + ${meetingRoom.location}">location</p>
+        <p th:text="'Description: ' + ${meetingRoom.description}">description</p>
+        <p th:text="${meetingRoom.available ? 'Available' : 'Not available'}">available</p>
+        <table>
+            <th>List of meetings</th>
+            <tr th:each="meeting : ${meetingRoom.meetings}">
+                <td th:text="${meeting.meetingTitle}">Meeting</td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+    <br />
+    <a href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
 </body>
 </html>

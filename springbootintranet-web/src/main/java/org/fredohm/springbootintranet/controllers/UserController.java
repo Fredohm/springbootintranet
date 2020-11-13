@@ -4,6 +4,7 @@ import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,8 +25,11 @@ public class UserController {
         return "user/list";
     }
 
-    @GetMapping({"/display", "/display.html"})
-    public String display() {
+    @GetMapping("/display/{id}")
+    public String display(Model model, @PathVariable("id") Long id) {
+
+        model.addAttribute("user", userService.findById(id));
+
         return "user/display";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Meeting display</title>
@@ -8,8 +8,23 @@
     <div>
         <h2>Intranet - Booking</h2>
         <h3>Meeting</h3>
-        <br />
+    </div>
+    <br />
+    <hr>
+    <div>
+        <h3><span th:text="${meeting.meetingTitle}">Meeting Title</span></h3>
+        <hr>
+        <p th:text="'Date: ' + ${meeting.meetingDate}">Date</p>
+        <p th:text="'Start: ' + ${meeting.startTime}">Start time</p>
+        <p th:text="'End: ' + ${meeting.endTime}">End Time</p>
+        <p th:text="'Meeting room: ' + ${meeting.meetingRoom.name}">Meeting room</p>
+        <p th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
+        <p th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
+        <p th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
+        <p th:text="'reserved by: ' + ${meeting.user.username}">Username</p>
         <hr>
     </div>
+    <br />
+    <a href="/meeting/list" th:href="@{/meeting/list}">back</a>
 </body>
 </html>

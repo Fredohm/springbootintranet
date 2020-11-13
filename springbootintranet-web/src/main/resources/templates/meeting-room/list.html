@@ -24,7 +24,7 @@
                 <td th:text="${meetingRoom.name}">name</td>
                 <td th:text="${meetingRoom.capacity}">capacity</td>
                 <td>
-                    <a th:text="'view'" th:href="@{/meeting-room/display(id=${meetingRoom.id})}">view</a>
+                    <a th:text="'view'" th:href="@{/meeting-room/display/{id}(id = ${meetingRoom.id})}">view</a>
                 </td>
             </tr>
         </table>

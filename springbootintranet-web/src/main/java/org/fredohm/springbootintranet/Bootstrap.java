@@ -67,7 +67,7 @@ public class Bootstrap implements CommandLineRunner {
 
         Meeting staff1 = new Meeting();
         staff1.setUser(admin);
-        staff1.setMeetingTitle("staff1");
+        staff1.setMeetingTitle("staff 1");
         staff1.setMeetingRoom(salle1);
         staff1.setMeetingLeader("boss");
         staff1.setMembersNb(4);
