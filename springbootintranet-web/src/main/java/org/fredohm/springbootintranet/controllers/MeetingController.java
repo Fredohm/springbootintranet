@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,5 +32,15 @@ public class MeetingController {
         model.addAttribute("meeting", meetingService.findById(id));
 
         return "meeting/display";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model) {
+
+        Meeting meeting = new Meeting();
+
+        model.addAttribute("meeting", meeting);
+
+        return "meeting/add-form";
     }
 }

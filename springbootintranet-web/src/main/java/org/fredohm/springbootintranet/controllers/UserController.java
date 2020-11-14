@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import org.fredohm.springbootintranet.domain.User;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,5 +32,15 @@ public class UserController {
         model.addAttribute("user", userService.findById(id));
 
         return "user/display";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model) {
+
+        User user = new User();
+
+        model.addAttribute("user", user);
+
+        return "user/add-form";
     }
 }

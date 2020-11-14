@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,5 +32,15 @@ public class MeetingRoomController {
         model.addAttribute("meetingRoom", meetingRoomService.findById(id));
 
         return "meeting-room/display";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model) {
+
+        MeetingRoom meetingRoom = new MeetingRoom();
+
+        model.addAttribute("meetingRoom", meetingRoom);
+
+        return "/meeting-room/add-form";
     }
 }
