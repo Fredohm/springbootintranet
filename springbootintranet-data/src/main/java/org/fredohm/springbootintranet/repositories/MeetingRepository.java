@@ -1,0 +1,8 @@
+package org.fredohm.springbootintranet.repositories;
+
+import org.fredohm.springbootintranet.domain.Meeting;
+import org.springframework.data.repository.CrudRepository;
+
+public interface MeetingRepository extends CrudRepository<Meeting, Long> {
+
+}
