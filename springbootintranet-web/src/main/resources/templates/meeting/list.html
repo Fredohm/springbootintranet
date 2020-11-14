@@ -5,15 +5,12 @@
     <title>Meetings list</title>
 </head>
 <body>
-    <div>
-        <h2>Intranet - Booking</h2>
-        <h3>List of meetings</h3>
+    <div th:replace="fragments/header :: header">
+        <h2>Header</h2>
     </div>
 
-    <br />
-    <hr>
-
     <div>
+        <h3>List of meetings</h3>
         <table>
             <tr>
                 <th>title</th>
@@ -32,9 +29,13 @@
         </table>
     </div>
 
-    <br />
-    <hr>
+    <div>
+        <br />
+        <a href="/index" th:href="@{/index}">Back to home page</a>
+    </div>
 
-    <a href="/index" th:href="@{/index}">Back to home page</a>
+    <div th:replace="fragments/footer :: footer">
+        footer
+    </div>
 </body>
 </html>

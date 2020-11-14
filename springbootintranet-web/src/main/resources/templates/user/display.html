@@ -5,12 +5,9 @@
     <title>User display</title>
 </head>
 <body>
-    <div>
-        <h2>Intranet - Booking</h2>
-        <h3>User</h3>
+    <div th:replace="fragments/header :: header">
+        <h2>Header</h2>
     </div>
-    <br />
-    <hr>
 
     <div>
         <h3><span th:text="${user.username}">Username</span></h3>
@@ -26,8 +23,14 @@
         </table>
         <hr>
     </div>
-    <br />
-    <hr>
-    <a href="/user/list" th:href="@{/user/list}">back</a>
+
+    <div>
+        <br />
+        <a href="/user/list" th:href="@{/user/list}">back</a>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">
+        footer
+    </div>
 </body>
 </html>

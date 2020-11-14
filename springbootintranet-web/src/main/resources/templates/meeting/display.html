@@ -5,12 +5,10 @@
     <title>Meeting display</title>
 </head>
 <body>
-    <div>
-        <h2>Intranet - Booking</h2>
-        <h3>Meeting</h3>
+    <div th:replace="fragments/header :: header">
+        <h2>Header</h2>
     </div>
-    <br />
-    <hr>
+
     <div>
         <h3><span th:text="${meeting.meetingTitle}">Meeting Title</span></h3>
         <hr>
@@ -24,7 +22,14 @@
         <p th:text="'reserved by: ' + ${meeting.user.username}">Username</p>
         <hr>
     </div>
-    <br />
-    <a href="/meeting/list" th:href="@{/meeting/list}">back</a>
+
+    <div>
+        <br />
+        <a href="/meeting/list" th:href="@{/meeting/list}">back</a>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">
+        footer
+    </div>
 </body>
 </html>

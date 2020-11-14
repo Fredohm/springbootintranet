@@ -5,16 +5,13 @@
     <title>Users list</title>
 </head>
 <body>
-    <div>
-        <h2>Intranet - Booking</h2>
-        <h3>List of users</h3>
+    <div th:replace="fragments/header :: header">
+        <h2>Header</h2>
     </div>
-
-    <br />
-    <hr>
 
     <div>
         <table>
+            <h3>List of users</h3>
             <tr>
                 <th>Username</th>
                 <th>Email</th>
@@ -30,9 +27,13 @@
         </table>
     </div>
 
-    <br />
-    <hr>
+    <div>
+        <br />
+        <a href="/index" th:href="@{/index}">Back to home page</a>
+    </div>
 
-    <a href="/index" th:href="@{/index}">Back to home page</a>
+    <div th:replace="fragments/footer :: footer">
+        footer
+    </div>
 </body>
 </html>
