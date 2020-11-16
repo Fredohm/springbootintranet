@@ -18,7 +18,12 @@
         <table>
             <th>List of meetings</th>
             <tr th:each="meeting : ${user.meetings}">
-                <td th:text="${meeting.meetingTitle}">Meeting</td>
+                <td>
+                    <a th:text="${meeting.meetingTitle}"
+                       th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
+                        Meeting
+                    </a>
+                </td>
             </tr>
         </table>
         <hr>

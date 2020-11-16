@@ -19,7 +19,13 @@
         <p th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
         <p th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
         <p th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
-        <p th:text="'reserved by: ' + ${meeting.user.username}">Username</p>
+        <p>
+            reserved by:
+            <a th:text="${meeting.user.username}"
+               th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
+               Username
+            </a>
+        </p>
         <hr>
     </div>
 
