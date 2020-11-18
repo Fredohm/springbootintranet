@@ -16,6 +16,7 @@ class MeetingRoomMapServiceTest {
     @BeforeEach
     void setUp() {
         meetingRoomMapService = new MeetingRoomMapService();
+        meetingRoomMapService.save(new MeetingRoom());
 
     }
 
