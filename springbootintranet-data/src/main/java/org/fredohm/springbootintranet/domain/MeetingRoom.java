@@ -1,12 +1,30 @@
 package org.fredohm.springbootintranet.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@ToString
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "meeting_rooms")
 public class MeetingRoom extends BaseEntity {
+
+    @Builder
+    public MeetingRoom(long id, String name, Integer capacity, String location,
+                       String description, boolean available, Set<Meeting> meetings) {
+        super(id);
+        this.name = name;
+        this.capacity = capacity;
+        this.location = location;
+        this.description = description;
+        this.available = available;
+        this.meetings = meetings;
+    }
 
     @Column(name = "name")
     private String name;
@@ -26,63 +44,4 @@ public class MeetingRoom extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingRoom")
     private Set<Meeting> meetings = new HashSet<>();
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public Set<Meeting> getMeetings() {
-        return meetings;
-    }
-
-    public void setMeetings(Set<Meeting> meetings) {
-        this.meetings = meetings;
-    }
-
-    @Override
-    public String toString() {
-        return "MeetingRoom{" +
-                "name='" + name + '\'' +
-                ", capacity=" + capacity +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", available=" + available +
-                ", meetings=" + meetings +
-                '}';
-    }
 }

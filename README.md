@@ -1,4 +1,4 @@
-# Springboot intranet
+ # Springboot intranet
 project for an intranet with booking meetings
 
 ### Circle CI Build Status

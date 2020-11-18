@@ -1,29 +1,56 @@
 package org.fredohm.springbootintranet.domain;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "meetings")
 public class Meeting extends BaseEntity {
 
-    @Column(name = "title")
-    private String meetingTitle;
+    @Builder
+    public Meeting(Long id, String title, String contact, Integer membersNb, LocalDate date,
+                   LocalDate start,LocalDate end, Boolean drinks, Boolean food, Boolean projection,
+                   String notes, MeetingRoom meetingRoom, User user) {
+        super(id);
+        this.title = title;
+        this.contact = contact;
+        this.membersNb = membersNb;
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.drinks = drinks;
+        this.food = food;
+        this.projection = projection;
+        this.notes = notes;
+        this.meetingRoom = meetingRoom;
+        this.user = user;
+    }
 
-    @Column(name = "leader")
-    private String meetingLeader;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "contact")
+    private String contact;
 
     @Column(name = "members_nb")
     private Integer membersNb;
 
-    @Column(name = "meeting_date")
-    private LocalDate meetingDate;
+    @Column(name = "date")
+    private LocalDate date;
 
-    @Column(name = "start_time")
-    private LocalDate startTime;
+    @Column(name = "start")
+    private LocalDate start;
 
-    @Column(name = "end_time")
-    private LocalDate endTime;
+    @Column(name = "end")
+    private LocalDate end;
 
     @Column(name = "drinks")
     private Boolean drinks;
@@ -45,117 +72,19 @@ public class Meeting extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public String getMeetingTitle() {
-        return meetingTitle;
-    }
-
-    public void setMeetingTitle(String meetingTitle) {
-        this.meetingTitle = meetingTitle;
-    }
-
-    public String getMeetingLeader() {
-        return meetingLeader;
-    }
-
-    public void setMeetingLeader(String meetingLeader) {
-        this.meetingLeader = meetingLeader;
-    }
-
-    public Integer getMembersNb() {
-        return membersNb;
-    }
-
-    public void setMembersNb(Integer membersNb) {
-        this.membersNb = membersNb;
-    }
-
-    public LocalDate getMeetingDate() {
-        return meetingDate;
-    }
-
-    public void setMeetingDate(LocalDate meetingDate) {
-        this.meetingDate = meetingDate;
-    }
-
-    public LocalDate getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDate getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
-    }
-
-    public Boolean getDrinks() {
-        return drinks;
-    }
-
-    public void setDrinks(Boolean drinks) {
-        this.drinks = drinks;
-    }
-
-    public Boolean getFood() {
-        return food;
-    }
-
-    public void setFood(Boolean food) {
-        this.food = food;
-    }
-
-    public Boolean getProjection() {
-        return projection;
-    }
-
-    public void setProjection(Boolean projection) {
-        this.projection = projection;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public MeetingRoom getMeetingRoom() {
-        return meetingRoom;
-    }
-
-    public void setMeetingRoom(MeetingRoom meetingRoom) {
-        this.meetingRoom = meetingRoom;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
     public String toString() {
-        return "Meeting{" +
-                "meetingTitle='" + meetingTitle + '\'' +
-                ", meetingLeader='" + meetingLeader + '\'' +
-                ", membersNb=" + membersNb +
-                ", meetingDate=" + meetingDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", drinks=" + drinks +
-                ", food=" + food +
-                ", projection=" + projection +
-                ", notes='" + notes + '\'' +
-                ", meetingRoom=" + meetingRoom.getName() +
-                ", user=" + user.getUsername() +
-                '}';
+        return "Meeting(title="
+                + this.getTitle()
+                + ", contact=" + this.getContact()
+                + ", membersNb=" + this.getMembersNb()
+                + ", date=" + this.getDate()
+                + ", start=" + this.getStart()
+                + ", end=" + this.getEnd()
+                + ", drinks=" + this.getDrinks()
+                + ", food=" + this.getFood()
+                + ", projection=" + this.getProjection()
+                + ", notes=" + this.getNotes()
+                + ", meetingRoom=" + this.getMeetingRoom().getName()
+                + ", user=" + this.getUser().getUsername() + ")";
     }
 }

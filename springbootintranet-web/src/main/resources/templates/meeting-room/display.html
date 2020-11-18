@@ -20,7 +20,7 @@
             <th>List of meetings</th>
             <tr th:each="meeting : ${meetingRoom.meetings}">
                 <td>
-                    <a th:text="${meeting.meetingTitle}"
+                    <a th:text="${meeting.title}"
                        th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
                         Meeting
                     </a>

@@ -67,13 +67,13 @@ public class Bootstrap implements CommandLineRunner {
 
         Meeting staff1 = new Meeting();
         staff1.setUser(admin);
-        staff1.setMeetingTitle("staff 1");
+        staff1.setTitle("staff 1");
         staff1.setMeetingRoom(salle1);
-        staff1.setMeetingLeader("boss");
+        staff1.setContact("boss");
         staff1.setMembersNb(4);
-        staff1.setMeetingDate(LocalDate.now());
-        staff1.setStartTime(LocalDate.now());
-        staff1.setEndTime(LocalDate.now());
+        staff1.setDate(LocalDate.now());
+        staff1.setStart(LocalDate.now());
+        staff1.setEnd(LocalDate.now());
         staff1.setDrinks(true);
         staff1.setFood(false);
         staff1.setProjection(false);
@@ -82,12 +82,12 @@ public class Bootstrap implements CommandLineRunner {
         Meeting staff2 = new Meeting();
         staff2.setUser(jean);
         staff2.setMeetingRoom(salle2);
-        staff2.setMeetingTitle("Staff 2");
+        staff2.setTitle("Staff 2");
         staff2.setMembersNb(6);
-        staff2.setMeetingLeader("Luffy");
-        staff2.setMeetingDate(LocalDate.now());
-        staff2.setStartTime(LocalDate.now());
-        staff2.setEndTime(LocalDate.now());
+        staff2.setContact("Luffy");
+        staff2.setDate(LocalDate.now());
+        staff2.setStart(LocalDate.now());
+        staff2.setEnd(LocalDate.now());
         staff2.setDrinks(false);
         staff2.setFood(false);
         staff2.setProjection(true);
