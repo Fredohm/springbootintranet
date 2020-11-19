@@ -15,7 +15,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -58,34 +60,32 @@ class MeetingRoomSDJpaServiceTest {
     }
 
     @Test
+    void findByIdNotFound() {
+        when(meetingRoomRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        MeetingRoom meetingRoom = service.findById(1L);
+        assertNull(meetingRoom);
+    }
+
+    @Test
     void save() {
+        MeetingRoom meetingRoomToSave = MeetingRoom.builder().id(1L).build();
+        when(meetingRoomRepository.save(any())).thenReturn(returnMeetingRoom);
+
+        MeetingRoom savedMeetingRoom = service.save(meetingRoomToSave);
+        assertNotNull(savedMeetingRoom);
+        verify(meetingRoomRepository).save(any());
     }
 
     @Test
     void delete() {
+        service.delete(returnMeetingRoom);
+        verify(meetingRoomRepository).delete(any());
     }
 
     @Test
     void deleteById() {
-    }
-
-    @Test
-    void testFindAll() {
-    }
-
-    @Test
-    void testFindById() {
-    }
-
-    @Test
-    void testSave() {
-    }
-
-    @Test
-    void testDelete() {
-    }
-
-    @Test
-    void testDeleteById() {
+        service.deleteById(1L);
+        verify(meetingRoomRepository).deleteById(anyLong());
     }
 }
