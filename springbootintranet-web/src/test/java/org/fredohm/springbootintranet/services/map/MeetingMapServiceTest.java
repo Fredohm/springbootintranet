@@ -5,15 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapServiceTest {
-
-    UserMapService userMapService;
-    Long userId = 1L;
+class MeetingMapServiceTest {
 
     @BeforeEach
     void setUp() {
-        userMapService = new UserMapService();
-
     }
 
     @Test

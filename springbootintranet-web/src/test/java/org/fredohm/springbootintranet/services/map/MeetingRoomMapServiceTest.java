@@ -16,7 +16,7 @@ class MeetingRoomMapServiceTest {
     @BeforeEach
     void setUp() {
         meetingRoomMapService = new MeetingRoomMapService();
-        meetingRoomMapService.save(new MeetingRoom());
+        meetingRoomMapService.save(MeetingRoom.builder().id(meetingRoomId).build());
 
     }
 
@@ -28,10 +28,13 @@ class MeetingRoomMapServiceTest {
 
     @Test
     void findById() {
+        MeetingRoom meetingRoom = meetingRoomMapService.findById(meetingRoomId);
+        assertEquals(meetingRoomId, meetingRoom.getId());
     }
 
     @Test
     void save() {
+
     }
 
     @Test
