@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class MeetingRoomSDJpaServiceTest {
 
+    final Long meetingRoomId = 1L;
+
     @Mock
     MeetingRoomRepository meetingRoomRepository;
 
@@ -36,7 +38,7 @@ class MeetingRoomSDJpaServiceTest {
 
     @BeforeEach
     void setUp() {
-        returnMeetingRoom = MeetingRoom.builder().id(1L).build();
+        returnMeetingRoom = MeetingRoom.builder().id(meetingRoomId).build();
     }
 
     @Test
@@ -55,7 +57,7 @@ class MeetingRoomSDJpaServiceTest {
     void findById() {
         when(meetingRoomRepository.findById(anyLong())).thenReturn(Optional.of(returnMeetingRoom));
 
-        MeetingRoom meetingRoom = service.findById(1L);
+        MeetingRoom meetingRoom = service.findById(meetingRoomId);
         assertNotNull(meetingRoom);
     }
 
@@ -63,13 +65,13 @@ class MeetingRoomSDJpaServiceTest {
     void findByIdNotFound() {
         when(meetingRoomRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        MeetingRoom meetingRoom = service.findById(1L);
+        MeetingRoom meetingRoom = service.findById(meetingRoomId);
         assertNull(meetingRoom);
     }
 
     @Test
     void save() {
-        MeetingRoom meetingRoomToSave = MeetingRoom.builder().id(1L).build();
+        MeetingRoom meetingRoomToSave = MeetingRoom.builder().id(meetingRoomId).build();
         when(meetingRoomRepository.save(any())).thenReturn(returnMeetingRoom);
 
         MeetingRoom savedMeetingRoom = service.save(meetingRoomToSave);
