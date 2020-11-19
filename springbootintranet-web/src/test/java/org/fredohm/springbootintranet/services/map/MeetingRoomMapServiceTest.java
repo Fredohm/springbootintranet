@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MeetingRoomMapServiceTest {
 
@@ -34,14 +34,21 @@ class MeetingRoomMapServiceTest {
 
     @Test
     void save() {
-
+        Long id = 2L;
+        MeetingRoom meetingRoom2 =meetingRoomMapService.save(MeetingRoom.builder().id(id).build());
+        MeetingRoom savedMeetingRoom = meetingRoomMapService.save(meetingRoom2);
+        assertEquals(id, savedMeetingRoom.getId());
     }
 
     @Test
     void delete() {
+        meetingRoomMapService.delete(meetingRoomMapService.findById(meetingRoomId));
+        assertEquals(0, meetingRoomMapService.findAll().size());
     }
 
     @Test
     void deleteById() {
+        meetingRoomMapService.deleteById(meetingRoomId);
+        assertEquals(0, meetingRoomMapService.findAll().size());
     }
 }
