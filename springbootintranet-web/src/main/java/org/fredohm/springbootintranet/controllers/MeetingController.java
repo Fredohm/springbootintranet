@@ -23,7 +23,7 @@ public class MeetingController {
 
         model.addAttribute("meetings", meetingService.findAll());
 
-        return "/meeting/list";
+        return "meeting/list";
     }
 
     @GetMapping("/display/{id}")

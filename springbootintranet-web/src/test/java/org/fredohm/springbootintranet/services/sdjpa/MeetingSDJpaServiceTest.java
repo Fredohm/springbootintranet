@@ -92,6 +92,6 @@ class MeetingSDJpaServiceTest {
     @Test
     void deleteById() {
         service.deleteById(meetingId);
-        verify(meetingRepository).deleteById(anyLong());
+        verify(meetingRepository).deleteById(anyLong() );
     }
 }

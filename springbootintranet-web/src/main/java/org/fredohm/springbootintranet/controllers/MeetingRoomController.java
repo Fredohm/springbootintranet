@@ -18,7 +18,7 @@ public class MeetingRoomController {
         this.meetingRoomService = meetingRoomService;
     }
 
-    @GetMapping({"/list", "/list.html"})
+    @GetMapping("/list")
     public String list(Model model) {
 
         model.addAttribute("meetingRooms", meetingRoomService.findAll());
@@ -41,6 +41,6 @@ public class MeetingRoomController {
 
         model.addAttribute("meetingRoom", meetingRoom);
 
-        return "/meeting-room/add-form";
+        return "meeting-room/add-form";
     }
 }
