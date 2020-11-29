@@ -11,8 +11,30 @@
 
     <div>
         <br />
-        Add form here
-        <br />
+        <form th:object="${meetingRoom}" th:action="@{/meeting-room/processAddForm}" method="post">
+            <label>
+                Name: <input type="text" th:field="*{name}">
+            </label>
+            <br />
+            <label>
+                Capacity: <input type="text" th:field="*{capacity}">
+            </label>
+            <br />
+            <label>
+                Location: <input type="text" th:field="*{location}">
+            </label>
+            <br />
+            <label>
+                Description: <textarea type="text" th:field="*{description}"></textarea>
+            </label>
+            <br />
+            <label>
+                Available: <input type="checkbox" th:field="*{available}">
+            </label>
+            <br />
+            <button type="submit" value="submit">Submit</button>
+
+            <br />
         <br />
         <hr>
     </div>

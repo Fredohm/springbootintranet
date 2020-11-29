@@ -1,9 +1,6 @@
 package org.fredohm.springbootintranet.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"meetingRoom", "user"})
 @Table(name = "meetings")
 public class Meeting extends BaseEntity {
 
@@ -71,7 +69,7 @@ public class Meeting extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
+/*
     public String toString() {
         return "Meeting(title="
                 + this.getTitle()
@@ -86,5 +84,5 @@ public class Meeting extends BaseEntity {
                 + ", notes=" + this.getNotes()
                 + ", meetingRoom=" + this.getMeetingRoom().getName()
                 + ", user=" + this.getUser().getUsername() + ")";
-    }
+    }*/
 }
