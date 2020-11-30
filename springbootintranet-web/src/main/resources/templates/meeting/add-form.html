@@ -11,7 +11,47 @@
 
     <div>
         <br />
-        Add form here
+        <form th:object="${meeting}" th:action="@{/meeting/processAddForm}" method="post">
+            <label>
+                Title: <input type="text" th:field="*{title}">
+            </label>
+            <br />
+            <label>
+                Contact: <input type="text" th:field="*{contact}">
+            </label>
+            <br />
+            <label>
+                Date: <input type="date" th:field="*{date}">
+            </label>
+            <br />
+            <label>
+                Start: <input type="date" th:field="*{start}"></input>
+            </label>
+            <br />
+            <label>
+                End: <input type="date" th:field="*{end}">
+            </label>
+            <br />
+            <label>
+                Drinks: <input type="checkbox" th:field="*{drinks}">
+            </label>
+            <br />
+            <label>
+                Food: <input type="checkbox" th:field="*{food}">
+            </label>
+            <br />
+            <label>
+                Projection: <input type="checkbox" th:field="*{projection}">
+            </label>
+            <br />
+            <label>
+                Notes: <textarea type="text" th:field="*{notes}"></textarea>
+            </label>
+            <br />
+            <button type="submit" value="submit">Submit</button>
+
+            <br />
+        </form>
         <br />
         <br />
         <hr>

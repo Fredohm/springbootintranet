@@ -11,7 +11,35 @@
 
     <div>
         <br />
-        Add form here
+        <form th:object="${user}" th:action="@{/user/processAddForm}" method="post">
+            <label>
+                First name: <input type="text" th:field="*{firstName}">
+            </label>
+            <br />
+            <label>
+                Last name: <input type="text" th:field="*{lastName}">
+            </label>
+            <br />
+            <label>
+                Username: <input type="text" th:field="*{username}">
+            </label>
+            <br />
+            <label>
+                Email: <input type="email" th:field="*{email}"></input>
+            </label>
+            <br />
+            <label>
+                Password: <input type="password" th:field="*{password}">
+            </label>
+            <br />
+            <label>
+                Confirm Password: <input type="password" th:field="*{password}">
+            </label>
+            <br />
+            <button type="submit" value="submit">Submit</button>
+
+            <br />
+        </form>
         <br />
         <br />
         <hr>
