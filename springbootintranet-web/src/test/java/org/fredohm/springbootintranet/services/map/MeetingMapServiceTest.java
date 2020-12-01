@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MeetingMapServiceTest {
 
@@ -22,7 +23,7 @@ class MeetingMapServiceTest {
 
     @BeforeEach
     void setUp() {
-        meetingMapService = new MeetingMapService();
+        meetingMapService = new MeetingMapService(meetingRoomMapService);
         meetingMapService.save(Meeting.builder().id(meetingId).build());
 
         meetingRoomMapService = new MeetingRoomMapService();

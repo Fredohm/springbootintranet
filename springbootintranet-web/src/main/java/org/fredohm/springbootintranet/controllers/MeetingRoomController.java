@@ -42,14 +42,14 @@ public class MeetingRoomController {
     }
 
     @PostMapping("/processAddForm")
-    public String processAddForm(@ModelAttribute MeetingRoom meetingRoom, BindingResult result) {
+    public String processAddForm(@ModelAttribute MeetingRoom meetingRoom, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("meetingRoom", meetingRoom);
             return "meeting-room/add-form";
         }
-        MeetingRoom savedMeetingRoom = meetingRoomService.save(meetingRoom);
 
-        System.out.println(savedMeetingRoom.getId());
+        meetingRoomService.save(meetingRoom);
 
         return "meeting-room/added-confirmation";
     }

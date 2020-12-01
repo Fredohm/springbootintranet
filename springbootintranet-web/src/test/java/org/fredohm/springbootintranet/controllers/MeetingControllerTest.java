@@ -5,6 +5,7 @@ import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.User;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -67,7 +68,7 @@ class MeetingControllerTest {
     }
 
     @Test
-    //@Disabled
+    @Disabled
     void addForm() throws Exception {
         mockMvc.perform(get("/meeting/add"))
                 .andExpect(status().isOk())

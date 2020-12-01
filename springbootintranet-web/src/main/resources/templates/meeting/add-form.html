@@ -19,17 +19,26 @@
             <label>
                 Contact: <input type="text" th:field="*{contact}">
             </label>
-            <br />
             <label>
-                Date: <input type="date" th:field="*{date}">
+                Meeting room:
+                <select th:field="*{meetingRoom}">
+                    <option th:each="meetingRoomEach : ${meetingRoomList}"
+                            th:value="${meetingRoomEach.id}"
+                            th:text="${meetingRoomEach.name}">
+                    </option>
+                </select>
             </label>
             <br />
             <label>
-                Start: <input type="date" th:field="*{start}"></input>
+                Date: <input type="text" placeholder="dd-mm-yyyy" th:field="*{date}" th:value="${#temporals.format(meeting.date, 'dd-MM-yyyy')}"/>
             </label>
             <br />
             <label>
-                End: <input type="date" th:field="*{end}">
+                Start: <input type="text" placeholder="dd-mm-yyyy" th:field="*{start}" th:value="${#temporals.format(meeting.start, 'dd-MM-yyyy')}"/>
+            </label>
+            <br />
+            <label>
+                End: <input type="text" placeholder="dd-mm-yyyy" th:field="*{end}" th:value="${#temporals.format(meeting.end, 'dd-MM-yyyy')}"/>
             </label>
             <br />
             <label>

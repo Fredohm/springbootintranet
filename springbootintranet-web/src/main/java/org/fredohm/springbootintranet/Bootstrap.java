@@ -34,7 +34,7 @@ public class Bootstrap implements CommandLineRunner {
 
         User admin = new User();
         admin.setUsername("admin");
-        admin.setPassword("admin");
+        //admin.setPassword("admin");
         admin.setFirstName("Frédéric");
         admin.setLastName("Ohm");
         admin.setEmail("fredohm@onepiece.com");
@@ -42,7 +42,7 @@ public class Bootstrap implements CommandLineRunner {
 
         User jean = new User();
         jean.setUsername("usoppu");
-        jean.setPassword("usoppu");
+        //jean.setPassword("usoppu");
         jean.setFirstName("Jean");
         jean.setLastName("Dupont");
         jean.setEmail("ussoppu@onepiece.com");

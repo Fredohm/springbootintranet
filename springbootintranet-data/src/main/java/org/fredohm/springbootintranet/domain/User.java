@@ -18,11 +18,11 @@ import java.util.Set;
 public class User extends BaseEntity {
 
     @Builder
-    public User(Long id, String username, String password, String firstName, String lastName,
+    public User(Long id, String username/*, String password*/, String firstName, String lastName,
                 String email, Set<Meeting> meetings) {
         super(id);
         this.username = username;
-        this.password = password;
+        //this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -31,10 +31,10 @@ public class User extends BaseEntity {
 
     @Column(name = "username")
     private String username;
-
+/*
     @Column(name = "password")
     private String password;
-
+*/
     @Column(name = "first_name")
     private String firstName;
 
