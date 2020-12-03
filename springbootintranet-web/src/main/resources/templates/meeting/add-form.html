@@ -19,9 +19,10 @@
             <label>
                 Contact: <input type="text" th:field="*{contact}">
             </label>
+            <br />
             <label>
                 Meeting room:
-                <select th:field="*{meetingRoom}">
+                <select th:field="*{meetingRoom.id}">
                     <option th:each="meetingRoomEach : ${meetingRoomList}"
                             th:value="${meetingRoomEach.id}"
                             th:text="${meetingRoomEach.name}">

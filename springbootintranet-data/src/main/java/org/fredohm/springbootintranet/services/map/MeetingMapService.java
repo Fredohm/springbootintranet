@@ -5,6 +5,7 @@ import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class MeetingMapService extends AbstractMapService<Meeting, Long> impleme
         return super.findById(id);
     }
 
+    @Transactional
     @Override
     public Meeting save(Meeting meeting) {
 

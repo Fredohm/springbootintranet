@@ -1,12 +1,15 @@
 package org.fredohm.springbootintranet.controllers;
 
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/meeting")
@@ -48,7 +51,7 @@ public class MeetingController {
     }
 
     @PostMapping("/processAddForm")
-    public String processAddForm(@ModelAttribute Meeting meeting, BindingResult result, Model model) {
+    public String processAddForm(@Valid @ModelAttribute Meeting meeting, @RequestParam("meetingRoom.id") Long id, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             System.out.println(result.toString());
@@ -56,6 +59,11 @@ public class MeetingController {
             return "meeting/add-form";
         }
 
+        MeetingRoom updateMeetingRoom = meetingRoomService.findById(id);
+        updateMeetingRoom.getMeetings().add(meeting);
+        meetingRoomService.save(updateMeetingRoom);
+
+        meeting.setMeetingRoom(meetingRoomService.findById(id));
         meetingService.save(meeting);
 
         return "meeting/added-confirmation";
