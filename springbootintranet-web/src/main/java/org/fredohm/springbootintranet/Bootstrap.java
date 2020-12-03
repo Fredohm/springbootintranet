@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 
 @Component
@@ -72,8 +73,8 @@ public class Bootstrap implements CommandLineRunner {
         staff1.setContact("boss");
         staff1.setMembersNb(4);
         staff1.setDate(LocalDate.now());
-        staff1.setStart(LocalDate.now());
-        staff1.setEnd(LocalDate.now());
+        staff1.setStart(LocalTime.now());
+        staff1.setEnd(LocalTime.now());
         staff1.setDrinks(true);
         staff1.setFood(false);
         staff1.setProjection(false);
@@ -86,8 +87,8 @@ public class Bootstrap implements CommandLineRunner {
         staff2.setMembersNb(6);
         staff2.setContact("Luffy");
         staff2.setDate(LocalDate.now());
-        staff2.setStart(LocalDate.now());
-        staff2.setEnd(LocalDate.now());
+        staff2.setStart(LocalTime.now());
+        staff2.setEnd(LocalTime.now());
         staff2.setDrinks(false);
         staff2.setFood(false);
         staff2.setProjection(true);

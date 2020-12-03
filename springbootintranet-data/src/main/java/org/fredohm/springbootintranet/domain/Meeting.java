@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Setter
 @Getter
@@ -16,7 +17,7 @@ public class Meeting extends BaseEntity {
 
     @Builder
     public Meeting(Long id, String title, String contact, Integer membersNb, LocalDate date,
-                   LocalDate start,LocalDate end, Boolean drinks, Boolean food, Boolean projection,
+                   LocalTime start,LocalTime end, Boolean drinks, Boolean food, Boolean projection,
                    String notes, MeetingRoom meetingRoom, User user) {
         super(id);
         this.title = title;
@@ -47,12 +48,12 @@ public class Meeting extends BaseEntity {
     private LocalDate date;
 
     @Column(name = "start")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate start;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime start;
 
     @Column(name = "end")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate end;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime end;
 
     @Column(name = "drinks")
     private Boolean drinks;

@@ -35,11 +35,11 @@
             </label>
             <br />
             <label>
-                Start: <input type="text" placeholder="dd/mm/yyyy" th:field="*{start}" th:value="${#temporals.format(meeting.start, 'dd/MM/yyyy')}"/>
+                Start: <input type="text" placeholder="HH:mm:ss" th:field="*{start}" th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}"/>
             </label>
             <br />
             <label>
-                End: <input type="text" placeholder="dd/mm/yyyy" th:field="*{end}" th:value="${#temporals.format(meeting.end, 'dd/MM/yyyy')}"/>
+                End: <input type="text" placeholder="HH:mm:ss" th:field="*{end}" th:value="${#temporals.format(meeting.end, 'HH:mm:ss')}"/>
             </label>
             <br />
             <label>
