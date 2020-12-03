@@ -43,15 +43,15 @@ public class Meeting extends BaseEntity {
     private Integer membersNb;
 
     @Column(name = "date")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
 
     @Column(name = "start")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate start;
 
     @Column(name = "end")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate end;
 
     @Column(name = "drinks")

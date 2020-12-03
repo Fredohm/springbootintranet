@@ -12,9 +12,9 @@
     <div>
         <h3><span th:text="${meeting.title}">Meeting Title</span></h3>
         <hr>
-        <p th:text="'Date: ' + ${meeting.date}">Date</p>
-        <p th:text="'Start: ' + ${meeting.start}">Start time</p>
-        <p th:text="'End: ' + ${meeting.end}">End Time</p>
+        <p th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</p>
+        <p th:text="'Start: ' + ${#temporals.format(meeting.start, 'dd/MM/yyyy')}">Start time</p>
+        <p th:text="'End: ' + ${#temporals.format(meeting.end, 'dd/MM/yyyy')}">End Time</p>
         <p th:text="'Meeting room: ' + ${meeting.meetingRoom.name}">Meeting room</p>
         <p th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
         <p th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
