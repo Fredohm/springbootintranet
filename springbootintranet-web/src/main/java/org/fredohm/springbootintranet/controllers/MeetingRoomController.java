@@ -38,7 +38,7 @@ public class MeetingRoomController {
 
         model.addAttribute("meetingRoom", new MeetingRoom());
 
-        return "meeting-room/add-form";
+        return "meeting-room/meeting-room-form";
     }
 
     @PostMapping("/processAddForm")
@@ -46,10 +46,10 @@ public class MeetingRoomController {
 
         if (result.hasErrors()) {
             model.addAttribute("meetingRoom", meetingRoom);
-            return "meeting-room/add-form";
+            return "meeting-room/meeting-room-form";
         }
 
-        meetingRoomService.save(meetingRoom);
+        MeetingRoom savedMeetingRoom = meetingRoomService.save(meetingRoom);
 
         return "meeting-room/added-confirmation";
     }

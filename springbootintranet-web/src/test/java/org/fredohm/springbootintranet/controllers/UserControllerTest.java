@@ -62,6 +62,6 @@ class UserControllerTest {
     void addForm() throws Exception {
         mockMvc.perform(get("/user/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/add-form"));
+                .andExpect(view().name("user/user-form"));
     }
 }

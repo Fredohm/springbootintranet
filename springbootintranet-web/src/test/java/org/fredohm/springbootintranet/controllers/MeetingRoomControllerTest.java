@@ -62,6 +62,6 @@ class MeetingRoomControllerTest {
     void addForm() throws Exception {
         mockMvc.perform(get("/meeting-room/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("meeting-room/add-form"));
+                .andExpect(view().name("meeting-room/meeting-room-form"));
     }
 }

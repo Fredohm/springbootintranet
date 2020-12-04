@@ -40,18 +40,26 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-        return "user/add-form";
+        return "user/user-form";
     }
 
-    @PostMapping("/processAddForm")
-    public String processAddForm(@ModelAttribute User user, BindingResult result, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+
+        model.addAttribute("user", userService.findById(id));
+
+        return "user/user-form";
+    }
+
+    @PostMapping("/processUserForm")
+    public String saveOrUpdateUser(@ModelAttribute User user, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("user", user);
         }
 
-        userService.save(user);
+        User savedUser = userService.save(user);
 
-        return "user/added-confirmation";
+        return "redirect:/user/display/" + savedUser.getId();
     }
 }

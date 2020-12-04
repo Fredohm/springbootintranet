@@ -15,13 +15,17 @@
             <tr>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Link</th>
+                <th>View</th>
+                <th>Update</th>
             </tr>
             <tr th:each="user : ${users}">
                 <td th:text="${user.username}">name</td>
                 <td th:text="${user.email}">capacity</td>
                 <td>
                     <a th:text="'view'" th:href="@{/user/display/{id}(id = ${user.id})}">view</a>
+                </td>
+                <td>
+                    <a th:text="'update'" th:href="@{/user/update/{id}(id = ${user.id})}">Update</a>
                 </td>
             </tr>
         </table>
