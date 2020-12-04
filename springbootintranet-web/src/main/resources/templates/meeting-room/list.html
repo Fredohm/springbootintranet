@@ -15,13 +15,17 @@
             <tr>
                 <th>Meeting-room</th>
                 <th>Number of places</th>
-                <th>Link</th>
+                <th>View</th>
+                <th>Update</th>
             </tr>
             <tr th:each="meetingRoom : ${meetingRooms}">
                 <td th:text="${meetingRoom.name}">name</td>
                 <td th:text="${meetingRoom.capacity}">capacity</td>
                 <td>
                     <a th:text="'view'" th:href="@{/meeting-room/display/{id}(id = ${meetingRoom.id})}">view</a>
+                </td>
+                <td>
+                    <a th:text="'update'" th:href="@{/meeting-room/update/{id}(id = ${meetingRoom.id})}">Update</a>
                 </td>
             </tr>
         </table>

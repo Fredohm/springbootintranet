@@ -47,16 +47,25 @@ public class MeetingController {
         model.addAttribute("meeting", meeting);
         model.addAttribute("meetingRoomList", meetingRoomService.findAll());
 
-        return "meeting/add-form";
+        return "meeting/meeting-form";
     }
 
-    @PostMapping("/processAddForm")
-    public String processAddForm(@Valid @ModelAttribute Meeting meeting, @RequestParam("meetingRoom.id") Long id, BindingResult result, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+
+        model.addAttribute("meeting", meetingService.findById(id));
+        model.addAttribute("meetingRoomList", meetingRoomService.findAll());
+
+        return "meeting/meeting-form";
+    }
+
+    @PostMapping("/processMeetingForm")
+    public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting, @RequestParam("meetingRoom.id") Long id, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             System.out.println(result.toString());
             model.addAttribute("meeting", meeting);
-            return "meeting/add-form";
+            return "meeting/meeting-form";
         }
 
         MeetingRoom updateMeetingRoom = meetingRoomService.findById(id);
@@ -64,8 +73,8 @@ public class MeetingController {
         meetingRoomService.save(updateMeetingRoom);
 
         meeting.setMeetingRoom(meetingRoomService.findById(id));
-        meetingService.save(meeting);
+        Meeting savedMeeting = meetingService.save(meeting);
 
-        return "meeting/added-confirmation";
+        return "redirect:/meeting/display/" + savedMeeting.getId();
     }
 }

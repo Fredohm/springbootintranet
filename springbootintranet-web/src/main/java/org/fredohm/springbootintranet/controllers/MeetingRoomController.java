@@ -41,8 +41,16 @@ public class MeetingRoomController {
         return "meeting-room/meeting-room-form";
     }
 
-    @PostMapping("/processAddForm")
-    public String processAddForm(@ModelAttribute MeetingRoom meetingRoom, BindingResult result, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+
+        model.addAttribute("meetingRoom", meetingRoomService.findById(id));
+
+        return "meeting-room/meeting-room-form";
+    }
+
+    @PostMapping("/processMeetingRoomForm")
+    public String saveOrUpdateMeetingRoom(@ModelAttribute MeetingRoom meetingRoom, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("meetingRoom", meetingRoom);
@@ -51,6 +59,6 @@ public class MeetingRoomController {
 
         MeetingRoom savedMeetingRoom = meetingRoomService.save(meetingRoom);
 
-        return "meeting-room/added-confirmation";
+        return "redirect:/meeting-room/display/" + savedMeetingRoom.getId();
     }
 }

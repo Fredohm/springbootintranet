@@ -56,6 +56,7 @@ public class UserController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", user);
+            return "user/user-form";
         }
 
         User savedUser = userService.save(user);

@@ -11,7 +11,8 @@
 
     <div>
         <br />
-        <form th:object="${meeting}" th:action="@{/meeting/processAddForm}" method="post">
+        <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
+            <input th:type="hidden" th:field="*{id}"/>
             <label>
                 Title: <input type="text" th:field="*{title}">
             </label>
