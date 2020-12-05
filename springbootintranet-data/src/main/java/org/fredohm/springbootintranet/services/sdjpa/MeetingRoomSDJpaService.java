@@ -6,6 +6,7 @@ import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +23,7 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
         this.meetingRepository = meetingRepository;
     }
 
+    @Transactional
     @Override
     public Set<MeetingRoom> findAll() {
 
@@ -30,21 +32,25 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
         return meetingRooms;
     }
 
+    @Transactional
     @Override
     public MeetingRoom findById(Long id) {
         return meetingRoomRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     @Override
     public MeetingRoom save(MeetingRoom meetingRoom) {
         return meetingRoomRepository.save(meetingRoom);
     }
 
+    @Transactional
     @Override
     public void delete(MeetingRoom meetingRoom) {
         meetingRoomRepository.delete(meetingRoom);
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
         meetingRoomRepository.deleteById(id);

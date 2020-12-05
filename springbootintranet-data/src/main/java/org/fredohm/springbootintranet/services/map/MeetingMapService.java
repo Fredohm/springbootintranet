@@ -19,12 +19,14 @@ public class MeetingMapService extends AbstractMapService<Meeting, Long> impleme
         this.meetingRoomService = meetingRoomService;
     }
 
+    @Transactional
     @Override
     public Set<Meeting> findAll() {
 
         return super.findAll();
     }
 
+    @Transactional
     @Override
     public Meeting findById(Long id) {
 
@@ -38,12 +40,14 @@ public class MeetingMapService extends AbstractMapService<Meeting, Long> impleme
         return super.save(meeting);
     }
 
+    @Transactional
     @Override
     public void delete(Meeting meeting) {
 
         super.delete(meeting);
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
 

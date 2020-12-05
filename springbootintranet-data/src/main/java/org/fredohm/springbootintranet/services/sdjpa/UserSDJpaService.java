@@ -5,6 +5,7 @@ import org.fredohm.springbootintranet.repositories.UserRepository;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class UserSDJpaService implements UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     @Override
     public Set<User> findAll() {
 
@@ -27,21 +29,25 @@ public class UserSDJpaService implements UserService {
         return users;
     }
 
+    @Transactional
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     @Override
     public User save(User user) {
         return userRepository.save(user);
     }
 
+    @Transactional
     @Override
     public void delete(User user) {
         userRepository.delete(user);
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);

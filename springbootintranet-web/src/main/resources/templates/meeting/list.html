@@ -18,6 +18,7 @@
                 <th>date</th>
                 <th>View</th>
                 <th>Update</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="meeting : ${meetings}">
                 <td th:text="${meeting.title}">title</td>
@@ -28,6 +29,9 @@
                 </td>
                 <td>
                     <a th:text="'update'" th:href="@{/meeting/update/{id}(id = ${meeting.id})}">update</a>
+                </td>
+                <td>
+                    <a th:text="delete" th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">delete</a>
                 </td>
             </tr>
         </table>

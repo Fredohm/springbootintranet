@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MeetingRoomMapServiceTest {
 
     MeetingRoomMapService meetingRoomMapService;
+
     final Long meetingRoomId = 1L;
 
     @BeforeEach

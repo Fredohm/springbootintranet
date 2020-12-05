@@ -41,7 +41,7 @@ public class MeetingRoom extends BaseEntity {
     @Column(name = "available")
     private Boolean available;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
     private Set<Meeting> meetings = new HashSet<>();
 
 }

@@ -63,4 +63,12 @@ public class UserController {
 
         return "redirect:/user/display/" + savedUser.getId();
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+
+        userService.deleteById(id);
+
+        return "redirect:/user/list";
+    }
 }

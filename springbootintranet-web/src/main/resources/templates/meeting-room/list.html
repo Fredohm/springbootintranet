@@ -17,6 +17,7 @@
                 <th>Number of places</th>
                 <th>View</th>
                 <th>Update</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="meetingRoom : ${meetingRooms}">
                 <td th:text="${meetingRoom.name}">name</td>
@@ -25,7 +26,10 @@
                     <a th:text="'view'" th:href="@{/meeting-room/display/{id}(id = ${meetingRoom.id})}">view</a>
                 </td>
                 <td>
-                    <a th:text="'update'" th:href="@{/meeting-room/update/{id}(id = ${meetingRoom.id})}">Update</a>
+                    <a th:text="'update'" th:href="@{/meeting-room/update/{id}(id = ${meetingRoom.id})}">update</a>
+                </td>
+                <td>
+                    <a th:text="'delete'" th:href="@{/meeting-room/delete/{id}(id = ${meetingRoom.id})}">delete</a>
                 </td>
             </tr>
         </table>

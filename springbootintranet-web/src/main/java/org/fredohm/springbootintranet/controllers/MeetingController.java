@@ -70,11 +70,19 @@ public class MeetingController {
 
         MeetingRoom updateMeetingRoom = meetingRoomService.findById(id);
         updateMeetingRoom.getMeetings().add(meeting);
-        meetingRoomService.save(updateMeetingRoom);
+        //meetingRoomService.save(updateMeetingRoom);
 
         meeting.setMeetingRoom(meetingRoomService.findById(id));
         Meeting savedMeeting = meetingService.save(meeting);
 
         return "redirect:/meeting/display/" + savedMeeting.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+
+        meetingService.deleteById(id);
+
+        return "redirect:/meeting/list";
     }
 }
