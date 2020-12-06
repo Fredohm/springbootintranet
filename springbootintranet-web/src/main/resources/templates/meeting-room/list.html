@@ -14,9 +14,9 @@
 <div th:replace="fragments/header :: header">
     <h2>Header</h2>
 </div>
-<div>
+<div class="container">
     <h3>List of meeting-rooms</h3>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>Meeting-room</th>
             <th>Number of places</th>
@@ -39,15 +39,12 @@
         </tr>
     </table>
     <br />
-    <br />
     <hr>
 </div>
-<div>
+<div class="container">
     <br />
     <a href="/meeting-room/add" th:href="@{/meeting-room/add}">Add a meeting-room</a>
     <br />
-    <br />
-    <a href="/index" th:href="@{/index}">Back to home page</a>
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

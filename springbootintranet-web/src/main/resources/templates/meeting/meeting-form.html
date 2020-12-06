@@ -14,7 +14,7 @@
 <div th:replace="fragments/header :: header">
     <h2>Header</h2>
 </div>
-<div>
+<div class="container">
     <br />
     <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
         <input th:type="hidden" th:field="*{id}"/>
@@ -61,20 +61,20 @@
         </label>
         <br />
         <label>
-            Notes: <textarea type="text" th:field="*{notes}"></textarea>
+            Notes: <textarea th:field="*{notes}"></textarea>
         </label>
         <br />
         <button type="submit" value="submit">Submit</button>
-
         <br />
     </form>
     <br />
     <br />
     <hr>
 </div>
-<div>
+<div class="container">
     <br />
     <a href="/meeting/list" th:href="@{/meeting/list}">back</a>
+    <br />
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

@@ -11,51 +11,46 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-    <div th:replace="fragments/header :: header">
-        <h2>Header</h2>
-    </div>
+<div th:replace="fragments/header :: header">
+    <h2>Header</h2>
+</div>
+<div class="container">
+    <h3>List of meetings</h3>
+    <table class="table table-striped">
+        <tr>
+            <th>title</th>
+            <th>meeting room</th>
+            <th>date</th>
+            <th>View</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="meeting : ${meetings}">
+            <td th:text="${meeting.title}">title</td>
+            <td th:text="${meeting.meetingRoom.name}">name</td>
+            <td th:text="${meeting.date}">date</td>
+            <td>
+                <a th:text="'link'" th:href="@{/meeting/display/{id}(id = ${meeting.id})}">view</a>
+            </td>
+            <td>
+                <a th:text="'update'" th:href="@{/meeting/update/{id}(id = ${meeting.id})}">update</a>
+            </td>
+            <td>
+                <a th:text="delete" th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">delete</a>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr>
+</div>
+<div class="container">
+    <br />
+    <a href="/meeting/add" th:href="@{/meeting/add}">Add a meeting</a>
+    <br />
+</div>
 
-    <div>
-        <h3>List of meetings</h3>
-        <table>
-            <tr>
-                <th>title</th>
-                <th>meeting room</th>
-                <th>date</th>
-                <th>View</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-            <tr th:each="meeting : ${meetings}">
-                <td th:text="${meeting.title}">title</td>
-                <td th:text="${meeting.meetingRoom.name}">name</td>
-                <td th:text="${meeting.date}">date</td>
-                <td>
-                    <a th:text="'link'" th:href="@{/meeting/display/{id}(id = ${meeting.id})}">view</a>
-                </td>
-                <td>
-                    <a th:text="'update'" th:href="@{/meeting/update/{id}(id = ${meeting.id})}">update</a>
-                </td>
-                <td>
-                    <a th:text="delete" th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">delete</a>
-                </td>
-            </tr>
-        </table>
-        <br />
-        <br />
-        <hr>
-    </div>
-
-    <div>
-        <br />
-        <a href="/meeting/add" th:href="@{/meeting/add}">Add a meeting</a>
-        <br />
-        <br />
-        <a href="/index" th:href="@{/index}">Back to home page</a>
-    </div>
-
-    <div th:replace="fragments/footer :: footer">
-        footer
-    </div>
+<div th:replace="fragments/footer :: footer">
+    footer
+</div>
 </body>
 </html>

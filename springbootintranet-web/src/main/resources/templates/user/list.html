@@ -14,8 +14,8 @@
 <div th:replace="fragments/header :: header">
     <h2>Header</h2>
 </div>
-<div>
-    <table>
+<div class="container">
+    <table class="table table-striped">
         <h3>List of users</h3>
         <tr>
             <th>Username</th>
@@ -39,15 +39,12 @@
         </tr>
     </table>
     <br />
-    <br />
     <hr>
 </div>
-<div>
+<div class="container">
     <br />
     <a href="/user/add" th:href="@{/user/add}">Add an user</a>
     <br />
-    <br />
-    <a href="/index" th:href="@{/index}">Back to home page</a>
 </div>
 <div th:replace="fragments/footer :: footer">
     footer
