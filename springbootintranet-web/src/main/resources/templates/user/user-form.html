@@ -17,33 +17,32 @@
 <div class="container">
     <br />
     <form th:object="${user}" th:action="@{/user/processUserForm}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <label>
-            First name: <input type="text" th:field="*{firstName}">
-        </label>
+        <div class="form-group row">
+            <label class="col-sm-2" for="firstName">First name</label>
+            <input id="firstName" class="form-control col-sm-4" th:field="*{firstName}" type="text"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="lastName">Last name</label>
+            <input id="lastName" class="form-control col-sm-4" th:field="*{lastName}" type="text" />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="username">Username</label>
+            <input id="username" class="form-control col-sm-4" th:field="*{username}" type="text" />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="email">Email address</label>
+            <input id="email" class="form-control col-sm-4" th:field="*{email}" type="email" placeholder="name@example.com">
+        </div>
         <br />
-        <label>
-            Last name: <input type="text" th:field="*{lastName}">
-        </label>
-        <br />
-        <label>
-            Username: <input type="text" th:field="*{username}">
-        </label>
-        <br />
-        <label>
-            Email: <input type="email" th:field="*{email}"/>
-        </label>
-        <br />
-        <button  type="submit" value="submit">Submit</button>
+        <button type="submit" class="btn btn-dark" value="submit">Submit</button>
         <br />
     </form>
-    <br />
     <br />
     <hr>
 </div>
 <div class="container">
     <br />
-    <a href="/meeting/list" th:href="@{/user/list}">back</a>
+    <a class="btn btn-dark" href="/meeting/list" th:href="@{/user/list}">back</a>
     <br />
 </div>
 <div th:replace="fragments/footer :: footer">

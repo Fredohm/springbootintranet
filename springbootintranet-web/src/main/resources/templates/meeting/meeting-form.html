@@ -18,53 +18,64 @@
     <br />
     <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
         <input th:type="hidden" th:field="*{id}"/>
-        <label>
-            Title: <input type="text" th:field="*{title}">
-        </label>
-        <br />
-        <label>
-            Contact: <input type="text" th:field="*{contact}">
-        </label>
-        <br />
-        <label>
-            Meeting room:
-            <select th:field="*{meetingRoom.id}">
+        <div class="form-group row">
+            <label class="col-sm-2" for="title">Title</label>
+            <input id="title" class="form-control col-sm-4" th:field="*{title}" type="text"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="contact">Contact</label>
+            <input id="contact" class="form-control col-sm-4" th:field="*{contact}" type="text"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="meetingRoom">Meeting room</label>
+            <select id="meetingRoom" th:field="*{meetingRoom.id}">
                 <option th:each="meetingRoomEach : ${meetingRoomList}"
                         th:value="${meetingRoomEach.id}"
                         th:text="${meetingRoomEach.name}">
                 </option>
             </select>
-        </label>
-        <br />
-        <label>
-            Date: <input type="text" placeholder="dd/mm/yyyy" th:field="*{date}" th:value="${#temporals.format(meeting.date, 'dd/MM/yyyy')}"/>
-        </label>
-        <br />
-        <label>
-            Start: <input type="text" placeholder="HH:mm:ss" th:field="*{start}" th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}"/>
-        </label>
-        <br />
-        <label>
-            End: <input type="text" placeholder="HH:mm:ss" th:field="*{end}" th:value="${#temporals.format(meeting.end, 'HH:mm:ss')}"/>
-        </label>
-        <br />
-        <label>
-            Drinks: <input type="checkbox" th:field="*{drinks}">
-        </label>
-        <br />
-        <label>
-            Food: <input type="checkbox" th:field="*{food}">
-        </label>
-        <br />
-        <label>
-            Projection: <input type="checkbox" th:field="*{projection}">
-        </label>
-        <br />
-        <label>
-            Notes: <textarea th:field="*{notes}"></textarea>
-        </label>
-        <br />
-        <button type="submit" value="submit">Submit</button>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="date">Date</label>
+            <input id="date" class="form-control col-sm-4" th:field="*{date}"
+                   th:value="${#temporals.format(meeting.date, 'dd/MM/yyyy')}" type="text"
+                   placeholder="dd/mm/yyyy"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="start">Start</label>
+            <input id="start" class="form-control col-sm-4" th:field="*{start}"
+                   th:value="${#temporals.format(meeting.start, 'HH/mm/ss')}" type="text"
+                   placeholder="hh/mm/ss"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="end">End</label>
+            <input id="end" class="form-control col-sm-4" th:field="*{end}"
+                   th:value="${#temporals.format(meeting.end, 'HH/mm/ss')}" type="text"
+                   placeholder="hh/mm/ss"/>
+        </div>
+        <div class="form-check">
+            <input id="drinks" class="form-check-input" type="checkbox" th:field="*{drinks}" value="" >
+            <label class="form-check-label" for="drinks">
+                Drinks
+            </label>
+        </div>
+        <div class="form-check">
+            <input id="food" class="form-check-input" type="checkbox" th:field="*{food}" value="" >
+            <label class="form-check-label" for="food">
+                Food
+            </label>
+        </div>
+        <div class="form-check">
+            <input id="projection" class="form-check-input" type="checkbox" th:field="*{projection}" value="" >
+            <label class="form-check-label" for="projection">
+                Projection
+            </label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="notes">Notes</label>
+            <textarea id="notes" class="form-control col-sm-4" th:field="*{notes}" rows="3"></textarea>
+        </div>
+        <button class="btn btn-dark" type="submit" value="submit">Submit</button>
         <br />
     </form>
     <br />
