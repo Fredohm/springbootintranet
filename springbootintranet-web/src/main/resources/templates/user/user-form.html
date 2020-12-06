@@ -17,6 +17,7 @@
 <div class="container">
     <br />
     <form th:object="${user}" th:action="@{/user/processUserForm}" method="post">
+        <input th:type="hidden" th:field="*{id}"/>
         <div class="form-group row">
             <label class="col-sm-2" for="firstName">First name</label>
             <input id="firstName" class="form-control col-sm-4" th:field="*{firstName}" type="text"/>
