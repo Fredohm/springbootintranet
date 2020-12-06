@@ -14,7 +14,7 @@
 <div th:replace="fragments/header :: header">
     <h2>Header</h2>
 </div>
-<div>
+<div class="container">
     <h3><span th:text="${user.username}">Username</span></h3>
     <hr>
     <p th:text="'First name: ' + ${user.firstName}">First name</p>
@@ -33,7 +33,7 @@
     </table>
     <hr>
 </div>
-<div>
+<div class="container">
     <br />
     <a href="/user/list" th:href="@{/user/list}">back</a>
 </div>

@@ -14,7 +14,7 @@
 <div th:replace="fragments/header :: header">
     <h2>Header</h2>
 </div>
-<div>
+<div class="container">
     <h3><span th:text="${meeting.title}">Meeting Title</span></h3>
     <hr>
     <p th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</p>
@@ -33,7 +33,7 @@
     </p-->
     <hr>
 </div>
-<div>
+<div class="container">
     <br />
     <a href="/meeting/list" th:href="@{/meeting/list}">back</a>
 </div>
