@@ -1,7 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
 import org.fredohm.springbootintranet.domain.Meeting;
-import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.springframework.stereotype.Controller;
@@ -68,9 +67,7 @@ public class MeetingController {
             return "meeting/meeting-form";
         }
 
-        MeetingRoom updateMeetingRoom = meetingRoomService.findById(id);
-        updateMeetingRoom.getMeetings().add(meeting);
-        //meetingRoomService.save(updateMeetingRoom);
+        meetingRoomService.findById(id).getMeetings().add(meeting);
 
         meeting.setMeetingRoom(meetingRoomService.findById(id));
         Meeting savedMeeting = meetingService.save(meeting);
