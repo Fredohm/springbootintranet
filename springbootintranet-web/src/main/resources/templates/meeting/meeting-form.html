@@ -16,6 +16,7 @@
 </div>
 <div class="container">
     <br />
+    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting'"></h3>
     <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
         <input th:type="hidden" th:field="*{id}"/>
         <div class="form-group row">
@@ -75,7 +76,7 @@
             <label class="col-sm-2" for="notes">Notes</label>
             <textarea id="notes" class="form-control col-sm-4" th:field="*{notes}" rows="3"></textarea>
         </div>
-        <button class="btn btn-dark" type="submit" value="submit">Submit</button>
+        <button class="btn btn-dark" type="submit" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
         <br />
     </form>
     <br />

@@ -16,6 +16,7 @@
 </div>
 <div class="container">
     <br />
+    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' user'"></h3>
     <form th:object="${user}" th:action="@{/user/processUserForm}" method="post">
         <input th:type="hidden" th:field="*{id}"/>
         <div class="form-group row">
@@ -35,7 +36,7 @@
             <input id="email" class="form-control col-sm-4" th:field="*{email}" type="email" placeholder="name@example.com">
         </div>
         <br />
-        <button type="submit" class="btn btn-dark" value="submit">Submit</button>
+        <button type="submit" class="btn btn-dark" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
         <br />
     </form>
     <br />
