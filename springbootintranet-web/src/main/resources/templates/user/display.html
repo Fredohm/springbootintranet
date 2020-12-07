@@ -15,27 +15,19 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <h3><span th:text="${user.username}">Username</span></h3>
-    <hr>
-    <p th:text="'First name: ' + ${user.firstName}">First name</p>
-    <p th:text="'Last name: ' + ${user.lastName}">Last name</p>
-    <p th:text="'Email: ' + ${user.email}">Email</p>
-    <table>
-        <th>List of meetings</th>
-        <tr th:each="meeting : ${user.meetings}">
-            <td>
-                <a th:text="${meeting.title}"
-                   th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
-                    Meeting
-                </a>
-            </td>
-        </tr>
-    </table>
-    <hr>
+    <div class="card col-sm-6" style="width: 18rem;">
+        <div class="card-body"></div>
+        <h5 class="card-title" th:text="${user.username}">Username></h5>
+        <hr>
+        <p class="card-text" th:text="'First name: ' + ${user.firstName}">First name</p>
+        <p class="card-text" th:text="'Last name: ' + ${user.lastName}">Last name</p>
+        <p class="card-text mb-4" th:text="'Email: ' + ${user.email}">Email</p>
+        <br />
+    </div>
 </div>
 <div class="container">
     <br />
-    <a class="btn btn-dark" href="/user/list" th:href="@{/user/list}">back</a>
+    <a class="btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

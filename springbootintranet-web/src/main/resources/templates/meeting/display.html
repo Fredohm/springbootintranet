@@ -15,23 +15,25 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <h3><span th:text="${meeting.title}">Meeting Title</span></h3>
-    <hr>
-    <p th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</p>
-    <p th:text="'Start: ' + ${#temporals.format(meeting.start, 'HH:mm:ss')}">Start time</p>
-    <p th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
-    <p th:text="'Meeting room: ' + ${meeting.meetingRoom.name}">Meeting room</p>
-    <p th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
-    <p th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
-    <p th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
-    <!--p>
-        reserved by:
-        <a th:text="${meeting.user.username}"
-           th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
-            Username
-        </a>
-    </p-->
-    <hr>
+    <div class="card col-sm-6" style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="card-title" th:text="${meeting.title}">Meeting Title</h3>
+            <h4 class="card-subtitle mb-4 text-muted" th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</h4>
+            <p class="card-text" th:text="'Start: ' + ${#temporals.format(meeting.start, 'HH:mm:ss')}">Start time</p>
+            <p class="card-text" th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
+            <p class="card-text" th:text="'Meeting room: ' + ${meeting.meetingRoom.name}">Meeting room</p>
+            <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
+            <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
+            <p class="card-text" th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
+            <!--p class="card-text">
+                reserved by:
+                <a th:text="${meeting.user.username}"
+                   th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
+                    Username
+                </a>
+            </p-->
+        </div>
+    </div>
 </div>
 <div class="container">
     <br />
