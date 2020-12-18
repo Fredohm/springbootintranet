@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
@@ -8,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 @RequestMapping("/meeting-room")
 public class MeetingRoomController {
@@ -53,10 +57,13 @@ public class MeetingRoomController {
     }
 
     @PostMapping("/processMeetingRoomForm")
-    public String saveOrUpdateMeetingRoom(@ModelAttribute MeetingRoom meetingRoom, BindingResult result, Model model) {
+    public String saveOrUpdateMeetingRoom(@Valid @ModelAttribute MeetingRoom meetingRoom, BindingResult result) {
 
         if (result.hasErrors()) {
-            model.addAttribute("meetingRoom", meetingRoom);
+            result.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
             return "meeting-room/meeting-room-form";
         }
 

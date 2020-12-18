@@ -41,7 +41,7 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
     @Transactional
     @Override
     public MeetingRoom save(MeetingRoom meetingRoom) {
-        return meetingRoomRepository.save(meetingRoom);
+         return meetingRoomRepository.save(meetingRoom);
     }
 
     @Transactional
