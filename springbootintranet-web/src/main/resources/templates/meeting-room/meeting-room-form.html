@@ -34,15 +34,36 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="capacity">Capacity</label>
-            <input id="capacity" class="form-control col-sm-4" th:field="*{capacity}" type="text"/>
+            <input type="text" id="capacity" class="form-control col-sm-4" th:field="*{capacity}" th:errorclass="has-error"/>
+            <div class="cols-sm-6" th:class="${#fields.hasErrors('capacity')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <span class="text-danger" th:if="${#fields.hasErrors('capacity')}">
+                  <ul>
+                    <li th:each="err : ${#fields.errors('capacity')}" th:text="${err}"/>
+                  </ul>
+                </span>
+            </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="location">Location</label>
-            <input id="location" class="form-control col-sm-4" th:field="*{location}" type="text"/>
+            <input type="text" id="location" class="form-control col-sm-4" th:field="*{location}" th:errorclass="has-error"/>
+            <div class="cols-sm-6" th:class="${#fields.hasErrors('location')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <span class="text-danger" th:if="${#fields.hasErrors('location')}">
+                  <ul>
+                    <li th:each="err : ${#fields.errors('location')}" th:text="${err}"/>
+                  </ul>
+                </span>
+            </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="description">Description</label>
-            <textarea id="description" class="form-control col-sm-4" th:field="*{description}" rows="3"></textarea>
+            <textarea id="description" class="form-control col-sm-4" th:field="*{description}" rows="3" th:errorclass="has-error"></textarea>
+            <div class="cols-sm-6" th:class="${#fields.hasErrors('description')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <span class="text-danger" th:if="${#fields.hasErrors('description')}">
+                  <ul>
+                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+                  </ul>
+                </span>
+            </div>
         </div>
         <div class="form-check">
             <input id="available" class="form-check-input" type="checkbox" th:field="*{available}" value="" >

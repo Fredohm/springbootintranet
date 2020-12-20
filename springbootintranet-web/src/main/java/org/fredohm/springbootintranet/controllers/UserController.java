@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.User;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -52,10 +56,13 @@ public class UserController {
     }
 
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@ModelAttribute User user, BindingResult result, Model model) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute User user, BindingResult result) {
 
         if (result.hasErrors()) {
-            model.addAttribute("user", user);
+            result.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
             return "user/user-form";
         }
 

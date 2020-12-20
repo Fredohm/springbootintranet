@@ -3,8 +3,7 @@ package org.fredohm.springbootintranet.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,17 +27,21 @@ public class MeetingRoom extends BaseEntity {
         this.meetings = meetings;
     }
 
-    @Column(name = "name")
     @NotBlank
     @Size(min = 1, max = 255)
+    @Column(name = "name")
     private String name;
 
+    @NotNull
+    @Min(2)
     @Column(name = "capacity")
     private Integer capacity;
 
+    @NotBlank
     @Column(name = "location")
     private String location;
 
+    @Size(max = 255)
     @Column(name = "description")
     private String description;
 
