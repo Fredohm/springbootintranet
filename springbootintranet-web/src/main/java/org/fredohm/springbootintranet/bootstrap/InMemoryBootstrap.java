@@ -1,33 +1,38 @@
-package org.fredohm.springbootintranet;
+package org.fredohm.springbootintranet.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.User;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.fredohm.springbootintranet.services.UserService;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 
+@Slf4j
 @Component
-public class Bootstrap implements CommandLineRunner {
+@Profile({"default","map"})
+public class InMemoryBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final MeetingRoomService meetingRoomService;
     private final MeetingService meetingService;
     private final UserService userService;
 
-    public Bootstrap(MeetingRoomService meetingRoomService, MeetingService meetingService, UserService userService) {
+    public InMemoryBootstrap(MeetingRoomService meetingRoomService, MeetingService meetingService, UserService userService) {
         this.meetingRoomService = meetingRoomService;
         this.meetingService = meetingService;
         this.userService = userService;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void onApplicationEvent(ContextRefreshedEvent event) {
         loadData();
     }
 
@@ -48,7 +53,6 @@ public class Bootstrap implements CommandLineRunner {
         jean.setLastName("Dupont");
         jean.setEmail("ussoppu@onepiece.com");
         jean.setMeetings(new HashSet<>());
-
 
         MeetingRoom salle1 = new MeetingRoom();
         salle1.setName("salle 1");

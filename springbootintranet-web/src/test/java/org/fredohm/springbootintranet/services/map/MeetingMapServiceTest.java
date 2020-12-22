@@ -23,7 +23,7 @@ class MeetingMapServiceTest {
 
     @BeforeEach
     void setUp() {
-        meetingMapService = new MeetingMapService(meetingRoomMapService);
+        meetingMapService = new MeetingMapService();
         meetingMapService.save(Meeting.builder().id(meetingId).build());
 
         meetingRoomMapService = new MeetingRoomMapService();

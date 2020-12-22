@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile({"dev", "prod", "springdatajpa"})
 public class MeetingRoomSDJpaService implements MeetingRoomService {
 
     private final MeetingRoomRepository meetingRoomRepository;

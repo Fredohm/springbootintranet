@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile({"dev", "prod", "springdatajpa"})
 public class UserSDJpaService implements UserService {
 
     private final UserRepository userRepository;
