@@ -3,7 +3,7 @@ package org.fredohm.springbootintranet.services.sdjpa;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
-import org.fredohm.springbootintranet.repositories.UserRepository;
+import org.fredohm.springbootintranet.repositories.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +31,7 @@ class MeetingSDJpaServiceTest {
     MeetingRoomRepository meetingRoomRepository;
 
     @Mock
-    UserRepository userRepository;
+    AppUserRepository userRepository;
 
     @InjectMocks
     MeetingSDJpaService service;
@@ -47,7 +45,7 @@ class MeetingSDJpaServiceTest {
 
     @Test
     void findAll() {
-        Set<Meeting> returnMeetings = new HashSet<>();
+        List<Meeting> returnMeetings = new ArrayList<>();
         returnMeetings.add(Meeting.builder().id(1L).build());
         returnMeetings.add(Meeting.builder().id(2L).build());
         when(meetingRepository.findAll()).thenReturn(returnMeetings);

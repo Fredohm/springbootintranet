@@ -1,6 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,13 +30,13 @@ class UserControllerTest {
 
     MockMvc mockMvc;
 
-    Set<User> users;
+    Set<AppUser> users;
 
     @BeforeEach
     void setUp() {
         users = new HashSet<>();
-        users.add(User.builder().id(1L).build());
-        users.add(User.builder().id(2L).build());
+        users.add(AppUser.builder().id(1L).build());
+        users.add(AppUser.builder().id(2L).build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }

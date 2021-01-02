@@ -14,12 +14,12 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+@Table(name = "app_users")
+public class AppUser extends BaseEntity {
 
     @Builder
-    public User(Long id, String username/*, String password*/, String firstName, String lastName,
-                String email, Set<Meeting> meetings) {
+    public AppUser(Long id, String username/*, String password*/, String firstName, String lastName,
+                   String email, Set<Meeting> meetings) {
         super(id);
         this.username = username;
         //this.password = password;

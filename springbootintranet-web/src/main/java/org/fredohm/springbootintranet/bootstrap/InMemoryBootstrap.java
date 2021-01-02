@@ -3,7 +3,7 @@ package org.fredohm.springbootintranet.bootstrap;
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.fredohm.springbootintranet.services.UserService;
@@ -38,7 +38,7 @@ public class InMemoryBootstrap implements ApplicationListener<ContextRefreshedEv
 
     private void loadData() {
 
-        User admin = new User();
+        AppUser admin = new AppUser();
         admin.setUsername("admin");
         //admin.setPassword("admin");
         admin.setFirstName("Frédéric");
@@ -46,7 +46,7 @@ public class InMemoryBootstrap implements ApplicationListener<ContextRefreshedEv
         admin.setEmail("fredohm@onepiece.com");
         admin.setMeetings(new HashSet<>());
 
-        User jean = new User();
+        AppUser jean = new AppUser();
         jean.setUsername("usoppu");
         //jean.setPassword("usoppu");
         jean.setFirstName("Jean");

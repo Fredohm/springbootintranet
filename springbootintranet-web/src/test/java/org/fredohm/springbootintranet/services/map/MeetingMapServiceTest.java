@@ -2,7 +2,7 @@ package org.fredohm.springbootintranet.services.map;
 
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,7 @@ class MeetingMapServiceTest {
     void save() {
         Long id = 2L;
         MeetingRoom savedMeetingRoom = meetingRoomMapService.save(MeetingRoom.builder().id(meetingRoomId).build());
-        User savedUser = userMapService.save(User.builder().id(userId).build());
+        AppUser savedUser = userMapService.save(AppUser.builder().id(userId).build());
         Meeting savedMeeting = Meeting.builder().id(id).meetingRoom(savedMeetingRoom).user(savedUser).build();
         assertNotNull(savedMeeting.getMeetingRoom());
         assertNotNull(savedMeeting.getUser());

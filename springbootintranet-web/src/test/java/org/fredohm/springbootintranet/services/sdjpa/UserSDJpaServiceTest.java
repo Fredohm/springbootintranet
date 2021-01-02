@@ -1,8 +1,8 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
-import org.fredohm.springbootintranet.repositories.UserRepository;
+import org.fredohm.springbootintranet.repositories.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,7 +24,7 @@ class UserSDJpaServiceTest {
     final Long userId = 1L;
 
     @Mock
-    UserRepository userRepository;
+    AppUserRepository userRepository;
 
     @Mock
     MeetingRepository meetingRepository;
@@ -34,21 +32,21 @@ class UserSDJpaServiceTest {
     @InjectMocks
     UserSDJpaService service;
 
-    User returnUser;
+    AppUser returnUser;
 
     @BeforeEach
     void setUp() {
-        returnUser = User.builder().id(userId).build();
+        returnUser = AppUser.builder().id(userId).build();
     }
 
     @Test
     void findAll() {
-        Set<User> returnUsers = new HashSet<>();
-        returnUsers.add(User.builder().id(1L).build());
-        returnUsers.add(User.builder().id(2L).build());
+        List<AppUser> returnUsers = new ArrayList<>();
+        returnUsers.add(AppUser.builder().id(1L).build());
+        returnUsers.add(AppUser.builder().id(2L).build());
         when(userRepository.findAll()).thenReturn(returnUsers);
 
-        Set<User> users = service.findAll();
+        Set<AppUser> users = service.findAll();
         assertNotNull(users);
         assertEquals(2, users.size());
 
@@ -58,7 +56,7 @@ class UserSDJpaServiceTest {
     void findById() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(returnUser));
 
-        User user = service.findById(userId);
+        AppUser user = service.findById(userId);
         assertNotNull(user);
     }
 
@@ -66,16 +64,16 @@ class UserSDJpaServiceTest {
     void findByIdNotFound() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        User user = service.findById(userId);
+        AppUser user = service.findById(userId);
         assertNull(user);
     }
 
     @Test
     void save() {
-        User userToSave = User.builder().id(userId).build();
+        AppUser userToSave = AppUser.builder().id(userId).build();
         when(userRepository.save(any())).thenReturn(returnUser);
 
-        User savedUser = service.save(userToSave);
+        AppUser savedUser = service.save(userToSave);
         assertNotNull(savedUser);
         verify(userRepository).save(any());
     }

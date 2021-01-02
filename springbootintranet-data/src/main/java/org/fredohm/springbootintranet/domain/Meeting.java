@@ -21,7 +21,7 @@ public class Meeting extends BaseEntity {
     @Builder
     public Meeting(Long id, String title, String contact, Integer membersNb, LocalDate date,
                    LocalTime start,LocalTime end, Boolean drinks, Boolean food, Boolean projection,
-                   String notes, MeetingRoom meetingRoom, User user) {
+                   String notes, MeetingRoom meetingRoom, AppUser user) {
         super(id);
         this.title = title;
         this.contact = contact;
@@ -82,7 +82,7 @@ public class Meeting extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private AppUser user;
 /*
     public String toString() {
         return "Meeting(title="

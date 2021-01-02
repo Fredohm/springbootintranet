@@ -1,7 +1,7 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
-import org.fredohm.springbootintranet.domain.User;
-import org.fredohm.springbootintranet.repositories.UserRepository;
+import org.fredohm.springbootintranet.domain.AppUser;
+import org.fredohm.springbootintranet.repositories.AppUserRepository;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -14,36 +14,36 @@ import java.util.Set;
 @Profile({"dev", "prod", "springdatajpa"})
 public class UserSDJpaService implements UserService {
 
-    private final UserRepository userRepository;
+    private final AppUserRepository userRepository;
 
-    public UserSDJpaService(UserRepository userRepository) {
+    public UserSDJpaService(AppUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Transactional
     @Override
-    public Set<User> findAll() {
+    public Set<AppUser> findAll() {
 
-        Set<User> users = new HashSet<>();
+        Set<AppUser> users = new HashSet<>();
         userRepository.findAll().forEach(users::add);
         return users;
     }
 
     @Transactional
     @Override
-    public User findById(Long id) {
+    public AppUser findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Transactional
     @Override
-    public User save(User user) {
+    public AppUser save(AppUser user) {
         return userRepository.save(user);
     }
 
     @Transactional
     @Override
-    public void delete(User user) {
+    public void delete(AppUser user) {
         userRepository.delete(user);
     }
 

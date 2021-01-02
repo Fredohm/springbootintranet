@@ -1,7 +1,7 @@
 package org.fredohm.springbootintranet.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +40,7 @@ public class UserController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        User user = new User();
+        AppUser user = new AppUser();
 
         model.addAttribute("user", user);
 
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute User user, BindingResult result) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute AppUser user, BindingResult result) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
@@ -66,7 +66,7 @@ public class UserController {
             return "user/user-form";
         }
 
-        User savedUser = userService.save(user);
+        AppUser savedUser = userService.save(user);
 
         return "redirect:/user/display/" + savedUser.getId();
     }

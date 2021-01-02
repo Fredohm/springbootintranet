@@ -10,9 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +41,7 @@ class MeetingRoomSDJpaServiceTest {
 
     @Test
     void findAll() {
-        Set<MeetingRoom> returnMeetingRooms = new HashSet<>();
+        List<MeetingRoom> returnMeetingRooms = new ArrayList<>();
         returnMeetingRooms.add(MeetingRoom.builder().id(1L).build());
         returnMeetingRooms.add(MeetingRoom.builder().id(2L).build());
         when(meetingRoomRepository.findAll()).thenReturn(returnMeetingRooms);

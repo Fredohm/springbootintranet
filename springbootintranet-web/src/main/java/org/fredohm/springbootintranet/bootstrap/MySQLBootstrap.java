@@ -2,7 +2,7 @@ package org.fredohm.springbootintranet.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.domain.User;
+import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.context.ApplicationListener;
@@ -40,7 +40,7 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
     }
 
     private void loadUsers() {
-        User admin = new User();
+        AppUser admin = new AppUser();
         admin.setUsername("admin");
         //admin.setPassword("admin");
         admin.setFirstName("Frédéric");
