@@ -1,8 +1,8 @@
 package org.fredohm.springbootintranet.repositories;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MeetingRoomRepository extends CrudRepository<MeetingRoom, Long> {
+public interface MeetingRoomRepository extends JpaRepository<MeetingRoom, Long> {
 
 }
