@@ -2,7 +2,7 @@ package org.fredohm.springbootintranet.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.AppUser;
-import org.fredohm.springbootintranet.services.UserService;
+import org.fredohm.springbootintranet.services.AppUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,9 +15,9 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final AppUserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(AppUserService userService) {
         this.userService = userService;
     }
 

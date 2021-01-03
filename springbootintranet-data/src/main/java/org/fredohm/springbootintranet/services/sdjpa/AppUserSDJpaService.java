@@ -2,7 +2,7 @@ package org.fredohm.springbootintranet.services.sdjpa;
 
 import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.repositories.AppUserRepository;
-import org.fredohm.springbootintranet.services.UserService;
+import org.fredohm.springbootintranet.services.AppUserService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +12,11 @@ import java.util.Set;
 
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
-public class UserSDJpaService implements UserService {
+public class AppUserSDJpaService implements AppUserService {
 
     private final AppUserRepository userRepository;
 
-    public UserSDJpaService(AppUserRepository userRepository) {
+    public AppUserSDJpaService(AppUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

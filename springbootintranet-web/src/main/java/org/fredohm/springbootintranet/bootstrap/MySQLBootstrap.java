@@ -1,10 +1,10 @@
 package org.fredohm.springbootintranet.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
-import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.AppUser;
+import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.services.AppUserService;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
-import org.fredohm.springbootintranet.services.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -17,10 +17,10 @@ import java.util.HashSet;
 @Profile({"dev", "prod", "springdatajpa"})
 public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final UserService userService;
+    private final AppUserService userService;
     private final MeetingRoomService meetingRoomService;
 
-    public MySQLBootstrap(UserService userService, MeetingRoomService meetingRoomService) {
+    public MySQLBootstrap(AppUserService userService, MeetingRoomService meetingRoomService) {
         this.meetingRoomService = meetingRoomService;
         this.userService = userService;
     }

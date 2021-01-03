@@ -1,7 +1,7 @@
 package org.fredohm.springbootintranet.controllers;
 
 import org.fredohm.springbootintranet.domain.AppUser;
-import org.fredohm.springbootintranet.services.UserService;
+import org.fredohm.springbootintranet.services.AppUserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest {
 
     @Mock
-    UserService userService;
+    AppUserService userService;
 
     @InjectMocks
     UserController userController;
