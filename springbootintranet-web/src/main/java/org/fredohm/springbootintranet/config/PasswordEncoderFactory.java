@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.config.security;
+package org.fredohm.springbootintranet.config;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
