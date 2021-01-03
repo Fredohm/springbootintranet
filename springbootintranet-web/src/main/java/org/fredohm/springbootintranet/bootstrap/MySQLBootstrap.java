@@ -67,10 +67,10 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
         Authority updateMeeting = authorityService.save(Authority.builder().role("meeting.update").build());
         Authority deleteMeeting = authorityService.save(Authority.builder().role("meeting.delete").build());
 
-        Authority createAppUser = authorityService.save(Authority.builder().role("AppUser.create").build());
-        Authority readAppUser = authorityService.save(Authority.builder().role("AppUser.read").build());
-        Authority updateAppUser = authorityService.save(Authority.builder().role("AppUser.update").build());
-        Authority deleteAppUser = authorityService.save(Authority.builder().role("AppUser.delete").build());
+        Authority createUser = authorityService.save(Authority.builder().role("user.create").build());
+        Authority readUser = authorityService.save(Authority.builder().role("user.read").build());
+        Authority updateUser = authorityService.save(Authority.builder().role("user.update").build());
+        Authority deleteUser = authorityService.save(Authority.builder().role("user.delete").build());
 
         Role adminRole = roleService.save(Role.builder().name("ADMIN").build());
         Role managerRole = roleService.save(Role.builder().name("MANAGER").build());
@@ -79,7 +79,7 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
         adminRole.setAuthorities(new HashSet<>(Set.of(
                 createMeetingRoom, readMeetingRoom, updateMeetingRoom, deleteMeetingRoom,
                 createMeeting, readMeeting, updateMeeting, deleteMeeting,
-                createAppUser, readAppUser, updateAppUser, deleteAppUser
+                createUser, readUser, updateUser, deleteUser
         )));
 
         managerRole.setAuthorities(new HashSet<>(Set.of(
