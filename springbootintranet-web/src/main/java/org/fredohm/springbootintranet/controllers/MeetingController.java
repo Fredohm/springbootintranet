@@ -1,6 +1,10 @@
 package org.fredohm.springbootintranet.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.fredohm.springbootintranet.config.permissions.meeting.CreateMeeting;
+import org.fredohm.springbootintranet.config.permissions.meeting.ReadMeeting;
+import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
@@ -13,17 +17,14 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/meeting")
 public class MeetingController {
 
     private final MeetingService meetingService;
     private final MeetingRoomService meetingRoomService;
 
-    public MeetingController(MeetingService meetingService, MeetingRoomService meetingRoomService) {
-        this.meetingService = meetingService;
-        this.meetingRoomService = meetingRoomService;
-    }
-
+    @ReadMeeting
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
@@ -32,6 +33,7 @@ public class MeetingController {
         return "meeting/list";
     }
 
+    @ReadMeeting
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
@@ -40,6 +42,7 @@ public class MeetingController {
         return "meeting/display";
     }
 
+    @CreateMeeting
     @GetMapping("/add")
     public String addForm(Model model) {
 
@@ -51,6 +54,7 @@ public class MeetingController {
         return "meeting/meeting-form";
     }
 
+    @UpdateMeeting
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
@@ -60,6 +64,8 @@ public class MeetingController {
         return "meeting/meeting-form";
     }
 
+    @CreateMeeting
+    @UpdateMeeting
     @PostMapping("/processMeetingForm")
     public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting, BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
 

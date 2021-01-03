@@ -1,6 +1,11 @@
 package org.fredohm.springbootintranet.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.fredohm.springbootintranet.config.permissions.user.CreateUser;
+import org.fredohm.springbootintranet.config.permissions.user.DeleteUser;
+import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
+import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
 import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.AppUserService;
 import org.springframework.stereotype.Controller;
@@ -12,15 +17,13 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
     private final AppUserService userService;
 
-    public UserController(AppUserService userService) {
-        this.userService = userService;
-    }
-
+    @ReadUser
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
@@ -29,6 +32,7 @@ public class UserController {
         return "user/list";
     }
 
+    @ReadUser
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
@@ -37,6 +41,7 @@ public class UserController {
         return "user/display";
     }
 
+    @CreateUser
     @GetMapping("/add")
     public String addForm(Model model) {
 
@@ -47,6 +52,7 @@ public class UserController {
         return "user/user-form";
     }
 
+    @UpdateUser
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
@@ -55,6 +61,8 @@ public class UserController {
         return "user/user-form";
     }
 
+    @CreateUser
+    @UpdateUser
     @PostMapping("/processUserForm")
     public String saveOrUpdateUser(@Valid @ModelAttribute AppUser user, BindingResult result) {
 
@@ -71,6 +79,7 @@ public class UserController {
         return "redirect:/user/display/" + savedUser.getId();
     }
 
+    @DeleteUser
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 

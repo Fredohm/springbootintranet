@@ -1,6 +1,11 @@
 package org.fredohm.springbootintranet.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.fredohm.springbootintranet.config.permissions.meetingRoom.CreateMeetingRoom;
+import org.fredohm.springbootintranet.config.permissions.meetingRoom.DeleteMeetingRoom;
+import org.fredohm.springbootintranet.config.permissions.meetingRoom.ReadMeetingRoom;
+import org.fredohm.springbootintranet.config.permissions.meetingRoom.UpdateMeetingRoom;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
@@ -13,17 +18,14 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/meeting-room")
 public class MeetingRoomController {
 
     private final MeetingRoomService meetingRoomService;
     private final MeetingService meetingService;
 
-    public MeetingRoomController(MeetingRoomService meetingRoomService, MeetingService meetingService) {
-        this.meetingRoomService = meetingRoomService;
-        this.meetingService = meetingService;
-    }
-
+    @ReadMeetingRoom
     @GetMapping("/list")
     public String list(Model model) {
 
@@ -32,6 +34,7 @@ public class MeetingRoomController {
         return "meeting-room/list";
     }
 
+    @ReadMeetingRoom
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
@@ -40,6 +43,7 @@ public class MeetingRoomController {
         return "meeting-room/display";
     }
 
+    @CreateMeetingRoom
     @GetMapping("/add")
     public String addForm(Model model) {
 
@@ -48,6 +52,7 @@ public class MeetingRoomController {
         return "meeting-room/meeting-room-form";
     }
 
+    @UpdateMeetingRoom
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
@@ -56,6 +61,8 @@ public class MeetingRoomController {
         return "meeting-room/meeting-room-form";
     }
 
+    @CreateMeetingRoom
+    @UpdateMeetingRoom
     @PostMapping("/processMeetingRoomForm")
     public String saveOrUpdateMeetingRoom(@Valid @ModelAttribute MeetingRoom meetingRoom, BindingResult result) {
 
@@ -72,6 +79,7 @@ public class MeetingRoomController {
         return "redirect:/meeting-room/display/" + savedMeetingRoom.getId();
     }
 
+    @DeleteMeetingRoom
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 
