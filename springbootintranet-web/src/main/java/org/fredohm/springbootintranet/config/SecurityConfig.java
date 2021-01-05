@@ -15,10 +15,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers();
+        web.ignoring().requestMatchers(PathRequest.toH2Console());
     }
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests(authorize -> {
             authorize
-                    .antMatchers("/index","/","/login", "/h2-console/**")
+                    .antMatchers("/", "/index", "/login")
                     .permitAll();
         })
                 .authorizeRequests()
