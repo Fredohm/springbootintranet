@@ -30,13 +30,12 @@
                     </div>
                 </li>
             </ul>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <form sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <a  th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0" type="submit">login</a>
             </form>
-            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <a th:href="@{/logout}" class="btn btn-outline-light my-2 my-sm-0" type="submit">logout</a>
+            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/doLogout}" method="post">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">logout</button>
             </form>
         </div>
     </nav>

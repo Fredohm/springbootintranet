@@ -36,6 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .loginProcessingUrl("/authenticateUser")
                 .and()
+                .logout()
+                    .logoutUrl("/doLogout")
+                    .logoutSuccessUrl("/index")
+                .and()
                 .httpBasic();
 
 //        http.headers().frameOptions().disable();
