@@ -25,18 +25,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .and()
                 .authorizeRequests(authorize -> {
-            authorize
-                    .antMatchers("/", "/index", "/login")
+                    authorize
+                    .antMatchers("/",  "/index", "/login")
                     .permitAll();
         })
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                    .and()
-                    .formLogin().and()
-                    .httpBasic();
+                .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/authenticateUser")
+                .and()
+                .httpBasic();
 
-        http.headers().frameOptions().disable();
-        http.csrf().ignoringAntMatchers("/h2-console/**");
+//        http.headers().frameOptions().disable();
+//        http.csrf().ignoringAntMatchers("/h2-console/**");
     }
 
 

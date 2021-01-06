@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -61,7 +61,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Traitement du courrier</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-light" href="#">Indic@t</a>
+                    <a sec:authorize="isAuthenticated()" class="btn btn-light" href="#">Indic@t</a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Réservation de salles</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-light" th:href="@{/meeting/list}">M@eting</a>
+                    <a sec:authorize="isAuthenticated()" class="btn btn-light" th:href="@{/meeting/list}">M@eting</a>
                 </div>
             </div>
         </div>

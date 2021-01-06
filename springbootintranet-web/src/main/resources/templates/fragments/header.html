@@ -1,8 +1,8 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header" class="container-fluid" style="margin-top: 5px;">
     <!--img th:src="@{/resources/images/coqpirate.jpg}" class="img-fluid" alt="Responsive image"-->
     <nav class="navbar navbar-expand-lg dark bg-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand text-light" href="#">
             <img th:src="@{/images/coq.jpg}" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="" loading="lazy">
             Intr@net
         </a>
@@ -12,16 +12,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-light" href="#" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Indic@t</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/meeting/list}">M@eting</a>
+                    <a class="nav-link text-light" th:href="@{/meeting/list}">M@eting</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,9 +30,13 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a  th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0" type="submit">login</a>
+            </form>
+            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <a th:href="@{/logout}" class="btn btn-outline-light my-2 my-sm-0" type="submit">logout</a>
             </form>
         </div>
     </nav>
