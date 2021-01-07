@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                     .logoutUrl("/doLogout")
-                    .logoutSuccessUrl("/index")
+                    .logoutSuccessUrl("/logout").permitAll()
                 .and()
                 .httpBasic();
 
