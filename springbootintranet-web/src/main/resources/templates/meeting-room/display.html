@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -15,31 +15,44 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <div class="card col-sm-6" style="width: 18rem;">
-        <div class="card-body">
-            <h3 class="card-title" th:text="${meetingRoom.name}">Nom de la salle</h3>
-            <h6 class="card-subtitle mb-2 text-muted" th:text="'Number of places: ' + ${meetingRoom.capacity}">Card subtitle</h6>
-            <p class="card-text" th:text="${meetingRoom.location}">some text</p>
-            <p class="card-text" th:text="${meetingRoom.available ? 'Available' : 'Not available'}">some text</p>
-            <p class="card-text" th:text="${meetingRoom.description}">Some quick example card's content.</p>
-            <br />
-            <h5 class="card-title text-muted">List of meetings</h5>
-            <table>
-                <tr th:each="meeting : ${meetingRoom.meetings}">
-                    <td>
-                        <a class="card-link" th:text="${meeting.title}"
-                           th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
-                            Meeting
-                        </a>
-                    </td>
-                </tr>
-            </table>
+    <div class="row">
+        <div class="card col-sm-3" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title" th:text="${meetingRoom.name}">Nom de la salle</h3>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Number of places: ' + ${meetingRoom.capacity}">Card subtitle</h6>
+                <p class="card-text" th:text="${meetingRoom.location}">some text</p>
+                <p class="card-text" th:text="${meetingRoom.available ? 'Available' : 'Not available'}">some text</p>
+                <p class="card-text" th:text="${meetingRoom.description}">Some quick example card's content.</p>
+                <br />
+                <h5 class="card-title text-muted">List of meetings</h5>
+                <table>
+                    <tr th:each="meeting : ${meetingRoom.meetings}">
+                        <td>
+                            <a class="card-link text-success" th:text="${meeting.title}"
+                               th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
+                                Meeting
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row p-2">
+                <a sec:authorize="hasAuthority('meetingRoom.update')"
+                   th:href="@{/meeting-room/update/{id}(id = ${meetingRoom.id})}"
+                   class="col-sm-6 btn btn-success" href="/meeting-room/list">
+                    update
+                </a>
+                <a sec:authorize="hasAuthority('meetingRoom.delete')"
+                   th:href="@{/meeting-room/delete/{id}(id = ${meetingRoom.id})}"
+                   class=" col-sm-6 btn btn-danger" href="/meeting-room/list">
+                    delete
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <br />
-    <a class="btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
+    <div class="row mt-3">
+        <a class="col-sm-3 btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
+    </div>
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

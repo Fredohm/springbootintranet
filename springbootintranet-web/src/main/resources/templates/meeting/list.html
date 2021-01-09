@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -22,30 +22,44 @@
             <th>meeting room</th>
             <th>date</th>
             <th>View</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th sec:authorize="hasAuthority('meeting.update')">Update</th>
+            <th sec:authorize="hasAuthority('meeting.delete')">Delete</th>
         </tr>
         <tr th:each="meeting : ${meetings}">
             <td th:text="${meeting.title}">title</td>
             <td th:text="${meeting.meetingRoom.name}">name</td>
             <td th:text="${meeting.date}">date</td>
             <td>
-                <a th:text="'view'" th:href="@{/meeting/display/{id}(id = ${meeting.id})}">view</a>
+                <a class="text-success"
+                   sec:authorize="hasAuthority('meeting.read')"
+                   th:text="'view'"
+                   th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
+                    view
+                </a>
             </td>
             <td>
-                <a th:text="'update'" th:href="@{/meeting/update/{id}(id = ${meeting.id})}">update</a>
+                <a class="text-success"
+                   sec:authorize="hasAuthority('meeting.update')"
+                   th:text="'update'"
+                   th:href="@{/meeting/update/{id}(id = ${meeting.id})}">
+                    update
+                </a>
             </td>
             <td>
-                <a th:text="delete" th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">delete</a>
+                <a class="text-danger"
+                   sec:authorize="hasAuthority('meeting.delete')"
+                   th:text="delete"
+                   th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">
+                    delete
+                </a>
             </td>
         </tr>
     </table>
     <br />
-    <hr>
 </div>
 <div class="container">
     <br />
-    <a class="btn btn-dark" href="/meeting/add" th:href="@{/meeting/add}">Add a meeting</a>
+    <a sec:authorize="hasAuthority('meeting.create')" class="btn btn-dark" href="/meeting/add" th:href="@{/meeting/add}">Add a meeting</a>
     <br />
 </div>
 

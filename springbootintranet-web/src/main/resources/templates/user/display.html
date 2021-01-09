@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -15,19 +15,32 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <div class="card col-sm-6" style="width: 18rem;">
-        <div class="card-body"></div>
-        <h5 class="card-title" th:text="${user.username}">Username></h5>
-        <hr>
-        <p class="card-text" th:text="'First name: ' + ${user.firstName}">First name</p>
-        <p class="card-text" th:text="'Last name: ' + ${user.lastName}">Last name</p>
-        <p class="card-text mb-4" th:text="'Email: ' + ${user.email}">Email</p>
-        <br />
+    <div class="row">
+        <div class="card col-sm-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title md-2" th:text="${user.username}">Username></h5>
+                <p class="card-text" th:text="'First name: ' + ${user.firstName}">First name</p>
+                <p class="card-text" th:text="'Last name: ' + ${user.lastName}">Last name</p>
+                <p class="card-text mb-4" th:text="'Email: ' + ${user.email}">Email</p>
+            </div>
+            <div class="row p-2">
+                <a sec:authorize="hasAuthority('user.update')"
+                   th:href="@{/user/update/{id}(id = ${user.id})}"
+                   class=" col-sm-6 btn btn-success" href="/meeting-room/list">
+                    update
+                </a>
+                <a sec:authorize="hasAuthority('user.delete')"
+                   th:href="@{/user/delete/{id}(id = ${user.id})}"
+                   class=" col-sm-6 btn btn-danger" href="/meeting-room/list">
+                    delete
+                </a>
+            </div>
+        </div>
     </div>
-</div>
-<div class="container">
-    <br />
-    <a class="btn btn-dark" href="/meeting-room/list" th:href="@{/user/list}">back</a>
+    <div class="row mt-3">
+        <br />
+        <a class="col-sm-4 btn btn-dark" href="/meeting-room/list" th:href="@{/user/list}">back</a>
+    </div>
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

@@ -14,23 +14,25 @@
                 <li class="nav-item active">
                     <a class="nav-link text-light" href="#" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li sec:authorize="isAuthenticated()" class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Indic@t</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" th:href="@{/meeting/list}">M@eting</a>
-                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
+                    <a sec:authorize="isAuthenticated()" class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        B@oking
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/meeting-room/list}">Meeting-rooms</a>
-                        <a class="dropdown-item" th:href="@{/user/list}">Users</a>
+                        <a class="dropdown-item" th:href="@{/meeting-room/list}">M@eting-rooms</a>
+                        <a class="dropdown-item" th:href="@{/meeting/list}">M@etings</a>
                     </div>
                 </li>
+                <li sec:authorize="hasAuthority('adminRole')" class="nav-item">
+                    <a class="nav-link text-light" th:href="@{/user/list}">Users</a>
+                </li>
             </ul>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
             <form sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
                 <a th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0" type="submit">login</a>
             </form>

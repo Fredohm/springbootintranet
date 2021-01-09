@@ -28,18 +28,29 @@
             <td th:text="${user.username}">name</td>
             <td th:text="${user.email}">capacity</td>
             <td>
-                <a th:text="'view'" th:href="@{/user/display/{id}(id = ${user.id})}">view</a>
+                <a class="text-success"
+                   th:text="'view'"
+                   th:href="@{/user/display/{id}(id = ${user.id})}">
+                    view
+                </a>
             </td>
             <td>
-                <a th:text="'update'" th:href="@{/user/update/{id}(id = ${user.id})}">update</a>
+                <a class="text-success"
+                   th:text="'update'"
+                   th:href="@{/user/update/{id}(id = ${user.id})}">
+                    update
+                </a>
             </td>
             <td>
-                <a th:text="'delete'" th:href="@{/user/delete/{id}(id = ${user.id})}">delete</a>
+                <a class="text-danger"
+                   th:text="'delete'"
+                   th:href="@{/user/delete/{id}(id = ${user.id})}">
+                    delete
+                </a>
             </td>
         </tr>
     </table>
     <br />
-    <hr>
 </div>
 <div class="container">
     <br />

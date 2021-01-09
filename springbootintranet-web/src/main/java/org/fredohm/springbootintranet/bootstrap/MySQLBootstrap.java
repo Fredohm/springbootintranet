@@ -57,6 +57,10 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
 
     private void loadSecurityData() {
 
+        Authority adminAuthority = authorityService.save(Authority.builder().role("adminRole").build());
+        Authority managerAuthority = authorityService.save(Authority.builder().role("managerRole").build());
+        Authority userAuthority = authorityService.save(Authority.builder().role("userRole").build());
+
         Authority createMeetingRoom = authorityService.save(Authority.builder().role("meetingRoom.create").build());
         Authority readMeetingRoom = authorityService.save(Authority.builder().role("meetingRoom.read").build());
         Authority updateMeetingRoom = authorityService.save(Authority.builder().role("meetingRoom.update").build());
@@ -76,13 +80,13 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
         Role managerRole = roleService.save(Role.builder().name("MANAGER").build());
         Role userRole = roleService.save(Role.builder().name("USER").build());
 
-        adminRole.setAuthorities(new HashSet<>(Set.of(
+        adminRole.setAuthorities(new HashSet<>(Set.of(adminAuthority,
                 createMeetingRoom, readMeetingRoom, updateMeetingRoom, deleteMeetingRoom,
                 createMeeting, readMeeting, updateMeeting, deleteMeeting,
                 createUser, readUser, updateUser, deleteUser
         )));
 
-        managerRole.setAuthorities(new HashSet<>(Set.of(
+        managerRole.setAuthorities(new HashSet<>(Set.of(managerAuthority,
                 readMeetingRoom,
                 createMeeting, readMeeting, updateMeeting
         )));

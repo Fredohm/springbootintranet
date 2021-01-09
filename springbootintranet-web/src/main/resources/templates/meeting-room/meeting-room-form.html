@@ -15,7 +15,7 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <h3  th:text="(*{id} ? 'Update' : 'Add') + ' meeting-room'"></h3>
+    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting-room'"></h3>
     <form th:object="${meetingRoom}" th:action="@{/meeting-room/processMeetingRoomForm}" method="post">
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
             <p>Please correct errors below</p>
@@ -72,15 +72,14 @@
             </label>
         </div>
         <br />
-        <button type="submit" class="btn btn-dark" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
+        <button type="submit" class="col-sm-6 btn btn-success" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
         <br />
     </form>
     <br />
-    <hr>
 </div>
 <div class="container">
     <br />
-    <a  class="btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
+    <a class="col-sm-6 btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
     <br />
 </div>
 <div th:replace="fragments/footer :: footer">

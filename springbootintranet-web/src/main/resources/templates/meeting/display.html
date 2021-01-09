@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -15,30 +15,47 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <div class="card col-sm-6" style="width: 18rem;">
-        <div class="card-body">
-            <h3 class="card-title" th:text="${meeting.title}">Meeting Title</h3>
-            <h4 class="card-subtitle mb-4 text-muted" th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</h4>
-            <p class="card-text" th:text="'Start: ' + ${#temporals.format(meeting.start, 'HH:mm:ss')}">Start time</p>
-            <p class="card-text" th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
-            <p class="card-text" th:text="'Meeting room: ' + ${meeting.meetingRoom.name}">Meeting room</p>
-            <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
-            <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
-            <p class="card-text" th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
-            <!--p class="card-text">
-                reserved by:
-                <a th:text="${meeting.user.username}"
-                   th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
-                    Username
+    <div class="row">
+        <div class="card col-sm-3" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title" th:text="${meeting.title}">Meeting Title</h3>
+                <h4 class="card-subtitle mb-4 text-muted" th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</h4>
+                <p class="card-text" th:text="'Start: ' + ${#temporals.format(meeting.start, 'HH:mm:ss')}">Start time</p>
+                <p class="card-text" th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
+                <p>
+                    <span th:text="'Meeting room: '">Meeting room:</span>
+                    <a th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}" class="card-text text-success"  th:text="${meeting.meetingRoom.name}">Meeting room</a>
+                </p>
+                <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
+                <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
+                <p class="card-text" th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
+                <!--p class="card-text">
+                    reserved by:
+                    <a th:text="${meeting.user.username}"
+                       th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
+                        Username
+                    </a>
+                </p-->
+            </div>
+            <div class="row p-2">
+                <a sec:authorize="hasAuthority('meeting.update')"
+                   th:href="@{/meeting/update/{id}(id = ${meeting.id})}"
+                   class=" col-sm-6 btn btn-success" href="/meeting/list">
+                    update
                 </a>
-            </p-->
+                <a sec:authorize="hasAuthority('meeting.delete')"
+                   th:href="@{/meeting/delete/{id}(id = ${meeting.id})}"
+                   class=" col-sm-6 btn btn-danger" href="/meeting/list">
+                    delete
+                </a>
+            </div>
         </div>
     </div>
+    <div class="row mt-3">
+        <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
+    </div>
 </div>
-<div class="container">
-    <br />
-    <a class="btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
-</div>
+
 <div th:replace="fragments/footer :: footer">
     footer
 </div>
