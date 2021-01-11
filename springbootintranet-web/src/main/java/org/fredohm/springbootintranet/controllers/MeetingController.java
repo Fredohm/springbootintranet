@@ -67,7 +67,9 @@ public class MeetingController {
     @CreateMeeting
     @UpdateMeeting
     @PostMapping("/processMeetingForm")
-    public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting, BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
+    public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting,
+                                      BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
+
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
@@ -82,6 +84,7 @@ public class MeetingController {
         meetingRoomService.findById(id).getMeetings().add(meeting);
 
         meeting.setMeetingRoom(meetingRoomService.findById(id));
+
         Meeting savedMeeting = meetingService.save(meeting);
 
         return "redirect:/meeting/display/" + savedMeeting.getId();

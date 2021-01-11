@@ -15,10 +15,13 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <br />
-    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' user'"></h3>
     <form th:object="${user}" th:action="@{/user/processUserForm}" method="post">
-        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-4">
+                <h3 th:text="(*{id} ? 'Update' : 'Add') + ' user'">add or update</h3>
+            </div>
+        </div>
+        <div th:if="${#fields.hasErrors('*')}" class="col-sm-6 alert alert-danger">
             <p>Please correct errors below</p>
         </div>
         <input th:type="hidden" th:field="*{id}"/>
@@ -67,17 +70,12 @@
             </div>
         </div>
         <br />
-        <button type="submit" class="btn btn-dark" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
+        <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/user/list}">back</a>
+        <button type="submit" class="col-sm-3 btn btn-success" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
         <br />
     </form>
-    <br />
-    <hr>
 </div>
-<div class="container">
-    <br />
-    <a class="btn btn-dark" href="/meeting/list" th:href="@{/user/list}">back</a>
-    <br />
-</div>
+
 <div th:replace="fragments/footer :: footer">
     footer
 </div>

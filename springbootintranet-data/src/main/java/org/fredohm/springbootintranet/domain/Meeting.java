@@ -50,17 +50,17 @@ public class Meeting extends BaseEntity {
 
     @NotNull
     @FutureOrPresent
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private LocalDate date;
 
     @NotNull
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "start")
     private LocalTime start;
 
     @NotNull
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "end")
     private LocalTime end;
 

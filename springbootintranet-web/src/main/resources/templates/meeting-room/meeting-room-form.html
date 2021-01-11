@@ -15,9 +15,13 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting-room'"></h3>
     <form th:object="${meetingRoom}" th:action="@{/meeting-room/processMeetingRoomForm}" method="post">
-        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-4">
+                <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting-room'">Add or update</h3>
+            </div>
+        </div>
+        <div th:if="${#fields.hasErrors('*')}" class="col-sm-6 alert alert-danger">
             <p>Please correct errors below</p>
         </div>
         <input th:type="hidden" th:field="*{id}"/>
@@ -71,16 +75,9 @@
                 Available
             </label>
         </div>
-        <br />
-        <button type="submit" class="col-sm-6 btn btn-success" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
-        <br />
+        <a class="col-sm-3 btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">Cancel</a>
+        <button type="submit" class="col-sm-3 btn btn-success" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
     </form>
-    <br />
-</div>
-<div class="container">
-    <br />
-    <a class="col-sm-6 btn btn-dark" href="/meeting-room/list" th:href="@{/meeting-room/list}">back</a>
-    <br />
 </div>
 <div th:replace="fragments/footer :: footer">
     footer

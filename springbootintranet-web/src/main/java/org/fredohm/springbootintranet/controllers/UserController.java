@@ -64,12 +64,14 @@ public class UserController {
     @CreateUser
     @UpdateUser
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute AppUser user, BindingResult result) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute AppUser user, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
+
+            model.addAttribute("user", user);
 
             return "user/user-form";
         }

@@ -15,10 +15,13 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <br />
-    <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting'"></h3>
     <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
-        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-4">
+                <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting'">Add or update</h3>
+            </div>
+        </div>
+        <div th:if="${#fields.hasErrors('*')}" class="col-sm-6 alert alert-danger">
             <p>Please correct errors below</p>
         </div>
         <input th:type="hidden" th:field="*{id}"/>
@@ -58,9 +61,9 @@
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2" for="date">Date</label>
-            <input type="text" id="date" class="form-control col-sm-4" th:field="*{date}"
-                   th:value="${#temporals.format(meeting.date, 'dd/MM/yyyy')}" placeholder="dd/mm/yyyy" th:errorclass="has-error"/>
+            <label class="col-sm-2" for="inputDate">Date</label>
+            <input type="date" id="inputDate" class="form-control col-sm-4" th:field="*{date}"
+                   th:value="${#temporals.format(meeting.date, 'dd-MM-yyyy')}" placeholder="dd-mm-yyyy" th:errorclass="has-error"/>
             <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('date')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <span class="text-danger" th:if="${#fields.hasErrors('date')}">
                   <ul>
@@ -71,8 +74,8 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="start">Start</label>
-            <input type="text" id="start" class="form-control col-sm-4" th:field="*{start}"
-                   th:value="${#temporals.format(meeting.start, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
+            <input type="time" id="start" class="form-control col-sm-4" th:field="*{start}"
+                   th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}" th:pattern="'HH:mm:ss'" placeholder="hh/mm/ss" th:errorclass="has-error"/>
             <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('start')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <span class="text-danger" th:if="${#fields.hasErrors('start')}">
                   <ul>
@@ -83,7 +86,7 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="end">End</label>
-            <input type="text" id="end" class="form-control col-sm-4" th:field="*{end}"
+            <input type="time" id="end" class="form-control col-sm-4" th:field="*{end}"
                    th:value="${#temporals.format(meeting.end, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
             <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('end')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <span class="text-danger" th:if="${#fields.hasErrors('end')}">
@@ -115,17 +118,9 @@
             <label class="col-sm-2" for="notes">Notes</label>
             <textarea id="notes" class="form-control col-sm-4" th:field="*{notes}" rows="3"></textarea>
         </div>
-        <button class="btn btn-dark" type="submit" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
-        <br />
+        <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
+        <button class="col-sm-3 btn btn-success" type="submit" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
     </form>
-    <br />
-    <br />
-    <hr>
-</div>
-<div class="container">
-    <br />
-    <a class="btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
-    <br />
 </div>
 <div th:replace="fragments/footer :: footer">
     footer
