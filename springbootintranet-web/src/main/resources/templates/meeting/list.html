@@ -49,9 +49,13 @@
                 <a class="text-danger"
                    sec:authorize="hasAuthority('meeting.delete')"
                    th:text="delete"
-                   th:href="@{/meeting/delete/{id}(id = ${meeting.id})}">
+                   th:href="@{/meeting/delete/{id}(id = ${meeting.id})}"
+                   data-toggle="modal" data-target="#delete">
                     delete
                 </a>
+            </td>
+            <td th:replace="fragments/modal :: delete (${meeting.id})">
+                delete modal
             </td>
         </tr>
     </table>
