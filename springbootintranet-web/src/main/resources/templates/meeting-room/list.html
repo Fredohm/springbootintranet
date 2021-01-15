@@ -48,7 +48,7 @@
                    th:href="@{/meeting-room/delete/{id}(id = ${meetingRoom.id})}"
                    data-toggle="modal" data-target="#delete">delete</a>
             </td>
-            <td th:replace="fragments/modal :: delete (${meetingRoom.id})">
+            <td th:replace="fragments/modal :: delete ('meeting-room', ${meetingRoom.id})">
                 delete modal
             </td>
         </tr>

@@ -49,7 +49,7 @@
                     delete
                 </a>
             </td>
-            <td th:replace="fragments/modal :: delete (${user.id})">
+            <td th:replace="fragments/modal :: delete ('user', ${user.id})">
                 delete modal
             </td>
         </tr>

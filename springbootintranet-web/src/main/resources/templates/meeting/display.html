@@ -56,7 +56,7 @@
         <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
     </div>
 </div>
-<div th:replace="fragments/modal :: delete (${meeting.id})">
+<div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
     delete modal
 </div>
 <div th:replace="fragments/footer :: footer">

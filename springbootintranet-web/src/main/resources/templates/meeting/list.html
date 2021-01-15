@@ -54,8 +54,10 @@
                     delete
                 </a>
             </td>
-            <td th:replace="fragments/modal :: delete (${meeting.id})">
+            <td>
+            <div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
                 delete modal
+            </div>
             </td>
         </tr>
     </table>

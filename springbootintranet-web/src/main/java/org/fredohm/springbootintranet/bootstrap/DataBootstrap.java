@@ -23,7 +23,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Component
 @Profile({"dev", "prod", "springdatajpa"})
-public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final MeetingRoomService meetingRoomService;
 
@@ -94,30 +94,57 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
         userService.save(User.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("admin"))
+                .firstName("Fred")
+                .lastName("Ohm")
+                .email("fredwaucquez@hotmail.fr")
                 .role(adminRole)
                 .build());
 
         userService.save(User.builder()
                 .username("manager")
                 .password(passwordEncoder.encode("manager"))
+                .firstName("Alice")
+                .lastName("Chouchou")
+                .email("achouchou@gmail.com")
                 .role(managerRole)
                 .build());
 
         userService.save(User.builder()
                 .username("user")
                 .password(passwordEncoder.encode("user"))
+                .firstName("Berte")
+                .lastName("Namibie")
+                .email("bena@ymail.co.jp")
                 .role(userRole)
                 .build());
     }
 
     private void loadMeetingRooms() {
-        MeetingRoom salleTest = new MeetingRoom();
-        salleTest.setName("salle Test");
-        salleTest.setAvailable(false);
-        salleTest.setCapacity(4);
-        salleTest.setDescription("Création d'une salle test lors du premier démarrage de l'application");
-        salleTest.setLocation("Shinsekai");
-        salleTest.setMeetings(new HashSet<>());
-        meetingRoomService.save(salleTest);
+        MeetingRoom salleVerte = new MeetingRoom();
+        salleVerte.setName("salle Verte");
+        salleVerte.setAvailable(true);
+        salleVerte.setCapacity(4);
+        salleVerte.setDescription("Création d'une salle test lors du premier démarrage de l'application");
+        salleVerte.setLocation("Shinsekai");
+        salleVerte.setMeetings(new HashSet<>());
+        meetingRoomService.save(salleVerte);
+
+        MeetingRoom salleBleue = new MeetingRoom();
+        salleBleue.setName("Salle Bleue");
+        salleBleue.setAvailable(true);
+        salleBleue.setCapacity(4);
+        salleBleue.setDescription("Création d'une salle test lors du premier démarrage de l'application");
+        salleBleue.setLocation("Shinsekai");
+        salleBleue.setMeetings(new HashSet<>());
+        meetingRoomService.save(salleBleue);
+
+        MeetingRoom salleRouge = new MeetingRoom();
+        salleRouge.setName("salle Rouge");
+        salleRouge.setAvailable(true);
+        salleRouge.setCapacity(4);
+        salleRouge.setDescription("Création d'une salle test lors du premier démarrage de l'application");
+        salleRouge.setLocation("Shinsekai");
+        salleRouge.setMeetings(new HashSet<>());
+        meetingRoomService.save(salleRouge);
     }
 }

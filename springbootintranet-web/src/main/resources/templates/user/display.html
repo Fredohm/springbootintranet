@@ -26,12 +26,12 @@
             <div class="row p-2">
                 <a sec:authorize="hasAuthority('user.update')"
                    th:href="@{/user/update/{id}(id = ${user.id})}"
-                   class=" col-sm-6 btn btn-success" href="/meeting-room/list">
+                   class=" col-sm-6 btn btn-success" href="/user/list">
                     update
                 </a>
                 <a sec:authorize="hasAuthority('user.delete')"
                    th:href="@{/user/delete/{id}(id = ${user.id})}"
-                   class=" col-sm-6 btn btn-danger" href="/meeting-room/list"
+                   class=" col-sm-6 btn btn-danger" href="/user/list"
                    data-toggle="modal" data-target="#delete">
                     delete
                 </a>
@@ -40,10 +40,10 @@
     </div>
     <div class="row mt-3">
         <br />
-        <a class="col-sm-4 btn btn-dark" href="/meeting-room/list" th:href="@{/user/list}">back</a>
+        <a class="col-sm-4 btn btn-dark" href="/user/list" th:href="@{/user/list}">back</a>
     </div>
 </div>
-<div th:replace="fragments/modal :: delete (${user.id})">
+<div th:replace="fragments/modal :: delete ('user', ${user.id})">
     delete modal
 </div>
 <div th:replace="fragments/footer :: footer">

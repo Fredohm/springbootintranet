@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<div th:fragment="delete (idToDelete)" class="modal" id="delete" tabindex="-1">
+<div th:fragment="delete (pathValue, idToDelete)" class="modal" id="delete" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,7 +32,7 @@
             <div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
-                    <a th:href="@{/meeting-room/delete/{id}(id = ${idToDelete})}" class="btn btn-danger" value="Delete">Delete</a>
+                    <a th:href="@{'/' + ${pathValue} + '/delete/' + ${idToDelete}}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>
