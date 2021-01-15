@@ -2,7 +2,6 @@ package org.fredohm.springbootintranet.controllers;
 
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -40,11 +39,9 @@ class MeetingControllerTest {
         meetings = new HashSet<>();
         meetings.add(Meeting.builder().id(1L)
                 .meetingRoom(MeetingRoom.builder().id(1L).name("Test1").build())
-                .user(AppUser.builder().id(1L).username("Test1").build())
                 .build());
         meetings.add(Meeting.builder().id(2L)
                 .meetingRoom(MeetingRoom.builder().id(2L).name("Test2").build())
-                .user(AppUser.builder().id(2L).username("Test2").build())
                 .build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(meetingController).build();

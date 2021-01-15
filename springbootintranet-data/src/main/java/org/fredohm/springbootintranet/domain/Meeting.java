@@ -14,14 +14,14 @@ import java.time.LocalTime;
 @Getter
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"meetingRoom", "user"})
+@ToString(exclude = "meetingRoom")
 @Table(name = "meetings")
 public class Meeting extends BaseEntity {
 
     @Builder
     public Meeting(Long id, String title, String contact, Integer membersNb, LocalDate date,
                    LocalTime start,LocalTime end, Boolean drinks, Boolean food, Boolean projection,
-                   String notes, MeetingRoom meetingRoom, AppUser user) {
+                   String notes, MeetingRoom meetingRoom) {
         super(id);
         this.title = title;
         this.contact = contact;
@@ -34,7 +34,6 @@ public class Meeting extends BaseEntity {
         this.projection = projection;
         this.notes = notes;
         this.meetingRoom = meetingRoom;
-        this.user = user;
     }
 
     @NotBlank
@@ -80,9 +79,6 @@ public class Meeting extends BaseEntity {
     @JoinColumn(name = "meeting_room_id")
     private MeetingRoom meetingRoom;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private AppUser user;
 /*
     public String toString() {
         return "Meeting(title="

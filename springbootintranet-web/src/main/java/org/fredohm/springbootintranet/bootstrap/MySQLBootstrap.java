@@ -2,12 +2,10 @@ package org.fredohm.springbootintranet.bootstrap;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.fredohm.springbootintranet.domain.AppUser;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
-import org.fredohm.springbootintranet.services.AppUserService;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.security.AuthorityService;
 import org.fredohm.springbootintranet.services.security.RoleService;
@@ -27,7 +25,6 @@ import java.util.Set;
 @Profile({"dev", "prod", "springdatajpa"})
 public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final AppUserService appUserService;
     private final MeetingRoomService meetingRoomService;
 
     private final AuthorityService authorityService;
@@ -42,11 +39,6 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
         if (authorityService.findAll().size() == 0) {
             log.debug("Loading authorities");
             loadSecurityData();
-        }
-
-        if (userService.findAll().size() == 0L) {
-            log.debug("Loading app users");
-            loadAppUsers();
         }
 
         if (meetingRoomService.findAll().size() == 0L) {
@@ -116,17 +108,6 @@ public class MySQLBootstrap implements ApplicationListener<ContextRefreshedEvent
                 .password(passwordEncoder.encode("user"))
                 .role(userRole)
                 .build());
-    }
-
-    private void loadAppUsers() {
-        AppUser admin = new AppUser();
-        admin.setUsername("admin");
-        //admin.setPassword("admin");
-        admin.setFirstName("Frédéric");
-        admin.setLastName("Ohm");
-        admin.setEmail("fredohm@onepiece.com");
-        admin.setMeetings(new HashSet<>());
-        appUserService.save(admin);
     }
 
     private void loadMeetingRooms() {

@@ -27,6 +27,9 @@ public class User implements UserDetails, CredentialsContainer {
 
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
 
     @Singular
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)

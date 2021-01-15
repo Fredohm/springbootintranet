@@ -6,8 +6,9 @@ import org.fredohm.springbootintranet.config.permissions.user.CreateUser;
 import org.fredohm.springbootintranet.config.permissions.user.DeleteUser;
 import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
 import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
-import org.fredohm.springbootintranet.domain.AppUser;
-import org.fredohm.springbootintranet.services.AppUserService;
+import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.services.security.UserService;
+import org.fredohm.springbootintranet.user.IntranetUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,7 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    private final AppUserService userService;
+    private final UserService userService;
 
     @ReadUser
     @GetMapping({"/list", "/list.html"})
@@ -45,7 +46,7 @@ public class UserController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        AppUser user = new AppUser();
+        IntranetUser user = new IntranetUser();
 
         model.addAttribute("user", user);
 
@@ -64,7 +65,7 @@ public class UserController {
     @CreateUser
     @UpdateUser
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute AppUser user, BindingResult result, Model model) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
@@ -76,7 +77,7 @@ public class UserController {
             return "user/user-form";
         }
 
-        AppUser savedUser = userService.save(user);
+        User savedUser = userService.save(user);
 
         return "redirect:/user/display/" + savedUser.getId();
     }
