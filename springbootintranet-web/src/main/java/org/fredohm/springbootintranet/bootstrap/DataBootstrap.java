@@ -83,7 +83,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
                 createMeeting, readMeeting, updateMeeting
         )));
 
-        userRole.setAuthorities(new HashSet<>(Set.of(
+        userRole.setAuthorities(new HashSet<>(Set.of(userAuthority,
                 readMeetingRoom, readMeeting
         )));
 

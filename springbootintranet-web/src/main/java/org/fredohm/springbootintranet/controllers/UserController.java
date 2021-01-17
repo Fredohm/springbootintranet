@@ -7,8 +7,10 @@ import org.fredohm.springbootintranet.config.permissions.user.DeleteUser;
 import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
 import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.services.security.RoleService;
 import org.fredohm.springbootintranet.services.security.UserService;
 import org.fredohm.springbootintranet.user.IntranetUser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,9 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final RoleService roleService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @ReadUser
     @GetMapping({"/list", "/list.html"})
@@ -46,9 +51,9 @@ public class UserController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        IntranetUser user = new IntranetUser();
+        IntranetUser intranetUser = new IntranetUser();
 
-        model.addAttribute("user", user);
+        model.addAttribute("intranetUser", intranetUser);
 
         return "user/user-form";
     }
@@ -57,7 +62,17 @@ public class UserController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("user", userService.findById(id));
+        userService.findById(id);
+
+        IntranetUser userToUpdate = IntranetUser.builder()
+                .id(userService.findById(id).getId())
+                .username(userService.findById(id).getUsername())
+                .firstName(userService.findById(id).getFirstName())
+                .lastName(userService.findById(id).getLastName())
+                .email(userService.findById(id).getEmail())
+                .build();
+
+        model.addAttribute("intranetUser", userToUpdate);
 
         return "user/user-form";
     }
@@ -65,21 +80,30 @@ public class UserController {
     @CreateUser
     @UpdateUser
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute IntranetUser intranetUser, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
-
-            model.addAttribute("user", user);
+            model.addAttribute("user", intranetUser);
 
             return "user/user-form";
         }
 
-        User savedUser = userService.save(user);
 
-        return "redirect:/user/display/" + savedUser.getId();
+
+        User userToSave = User.builder()
+                .username(intranetUser.getUsername())
+                .firstName(intranetUser.getFirstName())
+                .lastName(intranetUser.getLastName())
+                .password(passwordEncoder.encode(intranetUser.getPassword()))
+                .email(intranetUser.getEmail())
+                .role(roleService.findById(16L))
+                .build();
+        userService.save(userToSave);
+
+        return "redirect:/user/display/" + userToSave.getId();
     }
 
     @DeleteUser

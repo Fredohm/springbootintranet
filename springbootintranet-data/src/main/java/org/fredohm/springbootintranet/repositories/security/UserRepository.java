@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.repositories.security;
 
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.user.IntranetUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -8,4 +9,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
+
+    Optional<User> save(IntranetUser user);
 }

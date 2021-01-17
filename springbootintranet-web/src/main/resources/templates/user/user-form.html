@@ -15,7 +15,7 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <form th:object="${user}" th:action="@{/user/processUserForm}" method="post">
+    <form th:object="${intranetUser}" th:action="@{/user/processUserForm}" method="post">
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-4">
                 <h3 th:text="(*{id} ? 'Update' : 'Add') + ' user'">add or update</h3>
@@ -32,6 +32,28 @@
                 <span class="text-danger" th:if="${#fields.hasErrors('username')}">
                   <ul>
                     <li th:each="err : ${#fields.errors('username')}" th:text="${err}"/>
+                  </ul>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="password">Password</label>
+            <input type="password" id="password" class="form-control col-sm-4" th:field="*{password}"/>
+            <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <span class="text-danger" th:if="${#fields.hasErrors('password')}">
+                  <ul>
+                    <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                  </ul>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="matchingPassword">Confirm password</label>
+            <input type="password" id="matchingPassword" class="form-control col-sm-4" th:field="*{matchingPassword}"/>
+            <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <span class="text-danger" th:if="${#fields.hasErrors('password')}">
+                  <ul>
+                    <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
                   </ul>
                 </span>
             </div>
