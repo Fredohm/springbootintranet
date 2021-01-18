@@ -6,6 +6,7 @@ import org.fredohm.springbootintranet.config.permissions.user.CreateUser;
 import org.fredohm.springbootintranet.config.permissions.user.DeleteUser;
 import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
 import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
+import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.services.security.RoleService;
 import org.fredohm.springbootintranet.services.security.UserService;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -52,8 +54,10 @@ public class UserController {
     public String addForm(Model model) {
 
         IntranetUser intranetUser = new IntranetUser();
+        Set<Role> roles = roleService.findAll();
 
         model.addAttribute("intranetUser", intranetUser);
+        model.addAttribute("roles", roles);
 
         return "user/user-form";
     }
@@ -65,11 +69,12 @@ public class UserController {
         userService.findById(id);
 
         IntranetUser userToUpdate = IntranetUser.builder()
-                .id(userService.findById(id).getId())
+                .id(id)
                 .username(userService.findById(id).getUsername())
                 .firstName(userService.findById(id).getFirstName())
                 .lastName(userService.findById(id).getLastName())
                 .email(userService.findById(id).getEmail())
+
                 .build();
 
         model.addAttribute("intranetUser", userToUpdate);
@@ -91,9 +96,8 @@ public class UserController {
             return "user/user-form";
         }
 
-
-
         User userToSave = User.builder()
+                .id(intranetUser.getId())
                 .username(intranetUser.getUsername())
                 .firstName(intranetUser.getFirstName())
                 .lastName(intranetUser.getLastName())

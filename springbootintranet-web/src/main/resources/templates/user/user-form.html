@@ -91,6 +91,21 @@
                 </span>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Role
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a th:remove="all" class="dropdown-item" href="#">Action</a>
+                    <a th:remove="all" class="dropdown-item" href="#">Another action</a>
+                    <a th:remove="all" class="dropdown-item" href="#">Something else here</a>
+                    <ul th:each="role : ${roles}" class="dropdown-item" >
+                        <li th:text="${role.name}">Role name</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <br />
         <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/user/list}">back</a>
         <button type="submit" class="col-sm-3 btn btn-success" th:text="*{id} ? 'Update' : 'Add'" value="submit">Submit</button>
