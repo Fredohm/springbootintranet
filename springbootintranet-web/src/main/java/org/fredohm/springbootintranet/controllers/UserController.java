@@ -67,6 +67,7 @@ public class UserController {
     public String updateForm(@PathVariable Long id, Model model) {
 
         userService.findById(id);
+        Set<Role> roles = roleService.findAll();
 
         IntranetUser userToUpdate = IntranetUser.builder()
                 .id(id)
@@ -78,6 +79,7 @@ public class UserController {
                 .build();
 
         model.addAttribute("intranetUser", userToUpdate);
+        model.addAttribute("roles", roles);
 
         return "user/user-form";
     }
@@ -85,13 +87,16 @@ public class UserController {
     @CreateUser
     @UpdateUser
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute IntranetUser intranetUser, BindingResult result, Model model) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute IntranetUser intranetUser, BindingResult result, @RequestParam("role.id") Long id, Model model) {
+
+        Set<Role> roles = roleService.findAll();
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
             model.addAttribute("user", intranetUser);
+            model.addAttribute("roles", roles);
 
             return "user/user-form";
         }
@@ -103,7 +108,7 @@ public class UserController {
                 .lastName(intranetUser.getLastName())
                 .password(passwordEncoder.encode(intranetUser.getPassword()))
                 .email(intranetUser.getEmail())
-                .role(roleService.findById(16L))
+                .role(roleService.findById(id))
                 .build();
         userService.save(userToSave);
 

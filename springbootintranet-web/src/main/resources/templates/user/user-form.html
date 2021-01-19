@@ -29,81 +29,80 @@
             <label class="col-sm-2" for="username">Username</label>
             <input type="text" id="username" class="form-control col-sm-4" th:field="*{username}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('username')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('username')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('username')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('username')}" th:text="${err}"/>
+                      <li th:each="err : ${#fields.errors('username')}" th:text="${err}">Username</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="password">Password</label>
             <input type="password" id="password" class="form-control col-sm-4" th:field="*{password}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('password')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('password')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Password</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="matchingPassword">Confirm password</label>
             <input type="password" id="matchingPassword" class="form-control col-sm-4" th:field="*{matchingPassword}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('password')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('password')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Confirm Password</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="firstName">First name</label>
             <input type="text" id="firstName" class="form-control col-sm-4" th:field="*{firstName}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('firstName')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('firstName')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"/>
+                      <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}">First name</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="lastName">Last name</label>
             <input type="text" id="lastName" class="form-control col-sm-4" th:field="*{lastName}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('lastName')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('lastName')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('lastName')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"/>
+                    <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}">Last name</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="email">Email address</label>
             <input type="email" id="email" class="form-control col-sm-4" th:field="*{email}" placeholder="name@example.com"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('email')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <span class="text-danger" th:if="${#fields.hasErrors('email')}">
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+                      <li th:each="err : ${#fields.errors('email')}" th:text="${err}">error</li>
                   </ul>
-                </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Role
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a th:remove="all" class="dropdown-item" href="#">Action</a>
-                    <a th:remove="all" class="dropdown-item" href="#">Another action</a>
-                    <a th:remove="all" class="dropdown-item" href="#">Something else here</a>
-                    <ul th:each="role : ${roles}" class="dropdown-item" >
-                        <li th:text="${role.name}">Role name</li>
-                    </ul>
+            <div class="input-group col-sm-6 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option th:each="role : ${roles}"
+                            th:value="${role.id}"
+                            th:text="${role.name}">
+                    </option>
+                </select>
             </div>
         </div>
         <br />
@@ -112,7 +111,6 @@
         <br />
     </form>
 </div>
-
 <div th:replace="fragments/footer :: footer">
     footer
 </div>

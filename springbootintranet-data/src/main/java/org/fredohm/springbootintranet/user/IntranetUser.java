@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.user;
 
 import lombok.*;
+import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.validation.PasswordMatch;
 import org.fredohm.springbootintranet.validation.ValidEmail;
 
@@ -45,5 +46,5 @@ public class IntranetUser {
     @NotNull
     private String email;
 
-    private String formRole;
+    private Role role;
 }
