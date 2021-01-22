@@ -95,7 +95,7 @@ public class UserController {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
-            model.addAttribute("user", intranetUser);
+            model.addAttribute("intranetUser", intranetUser);
             model.addAttribute("roles", roles);
 
             return "user/user-form";
