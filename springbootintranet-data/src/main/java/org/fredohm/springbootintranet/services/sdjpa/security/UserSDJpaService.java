@@ -2,6 +2,7 @@ package org.fredohm.springbootintranet.services.sdjpa.security;
 
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.security.UserRepository;
 import org.fredohm.springbootintranet.services.security.UserService;
 import org.springframework.context.annotation.Profile;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -29,13 +31,24 @@ public class UserSDJpaService implements UserService {
     @Transactional
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+
+        Optional<User> userToFind = userRepository.findById(id);
+
+        if (userToFind.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
+        return userToFind.get();
     }
 
     @Transactional
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow();
+        Optional<User> userToFind = userRepository.findByUsername(username);
+
+        if (userToFind.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
+        return userToFind.get();
     }
 
 

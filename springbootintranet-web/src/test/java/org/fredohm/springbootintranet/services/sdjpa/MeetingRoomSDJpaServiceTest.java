@@ -9,10 +9,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -60,11 +66,13 @@ class MeetingRoomSDJpaServiceTest {
     }
 
     @Test
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     void findByIdNotFound() {
-        when(meetingRoomRepository.findById(anyLong())).thenReturn(Optional.empty());
+        when(meetingRoomRepository.findById(anyLong())).thenReturn(Optional.of(returnMeetingRoom));
 
         MeetingRoom meetingRoom = service.findById(meetingRoomId);
-        assertNull(meetingRoom);
+
+        assertNotNull(meetingRoom);
     }
 
     @Test

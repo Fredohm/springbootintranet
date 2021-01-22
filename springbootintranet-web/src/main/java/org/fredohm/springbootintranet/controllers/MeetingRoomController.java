@@ -7,8 +7,10 @@ import org.fredohm.springbootintranet.config.permissions.meetingRoom.DeleteMeeti
 import org.fredohm.springbootintranet.config.permissions.meetingRoom.ReadMeetingRoom;
 import org.fredohm.springbootintranet.config.permissions.meetingRoom.UpdateMeetingRoom;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -86,5 +88,16 @@ public class MeetingRoomController {
         meetingRoomService.deleteById(id);
 
         return "redirect:/meeting-room/list";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public String handleNotFound(Model model, Exception exception) {
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        model.addAttribute("exception", exception);
+
+        return "errors/404error";
     }
 }

@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.services.MeetingService;
 import org.springframework.context.annotation.Profile;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -32,7 +34,12 @@ public class MeetingSDJpaService implements MeetingService {
     @Transactional
     @Override
     public Meeting findById(Long id) {
-        return meetingRepository.findById(id).orElse(null);
+        Optional<Meeting> meetingToFind = meetingRepository.findById(id);
+
+        if (meetingToFind.isEmpty()) {
+            throw new NotFoundException("meeting not found");
+        }
+        return meetingToFind.get();
     }
 
     @Transactional

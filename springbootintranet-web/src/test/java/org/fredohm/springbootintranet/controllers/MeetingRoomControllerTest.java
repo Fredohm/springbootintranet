@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.controllers;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -56,6 +58,15 @@ class MeetingRoomControllerTest {
         mockMvc.perform(get("/meeting-room/display/{id}",1))
                 .andExpect(status().isOk())
                 .andExpect(view().name("meeting-room/display"));
+    }
+
+    @Test
+    public void displayMeetingRoomNotFound() throws Exception {
+        when(meetingRoomService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/meeting-room/display/1"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("errors/404error"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -35,7 +37,12 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
     @Transactional
     @Override
     public MeetingRoom findById(Long id) {
-        return meetingRoomRepository.findById(id).orElse(null);
+        Optional<MeetingRoom> meetingRoomToFind = meetingRoomRepository.findById(id);
+
+        if (meetingRoomToFind.isEmpty()) {
+            throw new NotFoundException("meeting-room not found for ID value " + id.toString());
+        }
+        return meetingRoomToFind.get();
     }
 
     @Transactional
