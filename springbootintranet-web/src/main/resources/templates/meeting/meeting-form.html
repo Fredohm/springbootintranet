@@ -54,6 +54,7 @@
         <div class="form-group row">
             <label class="col-sm-2" for="meetingRoom">Meeting room</label>
             <select id="meetingRoom" th:field="*{meetingRoom.id}">
+                <option selected th:value="choose...">Choose...</option>
                 <option th:each="meetingRoomEach : ${meetingRoomList}"
                         th:value="${meetingRoomEach.id}"
                         th:text="${meetingRoomEach.name}">
