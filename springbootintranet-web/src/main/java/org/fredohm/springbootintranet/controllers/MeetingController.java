@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/meeting")
-public class MeetingController {
+public class MeetingController extends ErrorController {
 
     private final MeetingService meetingService;
     private final MeetingRoomService meetingRoomService;

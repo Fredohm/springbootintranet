@@ -24,7 +24,7 @@ import java.util.Set;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends ErrorController {
 
     private final UserService userService;
     private final RoleService roleService;

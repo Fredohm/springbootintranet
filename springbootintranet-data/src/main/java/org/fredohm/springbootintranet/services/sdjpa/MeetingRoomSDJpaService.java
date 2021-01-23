@@ -37,11 +37,13 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
     @Transactional
     @Override
     public MeetingRoom findById(Long id) {
+
         Optional<MeetingRoom> meetingRoomToFind = meetingRoomRepository.findById(id);
 
         if (meetingRoomToFind.isEmpty()) {
             throw new NotFoundException("meeting-room not found for ID value " + id.toString());
         }
+
         return meetingRoomToFind.get();
     }
 

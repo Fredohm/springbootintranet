@@ -35,7 +35,7 @@ public class UserSDJpaService implements UserService {
         Optional<User> userToFind = userRepository.findById(id);
 
         if (userToFind.isEmpty()) {
-            throw new NotFoundException("User not found");
+            throw new NotFoundException("User not found for ID value " + id.toString());
         }
         return userToFind.get();
     }

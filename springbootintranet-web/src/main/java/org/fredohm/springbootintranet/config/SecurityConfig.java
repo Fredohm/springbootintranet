@@ -20,49 +20,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+        http.authorizeRequests()
+                .requestMatchers(PathRequest.toStaticResources()
+                        .atCommonLocations())
+                .permitAll()
                 .and()
                 .authorizeRequests(authorize -> {
                     authorize
-                    .antMatchers("/",  "/index", "/login")
-                    .permitAll();
-        })
+                            .antMatchers("/", "/index", "/login")
+                            .permitAll();
+                })
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/authenticateUser")
-                    .defaultSuccessUrl("/index", true)
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateUser")
+                .defaultSuccessUrl("/index", true)
                 .and()
                 .logout()
-                    .logoutUrl("/doLogout")
-                    .logoutSuccessUrl("/index?logout").permitAll()
+                .logoutUrl("/doLogout")
+                .logoutSuccessUrl("/index?logout")
+                .permitAll()
                 .and()
                 .httpBasic();
-
-//        http.headers().frameOptions().disable();
-//        http.csrf().ignoringAntMatchers("/h2-console/**");
     }
-
-
-    //    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password("{bcrypt}$2a$10$P0uQenAGMq5XmFffvzDs/O88GQlnkaVPgfbFk2cluvY51pBVDDyAW")
-//                .roles("ADMIN");
-//
-//        auth.inMemoryAuthentication()
-//                .withUser("manager")
-//                .password("{bcrypt}$2a$10$KTvBNi/3/frqLaGlit1LkesMKHdUPB.TuZ6hjZL8D47T/hKhTR3q2")
-//                .roles("MANAGER");
-//
-//        auth.inMemoryAuthentication()
-//                .withUser("user")
-//                .password("{bcrypt}$2a$10$lfU5vxh0Vc5y8x3nZ2Ew7OyaNajBhidzn7Njdo5chfpIGKdnzpSJO")
-//                .roles("USER");
-//    }
 }

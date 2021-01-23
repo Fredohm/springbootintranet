@@ -66,7 +66,7 @@ class MeetingRoomControllerTest {
 
         mockMvc.perform(get("/meeting-room/display/1"))
                 .andExpect(status().isNotFound())
-                .andExpect(view().name("errors/404error"));
+                .andExpect(view().name("error"));
     }
 
     @Test
