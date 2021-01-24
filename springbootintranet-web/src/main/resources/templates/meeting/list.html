@@ -28,7 +28,7 @@
         <tr th:each="meeting : ${meetings}">
             <td th:text="${meeting.title}">title</td>
             <td th:text="${meeting.meetingRoom.name}">name</td>
-            <td th:text="${meeting.date}">date</td>
+            <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
             <td>
                 <a class="text-success"
                    sec:authorize="hasAuthority('meeting.read')"

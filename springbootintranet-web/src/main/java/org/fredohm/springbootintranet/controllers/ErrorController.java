@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -29,6 +30,16 @@ public class ErrorController {
         log.error(exception.getMessage());
 
         model.addAttribute("exceptionType","400 - Bad Request");
+        model.addAttribute("exception", exception);
+
+        return "error";
+    }
+
+    @ExceptionHandler(AlreadyBookedException.class)
+    public String handleAlreadyBooked(Model model, Exception exception) {
+        log.error(exception.getMessage());
+
+        model.addAttribute("exceptionType", "Salle déjà réservée");
         model.addAttribute("exception", exception);
 
         return "error";
