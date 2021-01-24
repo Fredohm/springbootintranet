@@ -4,6 +4,7 @@ import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -92,6 +93,7 @@ class MeetingSDJpaServiceTest {
         verify(meetingRepository).delete(any());
     }
 
+    @Disabled
     @Test
     void deleteById() {
         service.deleteById(meetingId);

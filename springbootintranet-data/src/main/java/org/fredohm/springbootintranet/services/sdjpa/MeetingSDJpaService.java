@@ -41,7 +41,7 @@ public class MeetingSDJpaService implements MeetingService {
         Optional<Meeting> meetingToFind = meetingRepository.findById(id);
 
         if (meetingToFind.isEmpty()) {
-            throw new NotFoundException("meeting not found for ID value" + id.toString());
+            throw new NotFoundException("meeting not found for ID value " + id.toString());
         }
         return meetingToFind.get();
     }
