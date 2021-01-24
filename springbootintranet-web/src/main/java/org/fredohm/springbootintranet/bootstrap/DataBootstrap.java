@@ -2,11 +2,13 @@ package org.fredohm.springbootintranet.bootstrap;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
+import org.fredohm.springbootintranet.services.MeetingService;
 import org.fredohm.springbootintranet.services.security.AuthorityService;
 import org.fredohm.springbootintranet.services.security.RoleService;
 import org.fredohm.springbootintranet.services.security.UserService;
@@ -16,6 +18,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +30,7 @@ import java.util.Set;
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final MeetingRoomService meetingRoomService;
+    private final MeetingService meetingService;
 
     private final AuthorityService authorityService;
     private final RoleService roleService;
@@ -44,6 +49,11 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         if (meetingRoomService.findAll().size() == 0L) {
             log.debug("Loading meeting-rooms");
             loadMeetingRooms();
+        }
+
+        if (meetingService.findAll().size() == 0L) {
+            log.debug("Loading meetings");
+            loadMeetings();
         }
     }
 
@@ -146,5 +156,20 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleRouge.setLocation("Shinsekai");
         salleRouge.setMeetings(new HashSet<>());
         meetingRoomService.save(salleRouge);
+    }
+
+    private void loadMeetings() {
+        Meeting staff1 = new Meeting();
+        staff1.setTitle("Staff 1");
+        staff1.setContact("Fred");
+        staff1.setMembersNb(12);
+        staff1.setDate(LocalDate.of(2021,01,24));
+        staff1.setStart(LocalTime.of(9,0));
+        staff1.setEnd(LocalTime.of(10,30));
+        staff1.setMeetingRoom(meetingRoomService.findById(1L));
+        staff1.setProjection(false);
+        staff1.setFood(false);
+        staff1.setDrinks(true);
+        meetingService.save(staff1);
     }
 }
