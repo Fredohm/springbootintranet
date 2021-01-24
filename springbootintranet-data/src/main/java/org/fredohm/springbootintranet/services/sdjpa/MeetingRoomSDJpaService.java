@@ -62,6 +62,9 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+
+        findById(id);
+
         meetingRoomRepository.deleteById(id);
     }
 }

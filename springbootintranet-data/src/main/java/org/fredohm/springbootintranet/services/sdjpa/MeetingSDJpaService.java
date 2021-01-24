@@ -1,6 +1,8 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.services.MeetingService;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
 public class MeetingSDJpaService implements MeetingService {
@@ -45,7 +49,29 @@ public class MeetingSDJpaService implements MeetingService {
     @Transactional
     @Override
     public Meeting save(Meeting meeting) {
-        return meetingRepository.save(meeting);
+
+        if (isAvailable(meeting)) {
+            return meetingRepository.save(meeting);
+        } else {
+            throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+        }
+    }
+
+    private Boolean isAvailable(Meeting meeting) {
+        boolean bool = true;
+        List<Meeting> existingMeetings = meetingRepository.findAll();
+        for (Meeting meetingToCheck : existingMeetings) {
+            if ((meetingToCheck.getMeetingRoom()).equals(meeting.getMeetingRoom())) {
+                if ((meetingToCheck.getDate()).equals(meeting.getDate())) {
+                    log.debug("même salle, même jour");
+                    if ((meetingToCheck.getEnd().isAfter(meeting.getStart()))) {
+                        log.error("la réunion précédente n'est pas terminée");
+                        bool = false;
+                    }
+                }
+            }
+        }
+        return bool;
     }
 
     @Transactional
@@ -57,6 +83,9 @@ public class MeetingSDJpaService implements MeetingService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+
+        findById(id);
+
         meetingRepository.deleteById(id);
     }
 }

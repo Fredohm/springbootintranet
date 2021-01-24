@@ -67,6 +67,9 @@ public class UserSDJpaService implements UserService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+
+        findById(id);
+
         userRepository.deleteById(id);
     }
 }
