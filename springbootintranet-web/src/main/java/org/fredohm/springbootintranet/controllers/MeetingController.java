@@ -3,6 +3,7 @@ package org.fredohm.springbootintranet.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.config.permissions.meeting.CreateMeeting;
+import org.fredohm.springbootintranet.config.permissions.meeting.DeleteMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.ReadMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
 import org.fredohm.springbootintranet.domain.Meeting;
@@ -90,6 +91,7 @@ public class MeetingController extends ErrorController {
         return "redirect:/meeting/display/" + savedMeeting.getId();
     }
 
+    @DeleteMeeting
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 
