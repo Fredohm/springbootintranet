@@ -35,21 +35,21 @@
                     view
                 </a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('meetingRoom.update')">
                 <a class="text-success"
-                   sec:authorize="hasAuthority('meetingRoom.update')"
                    th:text="'update'"
                    th:href="@{/meeting-room/update/{id}(id = ${meetingRoom.id})}">update</a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('meetingRoom.delete')">
                 <a class="text-danger"
-                   sec:authorize="hasAuthority('meetingRoom.delete')"
                    th:text="'delete'"
                    th:href="@{/meeting-room/delete/{id}(id = ${meetingRoom.id})}"
                    data-toggle="modal" data-target="#delete">delete</a>
             </td>
-            <td th:replace="fragments/modal :: delete ('meeting-room', ${meetingRoom.id})">
-                delete modal
+            <td sec:authorize="hasAuthority('meetingRoom.delete')">
+                <div th:replace="fragments/modal :: delete ('meeting-room', ${meetingRoom.id})">
+                    delete modal
+                </div>
             </td>
         </tr>
     </table>

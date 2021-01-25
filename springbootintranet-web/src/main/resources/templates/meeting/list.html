@@ -28,39 +28,38 @@
         <tr th:each="meeting : ${meetings}">
             <td th:text="${meeting.title}">title</td>
             <td>
-                <a th:text="${meeting.meetingRoom.name}"
-                   th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}">name</a>
+                <a class="text-success" th:text="${meeting.meetingRoom.name}"
+                   th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}">
+                    name
+                </a>
             </td>
             <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
-            <td>
+            <td sec:authorize="hasAuthority('meeting.read')">
                 <a class="text-success"
-                   sec:authorize="hasAuthority('meeting.read')"
                    th:text="'view'"
                    th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
                     view
                 </a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('meeting.update')">
                 <a class="text-success"
-                   sec:authorize="hasAuthority('meeting.update')"
                    th:text="'update'"
                    th:href="@{/meeting/update/{id}(id = ${meeting.id})}">
                     update
                 </a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('meeting.delete')">
                 <a class="text-danger"
-                   sec:authorize="hasAuthority('meeting.delete')"
                    th:text="delete"
                    th:href="@{/meeting/delete/{id}(id = ${meeting.id})}"
                    data-toggle="modal" data-target="#delete">
                     delete
                 </a>
             </td>
-            <td>
-            <div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
-                delete modal
-            </div>
+            <td sec:authorize="hasAuthority('meeting.delete')">
+                <div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
+                    delete modal
+                </div>
             </td>
         </tr>
     </table>
