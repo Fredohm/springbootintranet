@@ -25,6 +25,7 @@ public class MeetingRoomController extends ErrorController {
     private final MeetingRoomService meetingRoomService;
     private final MeetingService meetingService;
 
+
     @ReadMeetingRoom
     @GetMapping("/list")
     public String list(Model model) {

@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
@@ -64,6 +65,10 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
     public void deleteById(Long id) {
 
         findById(id);
+
+        if (meetingRoomRepository.findById(id).get().getMeetings() != null) {
+            throw new ExistingMeetingsException("There is reservations schedulded in this meeting-room!");
+        }
 
         meetingRoomRepository.deleteById(id);
     }

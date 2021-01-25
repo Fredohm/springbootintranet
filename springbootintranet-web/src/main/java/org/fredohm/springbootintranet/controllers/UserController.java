@@ -75,7 +75,6 @@ public class UserController extends ErrorController {
                 .firstName(userService.findById(id).getFirstName())
                 .lastName(userService.findById(id).getLastName())
                 .email(userService.findById(id).getEmail())
-
                 .build();
 
         model.addAttribute("intranetUser", userToUpdate);

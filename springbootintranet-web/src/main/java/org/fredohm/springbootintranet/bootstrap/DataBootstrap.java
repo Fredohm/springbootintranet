@@ -163,7 +163,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         staff1.setTitle("Staff 1");
         staff1.setContact("Fred");
         staff1.setMembersNb(12);
-        staff1.setDate(LocalDate.of(2021,01,24));
+        staff1.setDate(LocalDate.now().plusDays(1));
         staff1.setStart(LocalTime.of(9,0));
         staff1.setEnd(LocalTime.of(10,30));
         staff1.setMeetingRoom(meetingRoomService.findById(1L));

@@ -2,13 +2,16 @@ package org.fredohm.springbootintranet.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
+import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
+@ControllerAdvice
 public class ErrorController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -40,6 +43,18 @@ public class ErrorController {
         log.error(exception.getMessage());
 
         model.addAttribute("exceptionType", "Salle déjà réservée");
+        model.addAttribute("exception", exception);
+
+        return "error";
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(ExistingMeetingsException.class)
+    public String forbiddenDeletingMeetingRoom(Model model, Exception exception) {
+        log.error("Interdit de supprimer une salle si des réunions sont présentes!");
+        log.error(exception.getMessage());
+
+        model.addAttribute("exceptionType","401 - Unauthorized");
         model.addAttribute("exception", exception);
 
         return "error";
