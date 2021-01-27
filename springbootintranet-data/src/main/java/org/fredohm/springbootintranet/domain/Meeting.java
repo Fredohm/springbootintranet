@@ -78,21 +78,4 @@ public class Meeting extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "meeting_room_id")
     private MeetingRoom meetingRoom;
-
-/*
-    public String toString() {
-        return "Meeting(title="
-                + this.getTitle()
-                + ", contact=" + this.getContact()
-                + ", membersNb=" + this.getMembersNb()
-                + ", date=" + this.getDate()
-                + ", start=" + this.getStart()
-                + ", end=" + this.getEnd()
-                + ", drinks=" + this.getDrinks()
-                + ", food=" + this.getFood()
-                + ", projection=" + this.getProjection()
-                + ", notes=" + this.getNotes()
-                + ", meetingRoom=" + this.getMeetingRoom().getName()
-                + ", user=" + this.getUser().getUsername() + ")";
-    }*/
 }
