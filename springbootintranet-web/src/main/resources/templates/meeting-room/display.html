@@ -24,17 +24,6 @@
                 <p class="card-text" th:text="${meetingRoom.available ? 'Available' : 'Not available'}">some text</p>
                 <p class="card-text" th:text="${meetingRoom.description}">Some quick example card's content.</p>
                 <br />
-                <h5 class="card-title text-muted">List of meetings</h5>
-                <table>
-                    <tr th:each="meeting : ${meetingRoom.meetings}">
-                        <td>
-                            <a class="card-link text-success" th:text="${meeting.title}"
-                               th:href="@{/meeting/display/{id}(id = ${meeting.id})}">
-                                Meeting
-                            </a>
-                        </td>
-                    </tr>
-                </table>
             </div>
             <div class="row p-2">
                 <a sec:authorize="hasAuthority('meetingRoom.update')"
@@ -49,6 +38,15 @@
                     delete
                 </a>
             </div>
+        </div>
+        <div class="col-sm-9">
+            <h5 class="card-title text-muted">List of meetings</h5>
+            <ul th:each="meeting : ${meetingRoom.meetings}" class="list-group list-group-horizontal">
+                <li th:text="${meeting.title}" class="list-group-item text-success col-sm-4">An item</li>
+                <li th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}" class="list-group-item col-sm-2">An item</li>
+                <li th:text="${meeting.start} + 'h'" class="list-group-item col-sm-2">An item</li>
+                <li th:text="${meeting.end} + 'h'" class="list-group-item col-sm-2">An item</li>
+            </ul>
         </div>
     </div>
     <div class="row mt-3">

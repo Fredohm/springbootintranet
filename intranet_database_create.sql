@@ -1,0 +1,14 @@
+create table authority (id bigint not null, role varchar(255), primary key (id)) engine=InnoDB;
+create table hibernate_sequence (next_val bigint) engine=InnoDB;
+insert into hibernate_sequence values ( 1 );
+create table meeting_rooms (id bigint not null auto_increment, available bit, capacity integer not null, description varchar(255), location varchar(255), name varchar(255), primary key (id)) engine=InnoDB;
+create table meetings (id bigint not null auto_increment, contact varchar(255), date date not null, drinks bit, end time not null, food bit, members_nb integer not null, notes varchar(255), projection bit, start time not null, title varchar(255), meeting_room_id bigint, primary key (id)) engine=InnoDB;
+create table role (id bigint not null, name varchar(255), primary key (id)) engine=InnoDB;
+create table role_authority (role_id bigint not null, authority_id bigint not null, primary key (role_id, authority_id)) engine=InnoDB;
+create table user (id bigint not null, account_non_expired bit, account_non_locked bit, created_date datetime, credentials_non_expired bit, email varchar(255), enabled bit, first_name varchar(255), last_modified_date datetime, last_name varchar(255), password varchar(255), username varchar(255), primary key (id)) engine=InnoDB;
+create table user_role (user_id bigint not null, role_id bigint not null, primary key (user_id, role_id)) engine=InnoDB;
+alter table meetings add constraint FKgr4r60oefsd72nnov73gsy8gq foreign key (meeting_room_id) references meeting_rooms (id);
+alter table role_authority add constraint FKqbri833f7xop13bvdje3xxtnw foreign key (authority_id) references authority (id);
+alter table role_authority add constraint FK2052966dco7y9f97s1a824bj1 foreign key (role_id) references role (id);
+alter table user_role add constraint FKa68196081fvovjhkek5m97n3y foreign key (role_id) references role (id);
+alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (id);

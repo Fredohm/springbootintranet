@@ -29,13 +29,13 @@
                 <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
                 <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
                 <p class="card-text" th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
-                <!--p class="card-text">
-                    reserved by:
-                    <a th:text="${meeting.user.username}"
-                       th:href="@{/user/display/{id}(id = ${meeting.user.id})}">
-                        Username
-                    </a>
-                </p-->
+<!--                <!p class="card-text">-->
+<!--                    reserved by:-->
+<!--                    <a th:text="${meeting.user.username}"-->
+<!--                       th:href="@{/user/display/{id}(id = ${meeting.user.id})}">-->
+<!--                        Username-->
+<!--                    </a>-->
+<!--                </p>-->
             </div>
             <div class="row p-2">
                 <a sec:authorize="hasAuthority('meeting.update')"

@@ -18,22 +18,24 @@
     <h3>List of meetings</h3>
     <table class="table table-striped">
         <tr>
-            <th>title</th>
-            <th>meeting room</th>
             <th>date</th>
+            <th>Time</th>
+            <th>meeting room</th>
+            <th>title</th>
             <th>View</th>
             <th sec:authorize="hasAuthority('meeting.update')">Update</th>
             <th sec:authorize="hasAuthority('meeting.delete')">Delete</th>
         </tr>
         <tr th:each="meeting : ${meetings}">
-            <td th:text="${meeting.title}">title</td>
+            <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
+            <td th:text="${#temporals.format(meeting.start, 'HH:mm')}">Time</td>
             <td>
                 <a class="text-success" th:text="${meeting.meetingRoom.name}"
                    th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}">
                     name
                 </a>
             </td>
-            <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
+            <td th:text="${meeting.title}">title</td>
             <td sec:authorize="hasAuthority('meeting.read')">
                 <a class="text-success"
                    th:text="'view'"
@@ -55,8 +57,6 @@
                    data-toggle="modal" data-target="#delete">
                     delete
                 </a>
-            </td>
-            <td sec:authorize="hasAuthority('meeting.delete')">
                 <div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
                     delete modal
                 </div>
