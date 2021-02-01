@@ -3,7 +3,10 @@ package org.fredohm.springbootintranet.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,6 +52,7 @@ public class MeetingRoom extends BaseEntity {
     private Boolean available;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
+    @OrderBy("date asc")
     private Set<Meeting> meetings = new HashSet<>();
 
 }
