@@ -10,10 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -44,6 +41,13 @@ public class MeetingSDJpaService implements MeetingService {
             throw new NotFoundException("meeting not found for ID value " + id.toString());
         }
         return meetingToFind.get();
+    }
+
+    @Override
+    public List<Meeting> findByOrderByDateAsc() {
+        List<Meeting> meetings = new ArrayList<>();
+        meetingRepository.findByOrderByDateAsc().forEach(meetings::add);
+        return meetings;
     }
 
     @Transactional

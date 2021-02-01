@@ -28,7 +28,7 @@
         </tr>
         <tr th:each="meeting : ${meetings}">
             <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
-            <td th:text="${#temporals.format(meeting.start, 'HH:mm')}">Time</td>
+            <td th:text="${#temporals.format(meeting.start, 'HH:mm')} + ' - ' + ${#temporals.format(meeting.end, 'HH:mm')}">Time</td>
             <td>
                 <a class="text-success" th:text="${meeting.meetingRoom.name}"
                    th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}">

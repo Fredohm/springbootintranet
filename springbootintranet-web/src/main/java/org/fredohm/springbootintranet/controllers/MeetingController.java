@@ -29,7 +29,7 @@ public class MeetingController extends ErrorController {
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("meetings", meetingService.findAll());
+        model.addAttribute("meetings", meetingService.findByOrderByDateAsc());
 
         return "meeting/list";
     }

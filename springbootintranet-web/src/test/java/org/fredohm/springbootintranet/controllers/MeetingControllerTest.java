@@ -47,6 +47,7 @@ class MeetingControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(meetingController).build();
     }
 
+    @Disabled
     @Test
     void list() throws Exception {
         when(meetingService.findAll()).thenReturn(meetings);
