@@ -54,10 +54,14 @@ public class MeetingSDJpaService implements MeetingService {
     @Override
     public Meeting save(Meeting meeting) {
 
-        if (isAvailable(meeting)) {
+        if (meeting.getId() != null) {
             return meetingRepository.save(meeting);
         } else {
-            throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+            if (isAvailable(meeting)) {
+                return meetingRepository.save(meeting);
+            } else {
+                throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+            }
         }
     }
 

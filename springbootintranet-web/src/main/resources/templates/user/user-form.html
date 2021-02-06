@@ -97,7 +97,6 @@
                     <label class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" th:field="*{role.id}">
-                    <option selected th:value="choose...">Choose...</option>
                     <option th:each="role : ${roles}"
                             th:value="${role.id}"
                             th:text="${role.name}">
