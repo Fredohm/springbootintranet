@@ -24,8 +24,8 @@
   * [Spring Security](https://spring.io/projects/spring-security)
   * [Thymeleaf](https://www.thymeleaf.org)
 ### [Bootstrap 4](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
-### Version controling with GitHub
-## CircleCI
+### Version controlling with [GitHub](https://github.com/Fredohm/springbootintranet)
+## [CircleCI](https://circleci.com/gh/Fredohm/springbootintranet)
 #### Circle CI Build Status
 [![CircleCI](https://circleci.com/gh/Fredohm/springbootintranet.svg?style=svg&circle-token=976fd357fc41e962a0f5fa62b42815e4ada5891c)](https://circleci.com/gh/Fredohm/springbootintranet)
 
