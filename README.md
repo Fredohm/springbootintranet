@@ -1,4 +1,5 @@
-# Springboot intranet ![coq](src/main/resources/static/images/coq.jpg)
+# Springboot intranet 
+# ![coq](src/main/resources/static/images/coq.jpg)
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
