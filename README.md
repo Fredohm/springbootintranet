@@ -12,8 +12,9 @@
 
 ## Technologies
 ### [Java EE 11]()
-#### [Maven](https://maven.apache.org/)
-#### [MySQL](https://www.mysql.com/)
+### [Maven](https://maven.apache.org/)
+### [MySQL](https://www.mysql.com/)
+### [Docker](https://hub.docker.com/)
 ### [Spring Framework](https://spring.io)
 #### [Spring-boot](https://spring.io/projects/spring-boot)
   * [Spring MVC](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html)
