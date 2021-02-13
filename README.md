@@ -11,11 +11,11 @@
 #### Management of incoming and outgoing mail
 
 ## Technologies
-#### [Java EE 11]()
+### [Java EE 11]()
 #### [Maven](https://maven.apache.org/)
 #### [MySQL](https://www.mysql.com/)
-#### [Spring Framework](https://spring.io)
-##### [Spring-boot](https://spring.io/projects/spring-boot)
+### [Spring Framework](https://spring.io)
+#### [Spring-boot](https://spring.io/projects/spring-boot)
   * [Spring MVC](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html)
   * [H2 database](https://www.h2database.com/html/main.html)
   * [Spring-boot Devtools](https://docs.spring.io/spring-boot/docs/1.5.16.RELEASE/reference/html/using-boot-devtools.html)
@@ -23,6 +23,7 @@
   * [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
   * [Spring Security](https://spring.io/projects/spring-security)
   * [Thymeleaf](https://www.thymeleaf.org)
+### [Bootstrap 4](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
 ### Version controling with GitHub
 ## CircleCI
 #### Circle CI Build Status
