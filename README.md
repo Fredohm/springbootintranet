@@ -3,7 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [CircleCI](#Circle CI)
+* [CircleCI](#CircleCI)
 
 ## General info
 ### project for an intranet
