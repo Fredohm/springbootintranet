@@ -35,7 +35,7 @@ public class UserController extends ErrorController {
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAllByOrderByUsernameAsc());
 
         return "user/list";
     }

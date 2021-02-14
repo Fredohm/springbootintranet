@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +23,13 @@ public class UserSDJpaService implements UserService {
     public Set<User> findAll() {
         Set<User> users = new HashSet<>();
         userRepository.findAll().forEach(users::add);
+        return users;
+    }
+
+    @Override
+    public List<User> findAllByOrderByUsernameAsc() {
+        List<User> users = new ArrayList<>();
+        userRepository.findAllByOrderByUsernameAsc().forEach(users::add);
         return users;
     }
 
