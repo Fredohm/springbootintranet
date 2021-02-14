@@ -50,7 +50,7 @@ public class MeetingController extends ErrorController {
         Meeting meeting = new Meeting();
 
         model.addAttribute("meeting", meeting);
-        model.addAttribute("meetingRoomList", meetingRoomService.findAll());
+        model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
     }
@@ -60,7 +60,7 @@ public class MeetingController extends ErrorController {
     public String updateForm(@PathVariable Long id, Model model) {
 
         model.addAttribute("meeting", meetingService.findById(id));
-        model.addAttribute("meetingRoomList", meetingRoomService.findAll());
+        model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
     }

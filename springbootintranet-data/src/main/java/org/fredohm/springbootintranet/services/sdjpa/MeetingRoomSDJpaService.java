@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
@@ -32,6 +30,22 @@ public class MeetingRoomSDJpaService implements MeetingRoomService {
 
         Set<MeetingRoom> meetingRooms = new HashSet<>();
         meetingRoomRepository.findAll().forEach(meetingRooms::add);
+        return meetingRooms;
+    }
+
+    @Transactional
+    @Override
+    public List<MeetingRoom> findAllByOrderByNameAsc() {
+        List<MeetingRoom> meetingRooms = new ArrayList<>();
+        meetingRoomRepository.findAllByOrderByNameAsc().forEach(meetingRooms::add);
+        return meetingRooms;
+    }
+
+    @Transactional
+    @Override
+    public List<MeetingRoom> findAllByAvailableIsTrueOrderByNameAsc() {
+        List<MeetingRoom> meetingRooms = new ArrayList<>();
+        meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().forEach(meetingRooms::add);
         return meetingRooms;
     }
 

@@ -30,7 +30,7 @@ public class MeetingRoom extends BaseEntity {
         this.meetings = meetings;
     }
 
-    @NotBlank
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;

@@ -30,7 +30,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/list")
     public String list(Model model) {
 
-        model.addAttribute("meetingRooms", meetingRoomService.findAll());
+        model.addAttribute("meetingRooms", meetingRoomService.findAllByOrderByNameAsc());
 
         return "meeting-room/list";
     }
