@@ -21,7 +21,7 @@
   * [H2 database](https://www.h2database.com/html/main.html)
   * [Spring-boot Devtools](https://docs.spring.io/spring-boot/docs/1.5.16.RELEASE/reference/html/using-boot-devtools.html)
   * [Project Lombok](https://projectlombok.org/)
-  * [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+  * [Hibernate ORM with Spring Data JPA](https://spring.io/projects/spring-data-jpa)
   * [Spring Security](https://spring.io/projects/spring-security)
   * [Thymeleaf](https://www.thymeleaf.org)
 ### [Bootstrap 4](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
