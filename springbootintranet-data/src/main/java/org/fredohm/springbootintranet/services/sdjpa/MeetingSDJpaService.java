@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Slf4j
@@ -32,6 +33,20 @@ public class MeetingSDJpaService implements MeetingService {
         return meetings;
     }
 
+    @Override
+    public List<Meeting> findByOrderByDateAsc() {
+        List<Meeting> meetings = new ArrayList<>();
+        meetingRepository.findByOrderByDateAsc().forEach(meetings::add);
+        return meetings;
+    }
+
+    @Override
+    public List<Meeting> findByDateAfterOrderByDateAsc(LocalDate date) {
+        List<Meeting> meetings = new ArrayList<>();
+        meetingRepository.findByDateAfterOrderByDateAsc(date).forEach(meetings::add);
+        return meetings;
+    }
+
     @Transactional
     @Override
     public Meeting findById(Long id) {
@@ -41,13 +56,6 @@ public class MeetingSDJpaService implements MeetingService {
             throw new NotFoundException("meeting not found for ID value " + id.toString());
         }
         return meetingToFind.get();
-    }
-
-    @Override
-    public List<Meeting> findByOrderByDateAsc() {
-        List<Meeting> meetings = new ArrayList<>();
-        meetingRepository.findByOrderByDateAsc().forEach(meetings::add);
-        return meetings;
     }
 
     @Transactional

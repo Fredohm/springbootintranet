@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Slf4j
 @Controller
@@ -29,7 +30,7 @@ public class MeetingController extends ErrorController {
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("meetings", meetingService.findByOrderByDateAsc());
+        model.addAttribute("meetings", meetingService.findByDateAfterOrderByDateAsc(LocalDate.now()));
 
         return "meeting/list";
     }
