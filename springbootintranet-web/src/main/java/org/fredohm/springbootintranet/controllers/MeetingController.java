@@ -78,7 +78,7 @@ public class MeetingController extends ErrorController {
                 log.debug(objectError.toString());
             });
 
-            model.addAttribute("meetingRoomList", meetingRoomService.findAll());
+            model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
             return "meeting/meeting-form";
         }

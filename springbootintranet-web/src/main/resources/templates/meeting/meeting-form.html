@@ -26,6 +26,52 @@
         </div>
         <input th:type="hidden" th:field="*{id}"/>
         <div class="form-group row">
+            <label class="col-sm-2" for="meetingRoom">Meeting room</label>
+            <select id="meetingRoom" th:field="*{meetingRoom.id}">
+                <option value="" th:text="choose...">choose...</option>
+                <option th:each="meetingRoomEach : ${meetingRoomList}"
+                        th:value="${meetingRoomEach.id}"
+                        th:text="${meetingRoomEach.name}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="inputDate">Date</label>
+            <input type="date" id="inputDate" class="form-control col-sm-4" th:field="*{date}"
+                   th:value="${#temporals.format(meeting.date, 'dd-MM-yyyy')}" placeholder="dd-mm-yyyy" th:errorclass="has-error"/>
+            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('date')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <div class="text-danger" th:if="${#fields.hasErrors('date')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('date')}" th:text="${err}">Date field error</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="start">Start</label>
+            <input type="time" id="start" class="form-control col-sm-4" th:field="*{start}"
+                   th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}" th:pattern="'HH:mm:ss'" placeholder="hh/mm/ss" th:errorclass="has-error"/>
+            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('start')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <div class="text-danger" th:if="${#fields.hasErrors('start')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('start')}" th:text="${err}">Start time field error</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="end">End</label>
+            <input type="time" id="end" class="form-control col-sm-4" th:field="*{end}"
+                   th:value="${#temporals.format(meeting.end, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
+            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('end')} ? 'col-sm-6 has-error' : 'col-sm-6'">
+                <div class="text-danger" th:if="${#fields.hasErrors('end')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('end')}" th:text="${err}">End time field error</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-sm-2" for="title">Title</label>
             <input type="text" id="title" class="form-control col-sm-4" th:field="*{title}" th:errorclass="has-error"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('title')} ? 'col-sm-6 has-error' : 'col-sm-6'">
@@ -50,51 +96,6 @@
         <div class="form-group row">
             <label class="col-sm-2" for="contact">Contact</label>
             <input id="contact" class="form-control col-sm-4" th:field="*{contact}"/>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="meetingRoom">Meeting room</label>
-            <select id="meetingRoom" th:field="*{meetingRoom.id}">
-                <option th:each="meetingRoomEach : ${meetingRoomList}"
-                        th:value="${meetingRoomEach.id}"
-                        th:text="${meetingRoomEach.name}">
-                </option>
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="inputDate">Date</label>
-            <input type="date" id="inputDate" class="form-control col-sm-4" th:field="*{date}"
-                   th:value="${#temporals.format(meeting.date, 'dd-MM-yyyy')}" placeholder="dd-mm-yyyy" th:errorclass="has-error"/>
-            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('date')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <div class="text-danger" th:if="${#fields.hasErrors('date')}">
-                  <ul>
-                      <li th:each="err : ${#fields.errors('date')}" th:text="${err}">Date field error</li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="start">Start</label>
-            <input type="time" id="start" class="form-control col-sm-4" th:field="*{start}"
-                   th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}" th:pattern="'HH:mm:ss'" placeholder="hh/mm/ss" th:errorclass="has-error"/>
-            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('start')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <div class="text-danger" th:if="${#fields.hasErrors('start')}">
-                  <ul>
-                      <li th:each="err : ${#fields.errors('start')}" th:text="${err}">Start time field error</li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="end">End</label>
-            <input type="time" id="end" class="form-control col-sm-4" th:field="*{end}"
-                   th:value="${#temporals.format(meeting.end, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
-            <div type="text" class="cols-sm-6" th:class="${#fields.hasErrors('end')} ? 'col-sm-6 has-error' : 'col-sm-6'">
-                <div class="text-danger" th:if="${#fields.hasErrors('end')}">
-                  <ul>
-                      <li th:each="err : ${#fields.errors('end')}" th:text="${err}">End time field error</li>
-                  </ul>
-                </div>
-            </div>
         </div>
         <div class="form-check">
             <input id="drinks" class="form-check-input" type="checkbox" th:field="*{drinks}" value="" >
