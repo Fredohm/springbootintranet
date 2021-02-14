@@ -31,7 +31,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('username')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('username')}">
                   <ul>
-                      <li th:each="err : ${#fields.errors('username')}" th:text="${err}">Username</li>
+                      <li th:each="err : ${#fields.errors('username')}" th:text="${err}">Username field error</li>
                   </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('password')}">
                   <ul>
-                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Password</li>
+                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Password field error</li>
                   </ul>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('password')}">
                   <ul>
-                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Confirm Password</li>
+                      <li th:each="err : ${#fields.errors('password')}" th:text="${err}">Confirm Password field error</li>
                   </ul>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('firstName')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('firstName')}">
                   <ul>
-                      <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}">First name</li>
+                      <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}">First name field error</li>
                   </ul>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('lastName')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('lastName')}">
                   <ul>
-                    <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}">Last name</li>
+                    <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}">Last name field error</li>
                   </ul>
                 </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="cols-sm-6" th:class="${#fields.hasErrors('email')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('email')}">
                   <ul>
-                      <li th:each="err : ${#fields.errors('email')}" th:text="${err}">error</li>
+                      <li th:each="err : ${#fields.errors('email')}" th:text="${err}">email field error</li>
                   </ul>
                 </div>
             </div>
