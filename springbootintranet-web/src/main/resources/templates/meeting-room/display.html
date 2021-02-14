@@ -21,7 +21,8 @@
                 <h3 class="card-title" th:text="${meetingRoom.name}">Nom de la salle</h3>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="'Number of places: ' + ${meetingRoom.capacity}">Card subtitle</h6>
                 <p class="card-text" th:text="${meetingRoom.location}">some text</p>
-                <p class="card-text" th:text="${meetingRoom.available ? 'Available' : 'Not available'}">some text</p>
+                <p th:if="${meetingRoom.available} == true" class="card-text text-info"  th:text="'Available'">some text</p>
+                <p th:if="${meetingRoom.available} == false" class="card-text text-danger"  th:text="'Not Available'">some text</p>
                 <p class="card-text" th:text="${meetingRoom.description}">Some quick example card's content.</p>
                 <br />
             </div>

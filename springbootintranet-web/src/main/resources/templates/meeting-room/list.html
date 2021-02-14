@@ -25,7 +25,8 @@
             <th sec:authorize="hasAuthority('meetingRoom.delete')">Delete</th>
         </tr>
         <tr th:each="meetingRoom : ${meetingRooms}">
-            <td th:text="${meetingRoom.name}">name</td>
+            <td th:if="${meetingRoom.available} == true" class="text-info" th:text="${meetingRoom.name}">name</td>
+            <td th:if="${meetingRoom.available} == false" class="text-danger" th:text="${meetingRoom.name}">name</td>
             <td th:text="${meetingRoom.capacity}">capacity</td>
             <td>
                 <a class="text-success"
