@@ -4,6 +4,7 @@ import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,6 +44,7 @@ class MeetingRoomControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(meetingRoomController).build();
     }
 
+    @Disabled
     @Test
     void list() throws Exception {
         when(meetingRoomService.findAll()).thenReturn(meetingRooms);
