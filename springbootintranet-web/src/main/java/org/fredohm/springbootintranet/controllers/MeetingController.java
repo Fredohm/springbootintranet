@@ -72,7 +72,6 @@ public class MeetingController extends ErrorController {
     public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting,
                                       BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
 
-
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());

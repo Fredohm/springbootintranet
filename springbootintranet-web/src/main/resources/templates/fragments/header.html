@@ -49,24 +49,16 @@
                     <h2 th:text="#{header.h2}">Welcome message</h2>
                     <p class="lead">Réservation de salles et gestion du courrier</p>
                     <div sec:authorize="isAuthenticated()">
-                        <p class="text-success">
-                            User: <span sec:authentication="name">username</span>
-                        </p>
+                        <p>User: <span class="text-success" sec:authentication="name">username</span></p>
                     </div>
                     <div sec:authorize="hasAuthority('adminRole')" >
-                        <p class="text-info">
-                            Role: <span th:text="Administrator">role</span>
-                        </p>
+                        <p >Role: <span class="text-info" th:text="administrator">role</span></p>
                     </div>
                     <div sec:authorize="hasAuthority('managerRole')" >
-                        <p class="text-info">
-                          Role: <span th:text="Manager">role</span>
-                        </p>
+                        <p >Role: <span class="text-info" th:text="manager">role</span></p>
                     </div>
                     <div sec:authorize="hasAuthority('userRole')" >
-                        <p class="text-info">
-                            Role: <span th:text="User">role</span>
-                        </p>
+                        <p >Role: <span class="text-info" th:text="user">role</span></p>
                     </div>
                 </div>
                 <div class="col-sm-6">
