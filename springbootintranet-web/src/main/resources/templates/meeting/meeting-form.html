@@ -85,7 +85,7 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2" for="membersNb">Participants</label>
-            <input type="text" id="membersNb" class="form-control col-sm-4" th:field="*{membersNb}" th:errorclass="has-error"/>
+            <input type="text" id="membersNb" class="form-control col-sm-4" th:field="*{membersNb}" th:errorclass="has-error">
             <div class="cols-sm-6" th:class="${#fields.hasErrors('membersNb')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('membersNb')}">
                   <ul>

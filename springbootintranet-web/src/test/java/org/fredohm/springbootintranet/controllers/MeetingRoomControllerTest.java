@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import org.fredohm.springbootintranet.controllers.mvc.MeetingRoomController;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.services.MeetingRoomService;

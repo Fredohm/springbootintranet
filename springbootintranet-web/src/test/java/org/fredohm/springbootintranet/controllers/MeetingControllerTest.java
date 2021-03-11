@@ -1,5 +1,6 @@
 package org.fredohm.springbootintranet.controllers;
 
+import org.fredohm.springbootintranet.controllers.mvc.MeetingController;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.services.MeetingService;

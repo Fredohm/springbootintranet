@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.user;
+package org.fredohm.springbootintranet.model;
 
 import lombok.*;
 import org.fredohm.springbootintranet.domain.security.Role;
@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 @PasswordMatch.List({
         @PasswordMatch(password = "password", confirmedPassword = "matchingPassword", message = "Must match!")
 })
-public class IntranetUser {
+public class UserDTO {
 
     private Long id;
 

@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.controllers;
+package org.fredohm.springbootintranet.controllers.mvc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,11 +6,12 @@ import org.fredohm.springbootintranet.config.permissions.user.CreateUser;
 import org.fredohm.springbootintranet.config.permissions.user.DeleteUser;
 import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
 import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
+import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.model.UserDTO;
 import org.fredohm.springbootintranet.services.security.RoleService;
 import org.fredohm.springbootintranet.services.security.UserService;
-import org.fredohm.springbootintranet.user.IntranetUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,10 +54,10 @@ public class UserController extends ErrorController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        IntranetUser intranetUser = new IntranetUser();
+        UserDTO userDTO = new UserDTO();
         Set<Role> roles = roleService.findAll();
 
-        model.addAttribute("intranetUser", intranetUser);
+        model.addAttribute("userDTO", userDTO);
         model.addAttribute("roles", roles);
 
         return "user/user-form";
@@ -69,7 +70,7 @@ public class UserController extends ErrorController {
         userService.findById(id);
         Set<Role> roles = roleService.findAll();
 
-        IntranetUser userToUpdate = IntranetUser.builder()
+        UserDTO userToUpdate = UserDTO.builder()
                 .id(id)
                 .username(userService.findById(id).getUsername())
                 .firstName(userService.findById(id).getFirstName())
@@ -77,7 +78,7 @@ public class UserController extends ErrorController {
                 .email(userService.findById(id).getEmail())
                 .build();
 
-        model.addAttribute("intranetUser", userToUpdate);
+        model.addAttribute("userDTO", userToUpdate);
         model.addAttribute("roles", roles);
 
         return "user/user-form";
@@ -86,7 +87,7 @@ public class UserController extends ErrorController {
     @CreateUser
     @UpdateUser
     @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute IntranetUser intranetUser, BindingResult result, @RequestParam("role.id") Long id, Model model) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, @RequestParam("role.id") Long id, Model model) {
 
         Set<Role> roles = roleService.findAll();
 
@@ -94,19 +95,19 @@ public class UserController extends ErrorController {
             result.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
-            model.addAttribute("intranetUser", intranetUser);
+            model.addAttribute("userDTO", userDTO);
             model.addAttribute("roles", roles);
 
             return "user/user-form";
         }
 
         User userToSave = User.builder()
-                .id(intranetUser.getId())
-                .username(intranetUser.getUsername())
-                .firstName(intranetUser.getFirstName())
-                .lastName(intranetUser.getLastName())
-                .password(passwordEncoder.encode(intranetUser.getPassword()))
-                .email(intranetUser.getEmail())
+                .id(userDTO.getId())
+                .username(userDTO.getUsername())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .password(passwordEncoder.encode(userDTO.getPassword()))
+                .email(userDTO.getEmail())
                 .role(roleService.findById(id))
                 .build();
         userService.save(userToSave);

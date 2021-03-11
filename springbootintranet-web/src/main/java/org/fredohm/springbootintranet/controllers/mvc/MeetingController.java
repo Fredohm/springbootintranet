@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.controllers;
+package org.fredohm.springbootintranet.controllers.mvc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,6 +6,7 @@ import org.fredohm.springbootintranet.config.permissions.meeting.CreateMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.DeleteMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.ReadMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
+import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.services.MeetingRoomService;
 import org.fredohm.springbootintranet.services.MeetingService;
