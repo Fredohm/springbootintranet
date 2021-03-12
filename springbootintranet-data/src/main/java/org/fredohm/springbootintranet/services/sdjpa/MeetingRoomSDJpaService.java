@@ -4,7 +4,7 @@ import org.fredohm.springbootintranet.domain.MeetingRoom;
 
 import java.util.List;
 
-public interface MeetingRoomService extends CrudService<MeetingRoom, Long> {
+public interface MeetingRoomSDJpaService extends CrudService<MeetingRoom, Long> {
 
     List<MeetingRoom> findAllByOrderByNameAsc();
 

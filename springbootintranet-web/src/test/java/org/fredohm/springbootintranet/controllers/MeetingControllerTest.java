@@ -3,7 +3,7 @@ package org.fredohm.springbootintranet.controllers;
 import org.fredohm.springbootintranet.controllers.mvc.MeetingController;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MeetingControllerTest {
 
     @Mock
-    MeetingService meetingService;
+    MeetingSDJpaService meetingService;
 
     @InjectMocks
     MeetingController meetingController;

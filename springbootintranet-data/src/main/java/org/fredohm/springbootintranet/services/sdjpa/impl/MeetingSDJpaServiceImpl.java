@@ -5,7 +5,7 @@ import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.*;
 @Slf4j
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
-public class MeetingSDJpaServiceImpl implements MeetingService {
+public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
 
     private final MeetingRepository meetingRepository;
 

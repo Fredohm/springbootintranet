@@ -7,8 +7,8 @@ import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.fredohm.springbootintranet.services.sdjpa.security.AuthorityService;
 import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
 import org.fredohm.springbootintranet.services.sdjpa.security.UserService;
@@ -30,8 +30,8 @@ import java.util.Set;
 @Profile({"dev", "prod", "springdatajpa"})
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final MeetingRoomService meetingRoomService;
-    private final MeetingService meetingService;
+    private final MeetingRoomSDJpaService meetingRoomService;
+    private final MeetingSDJpaService meetingService;
 
     private final AuthorityService authorityService;
     private final RoleService roleService;

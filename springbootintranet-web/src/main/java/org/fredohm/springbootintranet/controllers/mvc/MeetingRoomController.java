@@ -8,8 +8,8 @@ import org.fredohm.springbootintranet.config.permissions.meetingRoom.ReadMeeting
 import org.fredohm.springbootintranet.config.permissions.meetingRoom.UpdateMeetingRoom;
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +23,8 @@ import javax.validation.Valid;
 @RequestMapping("/meeting-room")
 public class MeetingRoomController extends ErrorController {
 
-    private final MeetingRoomService meetingRoomService;
-    private final MeetingService meetingService;
+    private final MeetingRoomSDJpaService meetingRoomService;
+    private final MeetingSDJpaService meetingService;
 
 
     @ReadMeetingRoom

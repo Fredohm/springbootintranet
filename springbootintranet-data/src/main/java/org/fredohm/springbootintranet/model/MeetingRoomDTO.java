@@ -3,9 +3,6 @@ package org.fredohm.springbootintranet.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.fredohm.springbootintranet.domain.Meeting;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +15,5 @@ public class MeetingRoomDTO {
     private String location;
     private String description;
     private boolean available;
-    private List<Meeting> meetings;
+    //private List<Meeting> meetings;
 }
