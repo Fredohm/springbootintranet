@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.services;
+package org.fredohm.springbootintranet.services.sdjpa;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 

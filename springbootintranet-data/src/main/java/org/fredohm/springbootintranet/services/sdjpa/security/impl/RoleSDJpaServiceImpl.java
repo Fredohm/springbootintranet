@@ -1,9 +1,9 @@
-package org.fredohm.springbootintranet.services.sdjpa.security;
+package org.fredohm.springbootintranet.services.sdjpa.security.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.repositories.security.RoleRepository;
-import org.fredohm.springbootintranet.services.security.RoleService;
+import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
-public class RoleSDJpaService implements RoleService {
+public class RoleSDJpaServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
 

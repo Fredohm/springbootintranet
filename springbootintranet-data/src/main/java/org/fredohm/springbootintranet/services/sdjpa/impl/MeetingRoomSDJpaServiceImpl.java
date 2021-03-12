@@ -1,11 +1,11 @@
-package org.fredohm.springbootintranet.services.sdjpa;
+package org.fredohm.springbootintranet.services.sdjpa.impl;
 
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
-import org.fredohm.springbootintranet.services.MeetingRoomService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +14,12 @@ import java.util.*;
 
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
-public class MeetingRoomSDJpaService implements MeetingRoomService {
+public class MeetingRoomSDJpaServiceImpl implements MeetingRoomService {
 
     private final MeetingRoomRepository meetingRoomRepository;
     private final MeetingRepository meetingRepository;
 
-    public MeetingRoomSDJpaService(MeetingRoomRepository meetingRoomRepository, MeetingRepository meetingRepository) {
+    public MeetingRoomSDJpaServiceImpl(MeetingRoomRepository meetingRoomRepository, MeetingRepository meetingRepository) {
         this.meetingRoomRepository = meetingRoomRepository;
         this.meetingRepository = meetingRepository;
     }

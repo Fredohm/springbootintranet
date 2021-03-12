@@ -3,6 +3,7 @@ package org.fredohm.springbootintranet.services.sdjpa;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.repositories.MeetingRepository;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
+import org.fredohm.springbootintranet.services.sdjpa.impl.MeetingRoomSDJpaServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class MeetingRoomSDJpaServiceTest {
     MeetingRepository meetingRepository;
 
     @InjectMocks
-    MeetingRoomSDJpaService service;
+    MeetingRoomSDJpaServiceImpl service;
 
     MeetingRoom returnMeetingRoom;
 

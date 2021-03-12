@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.services.sdjpa.security;
+package org.fredohm.springbootintranet.services.sdjpa.security.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.repositories.security.UserRepository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class JPAUserDetailsService implements UserDetailsService {
+public class JPAUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 

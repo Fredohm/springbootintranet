@@ -7,8 +7,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Setter
@@ -20,7 +20,7 @@ public class MeetingRoom extends BaseEntity {
 
     @Builder
     public MeetingRoom(long id, String name, Integer capacity, String location,
-                       String description, boolean available, Set<Meeting> meetings) {
+                       String description, boolean available, List<Meeting> meetings) {
         super(id);
         this.name = name;
         this.capacity = capacity;
@@ -53,6 +53,6 @@ public class MeetingRoom extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
     @OrderBy("date asc")
-    private Set<Meeting> meetings = new HashSet<>();
+    private List<Meeting> meetings = new ArrayList<>();
 
 }

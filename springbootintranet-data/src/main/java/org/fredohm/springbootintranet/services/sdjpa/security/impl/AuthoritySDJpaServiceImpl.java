@@ -1,9 +1,9 @@
-package org.fredohm.springbootintranet.services.sdjpa.security;
+package org.fredohm.springbootintranet.services.sdjpa.security.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.repositories.security.AuthorityRepository;
-import org.fredohm.springbootintranet.services.security.AuthorityService;
+import org.fredohm.springbootintranet.services.sdjpa.security.AuthorityService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
-public class AuthoritySDJpaService implements AuthorityService {
+public class AuthoritySDJpaServiceImpl implements AuthorityService {
 
     private final AuthorityRepository authorityRepository;
 

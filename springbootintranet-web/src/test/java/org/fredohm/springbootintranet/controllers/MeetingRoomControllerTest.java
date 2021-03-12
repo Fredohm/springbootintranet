@@ -3,7 +3,7 @@ package org.fredohm.springbootintranet.controllers;
 import org.fredohm.springbootintranet.controllers.mvc.MeetingRoomController;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
-import org.fredohm.springbootintranet.services.MeetingRoomService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

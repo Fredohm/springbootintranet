@@ -3,7 +3,7 @@ package org.fredohm.springbootintranet.controllers;
 import org.fredohm.springbootintranet.controllers.mvc.MeetingController;
 import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
-import org.fredohm.springbootintranet.services.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

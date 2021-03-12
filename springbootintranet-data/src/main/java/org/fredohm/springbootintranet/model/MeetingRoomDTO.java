@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.fredohm.springbootintranet.domain.Meeting;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +18,5 @@ public class MeetingRoomDTO {
     private String location;
     private String description;
     private boolean available;
-    private Set<Meeting> meetings;
+    private List<Meeting> meetings;
 }

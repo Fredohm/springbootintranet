@@ -1,4 +1,4 @@
-package org.fredohm.springbootintranet.services;
+package org.fredohm.springbootintranet.services.sdjpa;
 
 import java.util.Set;
 

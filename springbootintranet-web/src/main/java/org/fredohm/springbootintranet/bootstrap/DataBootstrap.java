@@ -7,11 +7,11 @@ import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
-import org.fredohm.springbootintranet.services.MeetingRoomService;
-import org.fredohm.springbootintranet.services.MeetingService;
-import org.fredohm.springbootintranet.services.security.AuthorityService;
-import org.fredohm.springbootintranet.services.security.RoleService;
-import org.fredohm.springbootintranet.services.security.UserService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomService;
+import org.fredohm.springbootintranet.services.sdjpa.MeetingService;
+import org.fredohm.springbootintranet.services.sdjpa.security.AuthorityService;
+import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
+import org.fredohm.springbootintranet.services.sdjpa.security.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -136,7 +137,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleVerte.setCapacity(4);
         salleVerte.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleVerte.setLocation("Shinsekai");
-        salleVerte.setMeetings(new HashSet<>());
+        salleVerte.setMeetings(new ArrayList<>());
         meetingRoomService.save(salleVerte);
 
         MeetingRoom salleBleue = new MeetingRoom();
@@ -145,7 +146,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleBleue.setCapacity(4);
         salleBleue.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleBleue.setLocation("Shinsekai");
-        salleBleue.setMeetings(new HashSet<>());
+        salleBleue.setMeetings(new ArrayList<>());
         meetingRoomService.save(salleBleue);
 
         MeetingRoom salleRouge = new MeetingRoom();
@@ -154,7 +155,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleRouge.setCapacity(4);
         salleRouge.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleRouge.setLocation("Shinsekai");
-        salleRouge.setMeetings(new HashSet<>());
+        salleRouge.setMeetings(new ArrayList<>());
         meetingRoomService.save(salleRouge);
     }
 
