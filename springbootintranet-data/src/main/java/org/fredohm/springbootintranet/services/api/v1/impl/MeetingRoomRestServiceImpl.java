@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Primary
 @Service
-public class MeetingRoomRestServiceImpl implements MeetingRoomRestService {
+public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
 
     private final MeetingRoomMapper meetingRoomMapper;
     private final MeetingRoomRepository meetingRoomRepository;
