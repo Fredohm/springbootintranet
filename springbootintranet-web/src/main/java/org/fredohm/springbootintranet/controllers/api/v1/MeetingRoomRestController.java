@@ -27,4 +27,28 @@ public class MeetingRoomRestController {
     public MeetingRoomDTO getMeetingRoomById(@PathVariable Long id) {
         return meetingRoomRestService.getMeetingRoomById(id);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MeetingRoomDTO createNewMeetingRoom(@RequestBody MeetingRoomDTO meetingRoomDTO) {
+        return meetingRoomRestService.createNewMeetingRoom(meetingRoomDTO);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MeetingRoomDTO updateMeetingRoom(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
+        return meetingRoomRestService.saveMeetingRoomByDTO(id, meetingRoomDTO);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MeetingRoomDTO patchCustomer(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
+        return meetingRoomRestService.patchMeetingRoom(id, meetingRoomDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteMeetingRoom(@PathVariable Long id) {
+        meetingRoomRestService.deleteMeetingRoomById(id);
+    }
 }

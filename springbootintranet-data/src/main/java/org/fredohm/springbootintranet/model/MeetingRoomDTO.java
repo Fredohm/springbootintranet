@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +17,5 @@ public class MeetingRoomDTO {
     private String location;
     private String description;
     private boolean available;
-    //private List<Meeting> meetings;
+    private List<MeetingDTO> meetings;
 }
