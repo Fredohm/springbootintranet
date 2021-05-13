@@ -2,6 +2,7 @@ package org.fredohm.springbootintranet.controllers.api.v1;
 
 
 import lombok.RequiredArgsConstructor;
+import org.fredohm.springbootintranet.config.permissions.meetingRoom.CreateMeetingRoom;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.fredohm.springbootintranet.model.MeetingRoomListDTO;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
@@ -28,6 +29,7 @@ public class MeetingRoomRestController {
         return meetingRoomRestService.getMeetingRoomById(id);
     }
 
+    @CreateMeetingRoom
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MeetingRoomDTO createNewMeetingRoom(@RequestBody MeetingRoomDTO meetingRoomDTO) {

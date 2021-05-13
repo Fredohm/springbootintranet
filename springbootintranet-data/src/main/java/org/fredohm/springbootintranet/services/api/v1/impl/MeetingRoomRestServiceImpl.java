@@ -10,6 +10,7 @@ import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +26,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
     public List<MeetingRoomDTO> getAllMeetingRooms() {
         return meetingRoomRepository.findAll()
                 .stream()
-                .map(meetingRoom -> {
-                    MeetingRoomDTO meetingRoomDTO = meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoom);
-                    return meetingRoomDTO;
-                })
+                .map(meetingRoomMapper::meetingRoomToMeetingRoomDTO)
                 .collect(Collectors.toList());
     }
 
@@ -41,6 +39,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
 
     @Override
     public MeetingRoomDTO createNewMeetingRoom(MeetingRoomDTO meetingRoomDTO) {
+        meetingRoomDTO.setMeetings(new ArrayList<>());
         return saveAndReturnDTO(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO));
     }
 
