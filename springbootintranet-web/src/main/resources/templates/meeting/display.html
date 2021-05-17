@@ -46,7 +46,8 @@
                 <a sec:authorize="hasAuthority('meeting.delete')"
                    th:href="@{/meeting/delete/{id}(id = ${meeting.id})}"
                    class=" col-sm-6 btn btn-danger" href="/meeting/list"
-                   data-toggle="modal" data-target="#delete">
+                   data-toggle="modal"
+                   th:attr="data-target='#delete'+${meeting.id}">
                     delete
                 </a>
             </div>

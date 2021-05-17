@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<div th:fragment="delete (pathValue, idToDelete)" class="modal" id="delete" tabindex="-1">
+<div th:fragment="delete (pathValue, idToDelete)" class="modal" th:attr="id='delete'+${idToDelete}" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

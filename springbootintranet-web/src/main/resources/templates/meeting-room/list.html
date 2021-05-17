@@ -45,7 +45,8 @@
                 <a class="text-danger"
                    th:text="'delete'"
                    th:href="@{/meeting-room/delete/{id}(id = ${meetingRoom.id})}"
-                   data-toggle="modal" data-target="#delete">
+                   data-toggle="modal"
+                   th:attr="data-target='#delete'+${meetingRoom.id}">
                     delete
                 </a>
                 <div th:replace="fragments/modal :: delete ('meeting-room', ${meetingRoom.id})">
