@@ -2,11 +2,11 @@ package org.fredohm.springbootintranet.bootstrap;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.fredohm.springbootintranet.domain.Meeting;
-import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.model.MeetingDTO;
+import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.fredohm.springbootintranet.services.sdjpa.security.AuthorityService;
@@ -131,7 +131,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     }
 
     private void loadMeetingRooms() {
-        MeetingRoom salleVerte = new MeetingRoom();
+        MeetingRoomDTO salleVerte = new MeetingRoomDTO();
         salleVerte.setName("salle Verte");
         salleVerte.setAvailable(true);
         salleVerte.setCapacity(4);
@@ -140,7 +140,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleVerte.setMeetings(new ArrayList<>());
         meetingRoomService.save(salleVerte);
 
-        MeetingRoom salleBleue = new MeetingRoom();
+        MeetingRoomDTO salleBleue = new MeetingRoomDTO();
         salleBleue.setName("Salle Bleue");
         salleBleue.setAvailable(true);
         salleBleue.setCapacity(4);
@@ -149,7 +149,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleBleue.setMeetings(new ArrayList<>());
         meetingRoomService.save(salleBleue);
 
-        MeetingRoom salleRouge = new MeetingRoom();
+        MeetingRoomDTO salleRouge = new MeetingRoomDTO();
         salleRouge.setName("salle Rouge");
         salleRouge.setAvailable(true);
         salleRouge.setCapacity(4);
@@ -160,7 +160,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
     }
 
     private void loadMeetings() {
-        Meeting staff1 = new Meeting();
+        MeetingDTO staff1 = new MeetingDTO();
         staff1.setTitle("Staff 1");
         staff1.setContact("Fred");
         staff1.setMembersNb(12);
@@ -171,6 +171,6 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         staff1.setProjection(false);
         staff1.setFood(false);
         staff1.setDrinks(true);
-        meetingService.save(staff1);
+        //meetingService.save(staff1);
     }
 }
