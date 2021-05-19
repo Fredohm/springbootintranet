@@ -33,7 +33,7 @@
                    th:href="@{/user/delete/{id}(id = ${user.id})}"
                    class=" col-sm-6 btn btn-danger" href="/user/list"
                    data-toggle="modal"
-                   th:attr="data-target='#delete'+${user.id}">
+                   th:attr="data-target='#delete' + ${user.id}">
                     delete
                 </a>
             </div>
