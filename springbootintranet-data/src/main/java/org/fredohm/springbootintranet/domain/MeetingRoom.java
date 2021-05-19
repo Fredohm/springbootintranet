@@ -3,10 +3,7 @@ package org.fredohm.springbootintranet.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +16,9 @@ import java.util.List;
 public class MeetingRoom extends BaseEntity {
 
     @Builder
-    public MeetingRoom(long id, String name, Integer capacity, String location,
+    public MeetingRoom(Long id, Integer version, Timestamp createdDate, Timestamp lastModifiedDate, String name, Integer capacity, String location,
                        String description, boolean available, List<Meeting> meetings) {
-        super(id);
+        super(id, version, createdDate, lastModifiedDate);
         this.name = name;
         this.capacity = capacity;
         this.location = location;
@@ -30,21 +27,16 @@ public class MeetingRoom extends BaseEntity {
         this.meetings = meetings;
     }
 
-    @NotNull
-    @Size(min = 1, max = 255)
+
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Min(2)
     @Column(name = "capacity")
     private Integer capacity;
 
-    @NotBlank
     @Column(name = "location")
     private String location;
 
-    @Size(max = 255)
     @Column(name = "description")
     private String description;
 
@@ -52,7 +44,6 @@ public class MeetingRoom extends BaseEntity {
     private Boolean available;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
-    @OrderBy("date asc")
     private List<Meeting> meetings = new ArrayList<>();
 
 }

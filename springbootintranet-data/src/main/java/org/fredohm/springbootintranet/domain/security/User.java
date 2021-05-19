@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.domain.security;
 
 import lombok.*;
+import org.fredohm.springbootintranet.domain.BaseEntity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.CredentialsContainer;
@@ -19,11 +20,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @Entity
-public class User implements UserDetails, CredentialsContainer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User extends BaseEntity implements UserDetails, CredentialsContainer {
 
     private String username;
     private String password;

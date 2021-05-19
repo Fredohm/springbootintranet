@@ -4,9 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -19,10 +17,10 @@ import java.time.LocalTime;
 public class Meeting extends BaseEntity {
 
     @Builder
-    public Meeting(Long id, String title, String contact, Integer membersNb, LocalDate date,
-                   LocalTime start,LocalTime end, Boolean drinks, Boolean food, Boolean projection,
+    public Meeting(Long id, Integer version, Timestamp createdDate, Timestamp lastModifiedDate, String title, String contact, Integer membersNb, LocalDate date,
+                   LocalTime start, LocalTime end, Boolean drinks, Boolean food, Boolean projection,
                    String notes, MeetingRoom meetingRoom) {
-        super(id);
+        super(id, version, createdDate, lastModifiedDate);
         this.title = title;
         this.contact = contact;
         this.membersNb = membersNb;
@@ -36,29 +34,26 @@ public class Meeting extends BaseEntity {
         this.meetingRoom = meetingRoom;
     }
 
-    @NotBlank
+
     @Column(name = "title")
     private String title;
 
     @Column(name = "contact")
     private String contact;
 
-    @NotNull
+
     @Column(name = "members_nb")
     private Integer membersNb;
 
-    @NotNull
-    @FutureOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     @Column(name = "date")
     private LocalDate date;
 
-    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "start")
     private LocalTime start;
 
-    @NotNull
+
     @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "end")
     private LocalTime end;
