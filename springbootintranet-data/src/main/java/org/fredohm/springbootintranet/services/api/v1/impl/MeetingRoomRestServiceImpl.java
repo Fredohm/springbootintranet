@@ -34,7 +34,6 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
     public MeetingRoomDTO getMeetingRoomById(Long id) {
         return meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoomRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new));
-
     }
 
     @Override
@@ -66,11 +65,11 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
             if (meetingRoomDTO.getLocation() != null) {
                 meetingRoom.setLocation(meetingRoomDTO.getLocation());
             }
+            // TODO Add logic
             meetingRoom.setAvailable(meetingRoomDTO.isAvailable());
 
             return meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoomRepository.save(meetingRoom));
         }).orElseThrow(ResourceNotFoundException::new);
-
     }
 
     @Override
