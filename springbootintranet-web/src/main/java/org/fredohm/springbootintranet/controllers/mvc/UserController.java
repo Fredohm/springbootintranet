@@ -102,7 +102,6 @@ public class UserController extends ErrorController {
         }
 
         User userToSave = User.builder()
-                .id(userDTO.getId())
                 .username(userDTO.getUsername())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())

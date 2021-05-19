@@ -8,6 +8,7 @@ import org.fredohm.springbootintranet.config.permissions.meeting.ReadMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.model.MeetingDTO;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public class MeetingController extends ErrorController {
     @CreateMeeting
     @UpdateMeeting
     @PostMapping("/processMeetingForm")
-    public String saveOrUpdateMeeting(@Valid @ModelAttribute Meeting meeting,
+    public String saveOrUpdateMeeting(@Valid @ModelAttribute MeetingDTO meetingDTO,
                                       BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
 
         if (result.hasErrors()) {
@@ -83,13 +84,13 @@ public class MeetingController extends ErrorController {
             return "meeting/meeting-form";
         }
 
-        meetingRoomService.findById(id).getMeetings().add(meeting);
+        meetingRoomService.findById(id).getMeetings().add(meetingDTO);
 
-        meeting.setMeetingRoom(meetingRoomService.findById(id));
+        meetingDTO.setMeetingRoomDTO(meetingRoomService.findById(id));
 
-        Meeting savedMeeting = meetingService.save(meeting);
+        MeetingDTO savedMeetingDTO = meetingService.save(meetingDTO);
 
-        return "redirect:/meeting/display/" + savedMeeting.getId();
+        return "redirect:/meeting/display/" + savedMeetingDTO.getId();
     }
 
     @DeleteMeeting
