@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@Disabled
 @ExtendWith(MockitoExtension.class)
 class MeetingRoomControllerTest {
 
@@ -48,7 +49,7 @@ class MeetingRoomControllerTest {
     @Disabled
     @Test
     void list() throws Exception {
-        when(meetingRoomService.findAll()).thenReturn(meetingRooms);
+        //when(meetingRoomService.findAll()).thenReturn(meetingRooms);
 
         mockMvc.perform(get("/meeting-room/list"))
                 .andExpect(status().isOk())
