@@ -1,26 +1,48 @@
 package org.fredohm.springbootintranet.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MeetingDTO {
+@Builder
+public class MeetingDTO extends BaseDTO {
 
-    Long id;
+    static final long serialVersionUID = -54254261107304646L;
+
+    @NotBlank
     String title;
+
     String contact;
+
+    @NotNull
     Integer membersNb;
+
+    @NotNull
+    @FutureOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate date;
+
+    @NotNull
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime start;
+
+    @NotNull
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime end;
-    Boolean drinks;
-    Boolean food;
-    Boolean projection;
+
+    boolean drinks;
+    boolean food;
+    boolean projection;
     String notes;
+
+    private MeetingRoomDTO meetingRoomDTO;
 }

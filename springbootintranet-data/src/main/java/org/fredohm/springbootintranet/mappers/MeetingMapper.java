@@ -5,12 +5,12 @@ import org.fredohm.springbootintranet.model.MeetingDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = DateMapper.class)
 public interface MeetingMapper {
 
     MeetingMapper INSTANCE = Mappers.getMapper(MeetingMapper.class);
 
     MeetingDTO meetingToMeetingDTO(Meeting meeting);
 
-    Meeting meetingRoomDtoToMeeting(MeetingDTO meetingDTO);
+    Meeting meetingDtoToMeeting(MeetingDTO meetingDTO);
 }

@@ -1,40 +1,19 @@
 package org.fredohm.springbootintranet.model;
 
-import lombok.*;
 import org.fredohm.springbootintranet.domain.security.Role;
-import org.fredohm.springbootintranet.validation.PasswordMatch;
 import org.fredohm.springbootintranet.validation.ValidEmail;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
-@ToString
-@Setter
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@PasswordMatch.List({
-        @PasswordMatch(password = "password", confirmedPassword = "matchingPassword", message = "Must match!")
-})
-public class UserDTO {
+public class UserUpdateDto {
 
-    @Null
     private Long id;
 
     @NotBlank
     @Size(min = 4, max = 12)
     private String username;
-
-    @NotNull
-    @Size(min = 5)
-    private String password;
-
-    @NotNull
-    @Size(min = 5)
-    private String matchingPassword;
 
     @NotBlank
     @Size(min = 1, max = 64)
@@ -50,3 +29,4 @@ public class UserDTO {
 
     private Role role;
 }
+

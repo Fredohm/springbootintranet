@@ -5,7 +5,7 @@ import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = DateMapper.class)
 public interface MeetingRoomMapper {
 
     MeetingRoomMapper INSTANCE = Mappers.getMapper(MeetingRoomMapper.class);
