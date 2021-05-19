@@ -44,5 +44,5 @@ public class MeetingDTO extends BaseDTO {
     boolean projection;
     String notes;
 
-    private MeetingRoomDTO meetingRoomDTO;
+    private MeetingRoomDTO meetingRoom;
 }

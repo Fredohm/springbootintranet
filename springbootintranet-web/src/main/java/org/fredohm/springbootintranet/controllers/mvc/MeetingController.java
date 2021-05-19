@@ -86,7 +86,7 @@ public class MeetingController extends ErrorController {
 
         meetingRoomService.findById(id).getMeetings().add(meetingDTO);
 
-        meetingDTO.setMeetingRoomDTO(meetingRoomService.findById(id));
+        meetingDTO.setMeetingRoom(meetingRoomService.findById(id));
 
         MeetingDTO savedMeetingDTO = meetingService.save(meetingDTO);
 
