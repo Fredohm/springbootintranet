@@ -1,13 +1,13 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
-import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.model.MeetingDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface MeetingSDJpaService extends CrudService<Meeting, Long> {
+public interface MeetingSDJpaService extends CrudService<MeetingDTO, Long> {
 
-    List<Meeting> findByOrderByDateAsc();
+    List<MeetingDTO> findByOrderByDateAsc();
 
-    List<Meeting> findByDateAfterOrderByDateAsc(LocalDate date);
+    List<MeetingDTO> findByDateAfterOrderByDateAsc(LocalDate date);
 }

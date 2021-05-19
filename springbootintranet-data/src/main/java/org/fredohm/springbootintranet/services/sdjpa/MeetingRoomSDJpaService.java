@@ -1,12 +1,14 @@
 package org.fredohm.springbootintranet.services.sdjpa;
 
-import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 
 import java.util.List;
 
-public interface MeetingRoomSDJpaService extends CrudService<MeetingRoom, Long> {
+public interface MeetingRoomSDJpaService extends CrudService<MeetingRoomDTO, Long> {
 
-    List<MeetingRoom> findAllByOrderByNameAsc();
+    List<MeetingRoomDTO> findAllByOrderByNameAsc();
 
-    List<MeetingRoom> findAllByAvailableIsTrueOrderByNameAsc();
+    List<MeetingRoomDTO> findAllByAvailableIsTrueOrderByNameAsc();
+
+    MeetingRoomDTO save(MeetingRoomDTO meetingRoomDTO);
 }

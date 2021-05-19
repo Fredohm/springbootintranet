@@ -1,9 +1,11 @@
 package org.fredohm.springbootintranet.services.sdjpa.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
-import org.fredohm.springbootintranet.repositories.MeetingRepository;
+import org.fredohm.springbootintranet.mappers.MeetingRoomMapper;
+import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
 import org.springframework.context.annotation.Profile;
@@ -12,46 +14,46 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
 @Profile({"dev", "prod", "springdatajpa"})
 public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
 
     private final MeetingRoomRepository meetingRoomRepository;
-    private final MeetingRepository meetingRepository;
+    private final MeetingRoomMapper meetingRoomMapper;
 
-    public MeetingRoomSDJpaServiceImpl(MeetingRoomRepository meetingRoomRepository, MeetingRepository meetingRepository) {
-        this.meetingRoomRepository = meetingRoomRepository;
-        this.meetingRepository = meetingRepository;
+
+    @Transactional
+    @Override
+    public Set<MeetingRoomDTO> findAll() {
+
+        Set<MeetingRoomDTO> meetingRoomsDTO = new HashSet<>();
+        meetingRoomRepository.findAll().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
+
+        return meetingRoomsDTO;
     }
 
     @Transactional
     @Override
-    public Set<MeetingRoom> findAll() {
+    public List<MeetingRoomDTO> findAllByOrderByNameAsc() {
+        List<MeetingRoomDTO> meetingRooms = new ArrayList<>();
 
-        Set<MeetingRoom> meetingRooms = new HashSet<>();
-        meetingRoomRepository.findAll().forEach(meetingRooms::add);
+        meetingRoomRepository.findAllByOrderByNameAsc().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
+
         return meetingRooms;
     }
 
     @Transactional
     @Override
-    public List<MeetingRoom> findAllByOrderByNameAsc() {
-        List<MeetingRoom> meetingRooms = new ArrayList<>();
-        meetingRoomRepository.findAllByOrderByNameAsc().forEach(meetingRooms::add);
+    public List<MeetingRoomDTO> findAllByAvailableIsTrueOrderByNameAsc() {
+        List<MeetingRoomDTO> meetingRooms = new ArrayList<>();
+        meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
         return meetingRooms;
     }
 
     @Transactional
     @Override
-    public List<MeetingRoom> findAllByAvailableIsTrueOrderByNameAsc() {
-        List<MeetingRoom> meetingRooms = new ArrayList<>();
-        meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().forEach(meetingRooms::add);
-        return meetingRooms;
-    }
-
-    @Transactional
-    @Override
-    public MeetingRoom findById(Long id) {
+    public MeetingRoomDTO findById(Long id) {
 
         Optional<MeetingRoom> meetingRoomToFind = meetingRoomRepository.findById(id);
 
@@ -59,19 +61,19 @@ public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
             throw new NotFoundException("meeting-room not found for ID value " + id.toString());
         }
 
-        return meetingRoomToFind.get();
+        return meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoomToFind.get());
     }
 
     @Transactional
     @Override
-    public MeetingRoom save(MeetingRoom meetingRoom) {
-         return meetingRoomRepository.save(meetingRoom);
+    public MeetingRoomDTO save(MeetingRoomDTO meetingRoomDTO) {
+         return meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoomRepository.save(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO)));
     }
 
     @Transactional
     @Override
-    public void delete(MeetingRoom meetingRoom) {
-        meetingRoomRepository.delete(meetingRoom);
+    public void delete(MeetingRoomDTO meetingRoomDTO) {
+        meetingRoomRepository.delete(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO));
     }
 
     @Transactional
