@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +20,8 @@ public class RoleSDJpaServiceImpl implements RoleService {
 
     @Transactional
     @Override
-    public Set<Role> findAll() {
-        Set<Role> roles = new HashSet<>();
+    public List<Role> findAll() {
+        List<Role> roles = new ArrayList<>();
         roleRepository.findAll().forEach(roles::add);
         return roles;
     }

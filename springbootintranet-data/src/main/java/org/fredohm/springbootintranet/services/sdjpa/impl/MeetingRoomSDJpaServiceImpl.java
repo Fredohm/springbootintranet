@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -25,30 +27,20 @@ public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
 
     @Transactional
     @Override
-    public Set<MeetingRoomDTO> findAll() {
-
-        Set<MeetingRoomDTO> meetingRoomsDTO = new HashSet<>();
-        meetingRoomRepository.findAll().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
-
-        return meetingRoomsDTO;
+    public List<MeetingRoomDTO> findAll() {
+        return meetingRoomRepository.findAll().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
     public List<MeetingRoomDTO> findAllByOrderByNameAsc() {
-        List<MeetingRoomDTO> meetingRooms = new ArrayList<>();
-
-        meetingRoomRepository.findAllByOrderByNameAsc().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
-
-        return meetingRooms;
+        return meetingRoomRepository.findAllByOrderByNameAsc().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
     public List<MeetingRoomDTO> findAllByAvailableIsTrueOrderByNameAsc() {
-        List<MeetingRoomDTO> meetingRooms = new ArrayList<>();
-        meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().forEach(meetingRoomMapper::meetingRoomToMeetingRoomDTO);
-        return meetingRooms;
+        return meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
     }
 
     @Transactional

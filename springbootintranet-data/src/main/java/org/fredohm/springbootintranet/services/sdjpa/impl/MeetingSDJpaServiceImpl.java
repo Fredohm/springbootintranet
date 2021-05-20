@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -26,10 +29,10 @@ public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
 
     @Transactional
     @Override
-    public Set<MeetingDTO> findAll() {
+    public List<MeetingDTO> findAll() {
 
-        Set<MeetingDTO> meetings = new HashSet<>();
-        meetingRepository.findAll().forEach(meetingMapper::meetingToMeetingDTO);
+        List<MeetingDTO> meetings = new ArrayList<>();
+        meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
         return meetings;
     }
 

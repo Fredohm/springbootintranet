@@ -3,10 +3,11 @@ package org.fredohm.springbootintranet.controllers.api.v1;
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.config.permissions.meeting.CreateMeeting;
 import org.fredohm.springbootintranet.model.MeetingDTO;
-import org.fredohm.springbootintranet.model.MeetingListDTO;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,8 +19,8 @@ public class MeetingRestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public MeetingListDTO getListOfMeeting() {
-        return new MeetingListDTO((meetingRestService.getAllMeetings()));
+    public List<MeetingDTO> getListOfMeeting() {
+        return meetingRestService.getAllMeetings();
     }
 
     @GetMapping("/{id}")

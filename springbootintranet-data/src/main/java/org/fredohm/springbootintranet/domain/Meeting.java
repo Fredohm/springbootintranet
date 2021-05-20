@@ -70,7 +70,7 @@ public class Meeting extends BaseEntity {
     @Column(name = "notes")
     private String notes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meeting_room_id")
     private MeetingRoom meetingRoom;
 }

@@ -11,14 +11,14 @@ spring:
     database: mysql
     show-sql: true
     open-in-view: true
-    properties:
-      hibernate:
-        hbm2ddl:
-          delimiter: ";"
-      javax:
-        persistence:
-          schema-generation:
-            create-source: metadata
-            scripts:
-              action: create
-              create-target: intranet_database_create.sql
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          delimiter: ";"
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: intranet_database_create.sql

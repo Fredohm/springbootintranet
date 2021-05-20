@@ -7,10 +7,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString(exclude = "meetings")
 @Entity
 @Table(name = "meeting_rooms")
 public class MeetingRoom extends BaseEntity {

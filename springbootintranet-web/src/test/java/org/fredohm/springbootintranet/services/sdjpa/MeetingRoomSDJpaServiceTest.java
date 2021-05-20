@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -56,7 +55,7 @@ class MeetingRoomSDJpaServiceTest {
         returnMeetingRooms.add(MeetingRoom.builder().id(2L).build());
         when(meetingRoomRepository.findAll()).thenReturn(returnMeetingRooms);
 
-        Set<MeetingRoomDTO> meetingRooms = service.findAll();
+        List<MeetingRoomDTO> meetingRooms = service.findAll();
         assertNotNull(meetingRooms);
         assertEquals(2, meetingRooms.size());
     }

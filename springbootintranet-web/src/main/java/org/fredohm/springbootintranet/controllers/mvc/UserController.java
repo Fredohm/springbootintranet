@@ -19,7 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -55,7 +55,7 @@ public class UserController extends ErrorController {
     public String addForm(Model model) {
 
         UserDTO userDTO = new UserDTO();
-        Set<Role> roles = roleService.findAll();
+        List<Role> roles = roleService.findAll();
 
         model.addAttribute("userDTO", userDTO);
         model.addAttribute("roles", roles);
@@ -68,7 +68,7 @@ public class UserController extends ErrorController {
     public String updateForm(@PathVariable Long id, Model model) {
 
         userService.findById(id);
-        Set<Role> roles = roleService.findAll();
+        List<Role> roles = roleService.findAll();
 
         UserDTO userToUpdate = UserDTO.builder()
                 .id(id)
@@ -89,7 +89,7 @@ public class UserController extends ErrorController {
     @PostMapping("/processUserForm")
     public String saveOrUpdateUser(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, @RequestParam("role.id") Long id, Model model) {
 
-        Set<Role> roles = roleService.findAll();
+        List<Role> roles = roleService.findAll();
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
