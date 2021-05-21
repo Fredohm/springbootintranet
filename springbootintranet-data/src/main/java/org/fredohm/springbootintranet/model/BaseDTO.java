@@ -1,15 +1,17 @@
 package org.fredohm.springbootintranet.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseDTO  implements Serializable {
