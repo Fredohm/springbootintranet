@@ -3,6 +3,7 @@ package org.fredohm.springbootintranet.services.sdjpa.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.mappers.MeetingMapper;
 import org.fredohm.springbootintranet.model.MeetingDTO;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,24 +30,19 @@ public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
     @Transactional
     @Override
     public List<MeetingDTO> findAll() {
-
-        List<MeetingDTO> meetings = new ArrayList<>();
-        meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
-        return meetings;
+        return meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<MeetingDTO> findByOrderByDateAsc() {
-        List<MeetingDTO> meetings = new ArrayList<>();
-        meetingRepository.findByOrderByDateAsc().forEach(meetingMapper::meetingToMeetingDTO);
-        return meetings;
+        return meetingRepository.findByOrderByDateAsc().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<MeetingDTO> findByDateAfterOrderByDateAsc(LocalDate date) {
-        List<MeetingDTO> meetings = new ArrayList<>();
-        meetingRepository.findByDateAfterOrderByDateAsc(date).forEach(meetingMapper::meetingToMeetingDTO);
-        return meetings;
+        return meetingRepository.findByDateAfterOrderByDateAsc(date).stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
     }
 
     @Transactional
@@ -65,25 +60,25 @@ public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
     @Override
     public MeetingDTO save(MeetingDTO meetingDTO) {
 
-//        if (meetingDTO.getId() != null) {
+        if (meetingDTO.getId() != null) {
             return  meetingMapper.meetingToMeetingDTO(meetingRepository.save(meetingMapper.meetingDtoToMeeting(meetingDTO)));
-//        } else {
-//            if (isAvailable(meetingDTO)) {
-//                return meetingMapper.meetingToMeetingDTO(meetingRepository.save(meetingMapper.meetingDtoToMeeting(meetingDTO)));
-//            } else {
-//                throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
-//            }
-//        }
+        } else {
+            if (isAvailable(meetingDTO)) {
+                return meetingMapper.meetingToMeetingDTO(meetingRepository.save(meetingMapper.meetingDtoToMeeting(meetingDTO)));
+            } else {
+                throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+            }
+        }
     }
 
-    private Boolean isAvailable(Meeting meeting) {
+    private Boolean isAvailable(MeetingDTO meetingDTO) {
         boolean bool = true;
-        List<Meeting> existingMeetings = meetingRepository.findAll();
-        for (Meeting meetingToCheck : existingMeetings) {
-            if ((meetingToCheck.getMeetingRoom()).equals(meeting.getMeetingRoom())) {
-                if ((meetingToCheck.getDate()).equals(meeting.getDate())) {
+        List<MeetingDTO> existingMeetings =  meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
+        for (MeetingDTO meetingToCheck : existingMeetings) {
+            if ((meetingToCheck.getMeetingRoomDTO()).equals(meetingDTO.getMeetingRoomDTO())) {
+                if ((meetingToCheck.getDate()).equals(meetingDTO.getDate())) {
                     log.debug("même salle, même jour");
-                    if ((meetingToCheck.getEnd().isAfter(meeting.getStart()))) {
+                    if ((meetingToCheck.getEnd().isAfter(meetingDTO.getStart()))) {
                         log.error("la réunion précédente n'est pas terminée");
                         bool = false;
                     }
