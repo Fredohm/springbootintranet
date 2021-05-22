@@ -30,8 +30,8 @@
             <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
             <td th:text="${#temporals.format(meeting.start, 'HH:mm')} + ' - ' + ${#temporals.format(meeting.end, 'HH:mm')}">Time</td>
             <td>
-                <a class="text-success" th:text="${meeting.meetingRoom.name}"
-                   th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}">
+                <a class="text-success" th:text="${meeting.meetingRoomDTO.name}"
+                   th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoomDTO.id})}">
                     name
                 </a>
             </td>
@@ -58,7 +58,7 @@
                    th:attr="data-target='#delete' + ${meeting.id}">
                     delete
                 </a>
-                <div th:replace="fragments/modal :: delete('meeting', ${meeting.id})"> b
+                <div th:replace="fragments/modal :: delete('meeting', ${meeting.id})">
                     delete modal
                 </div>
             </td>

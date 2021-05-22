@@ -24,7 +24,7 @@
                 <p class="card-text" th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
                 <p>
                     <span th:text="'Meeting room: '">Meeting room:</span>
-                    <a th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoom.id})}" class="card-text text-success"  th:text="${meeting.meetingRoom.name}">Meeting room</a>
+                    <a th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoomDTO.id})}" class="card-text text-success"  th:text="${meeting.meetingRoom.name}">Meeting room</a>
                 </p>
                 <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
                 <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
