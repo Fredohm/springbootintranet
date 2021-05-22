@@ -45,7 +45,7 @@ public class Meeting extends BaseEntity {
     @Column(name = "members_nb")
     private Integer membersNb;
 
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private LocalDate date;
 
@@ -70,7 +70,7 @@ public class Meeting extends BaseEntity {
     @Column(name = "notes")
     private String notes;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "meeting_room_id")
     private MeetingRoom meetingRoom;
 }
