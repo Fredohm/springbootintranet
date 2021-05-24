@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface MeetingSDJpaService extends CrudService<MeetingDTO, Long> {
 
-    List<MeetingDTO> findByOrderByDateAsc();
-
     List<MeetingDTO> findByDateAfterOrderByDateAsc(LocalDate date);
 }

@@ -1,6 +1,9 @@
 package org.fredohm.springbootintranet.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
@@ -56,9 +59,9 @@ public class MeetingDTO extends BaseDTO {
     @DateTimeFormat(pattern = "HH:mm")
     LocalTime end;
 
-    boolean drinks;
-    boolean food;
-    boolean projection;
+    Boolean drinks;
+    Boolean food;
+    Boolean projection;
     String notes;
 
     private MeetingRoomDTO meetingRoomDTO;

@@ -15,7 +15,7 @@
     <h2>Header</h2>
 </div>
 <div class="container">
-    <form th:object="${meeting}" th:action="@{/meeting/processMeetingForm}" method="post">
+    <form th:object="${meetingDTO}" th:action="@{/meeting/processMeetingForm}" method="post">
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-4">
                 <h3 th:text="(*{id} ? 'Update' : 'Add') + ' meeting'">Add or update</h3>
@@ -28,7 +28,7 @@
         <input id="id" th:type="hidden" th:field="*{id}"/>
         <div class="form-group row">
             <label class="col-sm-2" for="meetingRoom">Meeting room</label>
-            <select id="meetingRoom" th:field="*{meetingRoom.id}">
+            <select id="meetingRoom" th:field="*{meetingRoomDTO.id}">
                 <option value="" th:text="choose...">choose...</option>
                 <option th:each="meetingRoomEach : ${meetingRoomList}"
                         th:value="${meetingRoomEach.id}"
@@ -39,7 +39,7 @@
         <div class="form-group row">
             <label class="col-sm-2" for="inputDate">Date</label>
             <input type="date" id="inputDate" class="form-control col-sm-4" th:field="*{date}"
-                   th:value="${#temporals.format(meeting.date, 'dd-MM-yyyy')}" placeholder="dd-mm-yyyy" th:errorclass="has-error"/>
+                   th:value="${#temporals.format(meetingDTO.date, 'dd-MM-yyyy')}" placeholder="dd-mm-yyyy" th:errorclass="has-error"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('date')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('date')}">
                     <ul>

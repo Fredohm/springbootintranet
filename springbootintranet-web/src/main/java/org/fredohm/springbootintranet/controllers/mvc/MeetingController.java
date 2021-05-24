@@ -41,7 +41,7 @@ public class MeetingController extends ErrorController {
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("meeting", meetingService.findById(id));
+        model.addAttribute("meetingDTO", meetingService.findById(id));
 
         return "meeting/display";
     }
@@ -52,7 +52,7 @@ public class MeetingController extends ErrorController {
 
         Meeting meeting = new Meeting();
 
-        model.addAttribute("meeting", meeting);
+        model.addAttribute("meetingDTO", meeting);
         model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
@@ -62,7 +62,7 @@ public class MeetingController extends ErrorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("meeting", meetingService.findById(id));
+        model.addAttribute("meetingDTO", meetingService.findById(id));
         model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";

@@ -33,11 +33,11 @@ public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
         return meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
     }
 
-    @Transactional
-    @Override
-    public List<MeetingDTO> findByOrderByDateAsc() {
-        return meetingRepository.findByOrderByDateAsc().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
-    }
+//    @Transactional
+//    @Override
+//    public List<MeetingDTO> findByOrderByDateAsc() {
+//        return meetingRepository.findByOrderByDateAsc().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
+//    }
 
     @Transactional
     @Override

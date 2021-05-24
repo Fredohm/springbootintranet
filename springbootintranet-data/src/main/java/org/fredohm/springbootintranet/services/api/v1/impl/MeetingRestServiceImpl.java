@@ -20,6 +20,7 @@ public class MeetingRestServiceImpl implements MeetingRestService {
 
     private final MeetingMapper meetingMapper;
     private final MeetingRepository meetingRepository;
+    private MeetingRestServiceImpl meetingRoomRepository;
 
     @Override
     public List<MeetingDTO> getAllMeetings() {

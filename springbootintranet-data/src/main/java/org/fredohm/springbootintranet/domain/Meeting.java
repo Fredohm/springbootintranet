@@ -18,7 +18,7 @@ public class Meeting extends BaseEntity {
 
     @Builder
     public Meeting(Long id, Integer version, Timestamp createdDate, Timestamp lastModifiedDate, String title, String contact, Integer membersNb, LocalDate date,
-                   LocalTime start, LocalTime end, Boolean drinks, Boolean food, Boolean projection,
+                   LocalTime start, LocalTime end, boolean drinks, boolean food, boolean projection,
                    String notes, MeetingRoom meetingRoom) {
         super(id, version, createdDate, lastModifiedDate);
         this.title = title;
@@ -59,13 +59,13 @@ public class Meeting extends BaseEntity {
     private LocalTime end;
 
     @Column(name = "drinks")
-    private Boolean drinks;
+    private boolean drinks;
 
     @Column(name = "food")
-    private Boolean food;
+    private boolean food;
 
     @Column(name = "projection")
-    private Boolean projection;
+    private boolean projection;
 
     @Column(name = "notes")
     private String notes;

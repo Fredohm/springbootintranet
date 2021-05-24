@@ -9,8 +9,8 @@ import org.fredohm.springbootintranet.config.permissions.meetingRoom.UpdateMeeti
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
+import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,14 +25,15 @@ import javax.validation.Valid;
 public class MeetingRoomController extends ErrorController {
 
     private final MeetingRoomSDJpaService meetingRoomService;
-    private final MeetingSDJpaService meetingService;
+    private final MeetingRoomRestService meetingRoomRestService;
+
 
 
     @ReadMeetingRoom
     @GetMapping("/list")
     public String list(Model model) {
 
-        model.addAttribute("meetingRooms", meetingRoomService.findAllByOrderByNameAsc());
+        model.addAttribute("meetingRooms", meetingRoomRestService.getAllMeetingRooms());
 
         return "meeting-room/list";
     }
@@ -59,7 +60,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("meetingRoom", meetingRoomService.findById(id));
+        model.addAttribute("meetingRoom", meetingRoomRestService.getMeetingRoomById(id));
 
         return "meeting-room/meeting-room-form";
     }

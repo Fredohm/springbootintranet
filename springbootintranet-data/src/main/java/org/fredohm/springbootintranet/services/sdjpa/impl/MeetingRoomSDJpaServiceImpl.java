@@ -74,7 +74,7 @@ public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
 
         findById(id);
 
-        if (meetingRoomRepository.findById(id).get().getMeetings() != null) {
+        if (meetingRoomRepository.findById(id).get().getMeetings() != null && meetingRoomRepository.findById(id).get().getMeetings().size() > 0) {
             throw new ExistingMeetingsException("There is reservations schedulded in this meeting-room!");
         }
 

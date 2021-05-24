@@ -9,6 +9,4 @@ public interface MeetingRoomSDJpaService extends CrudService<MeetingRoomDTO, Lon
     List<MeetingRoomDTO> findAllByOrderByNameAsc();
 
     List<MeetingRoomDTO> findAllByAvailableIsTrueOrderByNameAsc();
-
-    MeetingRoomDTO save(MeetingRoomDTO meetingRoomDTO);
 }
