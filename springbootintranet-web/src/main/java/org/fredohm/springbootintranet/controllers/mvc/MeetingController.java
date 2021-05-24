@@ -72,7 +72,7 @@ public class MeetingController extends ErrorController {
     @UpdateMeeting
     @PostMapping("/processMeetingForm")
     public String saveOrUpdateMeeting(@Valid @ModelAttribute MeetingDTO meetingDTO,
-                                      BindingResult result, @RequestParam("meetingRoom.id") Long id, Model model) {
+                                      BindingResult result, @RequestParam("meetingRoomDTO.id") Long id, Model model) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {

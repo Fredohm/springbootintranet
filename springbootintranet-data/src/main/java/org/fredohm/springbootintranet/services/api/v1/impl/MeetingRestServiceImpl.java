@@ -64,9 +64,9 @@ public class MeetingRestServiceImpl implements MeetingRestService {
             if (meeting.getEnd() != null) {
                 meeting.setEnd(meetingDTO.getEnd());
             }
-            meeting.setDrinks(meetingDTO.isDrinks());
-            meeting.setFood(meetingDTO.isFood());
-            meeting.setProjection(meetingDTO.isProjection());
+            meeting.setDrinks(meetingDTO.getDrinks());
+            meeting.setFood(meetingDTO.getFood());
+            meeting.setProjection(meetingDTO.getProjection());
 
 
             return meetingMapper.meetingToMeetingDTO(meetingRepository.save(meeting));

@@ -6,7 +6,5 @@ import java.util.List;
 
 public interface MeetingRoomSDJpaService extends CrudService<MeetingRoomDTO, Long> {
 
-    List<MeetingRoomDTO> findAllByOrderByNameAsc();
-
     List<MeetingRoomDTO> findAllByAvailableIsTrueOrderByNameAsc();
 }

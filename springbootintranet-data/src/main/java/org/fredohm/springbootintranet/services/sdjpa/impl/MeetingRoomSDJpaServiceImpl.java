@@ -31,11 +31,6 @@ public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
         return meetingRoomRepository.findAll().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
     }
 
-    @Transactional
-    @Override
-    public List<MeetingRoomDTO> findAllByOrderByNameAsc() {
-        return meetingRoomRepository.findAllByOrderByNameAsc().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
-    }
 
     @Transactional
     @Override

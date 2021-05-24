@@ -51,7 +51,7 @@
         <div class="form-group row">
             <label class="col-sm-2" for="start">Start</label>
             <input type="time" id="start" class="form-control col-sm-4" th:field="*{start}"
-                   th:value="${#temporals.format(meeting.start, 'HH:mm:ss')}" th:pattern="'HH:mm:ss'" placeholder="hh/mm/ss" th:errorclass="has-error"/>
+                   th:value="${#temporals.format(meetingDTO.start, 'HH:mm:ss')}" th:pattern="'HH:mm:ss'" placeholder="hh/mm/ss" th:errorclass="has-error"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('start')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('start')}">
                     <ul>
@@ -63,7 +63,7 @@
         <div class="form-group row">
             <label class="col-sm-2" for="end">End</label>
             <input type="time" id="end" class="form-control col-sm-4" th:field="*{end}"
-                   th:value="${#temporals.format(meeting.end, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
+                   th:value="${#temporals.format(meetingDTO.end, 'HH/mm/ss')}" placeholder="hh/mm/ss" th:errorclass="has-error"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('end')} ? 'col-sm-6 has-error' : 'col-sm-6'">
                 <div class="text-danger" th:if="${#fields.hasErrors('end')}">
                     <ul>

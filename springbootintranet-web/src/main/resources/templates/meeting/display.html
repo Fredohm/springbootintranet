@@ -18,17 +18,17 @@
     <div class="row">
         <div class="card col-sm-3" style="width: 18rem;">
             <div class="card-body">
-                <h3 class="card-title" th:text="${meeting.title}">Meeting Title</h3>
-                <h4 class="card-subtitle mb-4 text-muted" th:text="'Date: ' + ${#temporals.format(meeting.date, 'dd/MM/yyyy')}">Date</h4>
-                <p class="card-text" th:text="'Start: ' + ${#temporals.format(meeting.start, 'HH:mm:ss')}">Start time</p>
-                <p class="card-text" th:text="'End: ' + ${#temporals.format(meeting.end, 'HH:mm:ss')}">End Time</p>
+                <h3 class="card-title" th:text="${meetingDTO.title}">Meeting Title</h3>
+                <h4 class="card-subtitle mb-4 text-muted" th:text="'Date: ' + ${#temporals.format(meetingDTO.date, 'dd/MM/yyyy')}">Date</h4>
+                <p class="card-text" th:text="'Start: ' + ${#temporals.format(meetingDTO.start, 'HH:mm:ss')}">Start time</p>
+                <p class="card-text" th:text="'End: ' + ${#temporals.format(meetingDTO.end, 'HH:mm:ss')}">End Time</p>
                 <p>
                     <span th:text="'Meeting room: '">Meeting room:</span>
-                    <a th:href="@{/meeting-room/display/{id}(id = ${meeting.meetingRoomDTO.id})}" class="card-text text-success"  th:text="${meeting.meetingRoom.name}">Meeting room</a>
+                    <a th:href="@{/meeting-room/display/{id}(id = ${meetingDTO.meetingRoomDTO.id})}" class="card-text text-success"  th:text="${meetingDTO.meetingRoomDTO.name}">Meeting room</a>
                 </p>
-                <p class="card-text" th:text="'Drinks: ' + ${meeting.drinks ? 'Yes' : 'No'}">Drinks</p>
-                <p class="card-text" th:text="'Food: ' + ${meeting.food ? 'Yes' : 'No'}">Food</p>
-                <p class="card-text" th:text="'Projection: ' + ${meeting.projection ? 'Yes' : 'No'}">Projection</p>
+                <p class="card-text" th:text="'Drinks: ' + ${meetingDTO.drinks ? 'Yes' : 'No'}">Drinks</p>
+                <p class="card-text" th:text="'Food: ' + ${meetingDTO.food ? 'Yes' : 'No'}">Food</p>
+                <p class="card-text" th:text="'Projection: ' + ${meetingDTO.projection ? 'Yes' : 'No'}">Projection</p>
 <!--                <!p class="card-text">-->
 <!--                    reserved by:-->
 <!--                    <a th:text="${meeting.user.username}"-->
@@ -39,15 +39,15 @@
             </div>
             <div class="row p-2">
                 <a sec:authorize="hasAuthority('meeting.update')"
-                   th:href="@{/meeting/update/{id}(id = ${meeting.id})}"
+                   th:href="@{/meeting/update/{id}(id = ${meetingDTO.id})}"
                    class=" col-sm-6 btn btn-success" href="/meeting/list">
                     update
                 </a>
                 <a sec:authorize="hasAuthority('meeting.delete')"
-                   th:href="@{/meeting/delete/{id}(id = ${meeting.id})}"
+                   th:href="@{/meeting/delete/{id}(id = ${meetingDTO.id})}"
                    class=" col-sm-6 btn btn-danger" href="/meeting/list"
                    data-toggle="modal"
-                   th:attr="data-target='#delete' + ${meeting.id}">
+                   th:attr="data-target='#delete' + ${meetingDTO.id}">
                     delete
                 </a>
             </div>
@@ -57,7 +57,7 @@
         <a class="col-sm-3 btn btn-dark" href="/meeting/list" th:href="@{/meeting/list}">back</a>
     </div>
 </div>
-<div th:replace="fragments/modal :: delete ('meeting', ${meeting.id})">
+<div th:replace="fragments/modal :: delete ('meeting', ${meetingDTO.id})">
     delete modal
 </div>
 <div th:replace="fragments/footer :: footer">
