@@ -3,10 +3,7 @@ package org.fredohm.springbootintranet.model;
 import lombok.*;
 
 import javax.persistence.OrderBy;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -36,6 +33,7 @@ public class MeetingRoomDTO extends BaseDTO {
     private String name;
 
     @NotNull
+    @Positive
     @Min(2)
     private Integer capacity;
 

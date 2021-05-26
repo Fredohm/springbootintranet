@@ -45,7 +45,7 @@ public class MeetingRoomRestController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MeetingRoomDTO patchCustomer(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
+    public MeetingRoomDTO patchMeetingRoom(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
         return meetingRoomRestService.patchMeetingRoom(id, meetingRoomDTO);
     }
 

@@ -7,10 +7,9 @@ import org.fredohm.springbootintranet.config.permissions.meeting.DeleteMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.ReadMeeting;
 import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
 import org.fredohm.springbootintranet.controllers.ErrorController;
-import org.fredohm.springbootintranet.domain.Meeting;
 import org.fredohm.springbootintranet.model.MeetingDTO;
+import org.fredohm.springbootintranet.services.api.v1.MeetingRestService;
 import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,14 +24,14 @@ import java.time.LocalDate;
 @RequestMapping("/meeting")
 public class MeetingController extends ErrorController {
 
-    private final MeetingSDJpaService meetingService;
+    private final MeetingRestService meetingRestService;
     private final MeetingRoomSDJpaService meetingRoomService;
 
     @ReadMeeting
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("meetings", meetingService.findByDateAfterOrderByDateAsc(LocalDate.now()));
+        model.addAttribute("meetings", meetingRestService.getMeetingByDateAfterOrderByDateAsc(LocalDate.now()));
 
         return "meeting/list";
     }
@@ -41,7 +40,7 @@ public class MeetingController extends ErrorController {
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("meetingDTO", meetingService.findById(id));
+        model.addAttribute("meetingDTO", meetingRestService.getMeetingById(id));
 
         return "meeting/display";
     }
@@ -50,9 +49,9 @@ public class MeetingController extends ErrorController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        Meeting meeting = new Meeting();
+        MeetingDTO meetingDTO = new MeetingDTO();
 
-        model.addAttribute("meetingDTO", meeting);
+        model.addAttribute("meetingDTO", meetingDTO);
         model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
@@ -62,7 +61,7 @@ public class MeetingController extends ErrorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("meetingDTO", meetingService.findById(id));
+        model.addAttribute("meetingDTO", meetingRestService.getMeetingById(id));
         model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
@@ -72,7 +71,7 @@ public class MeetingController extends ErrorController {
     @UpdateMeeting
     @PostMapping("/processMeetingForm")
     public String saveOrUpdateMeeting(@Valid @ModelAttribute MeetingDTO meetingDTO,
-                                      BindingResult result, @RequestParam("meetingRoomDTO.id") Long id, Model model) {
+                                      BindingResult result, @RequestParam("meetingRoomDTO.id") Long meetingRoomId, Model model) {
 
         if (result.hasErrors()) {
             result.getAllErrors().forEach(objectError -> {
@@ -84,20 +83,27 @@ public class MeetingController extends ErrorController {
             return "meeting/meeting-form";
         }
 
-        meetingRoomService.findById(id).getMeetings().add(meetingDTO);
+        meetingRoomService.findById(meetingRoomId).getMeetings().add(meetingDTO);
 
-        meetingDTO.setMeetingRoomDTO(meetingRoomService.findById(id));
+        meetingDTO.setMeetingRoomDTO(meetingRoomService.findById(meetingRoomId));
+        System.out.println(meetingDTO);
+        if (meetingDTO.getId() == null) {
+            MeetingDTO newMeetingDTO = meetingRestService.createNewMeeting(meetingDTO);
+            return "redirect:/meeting/display/" + newMeetingDTO.getId();
+        } else {
+            meetingRestService.patchMeeting(meetingDTO.getId(), meetingDTO);
+            return "redirect:/meeting/display/" + meetingDTO.getId();
+        }
 
-        MeetingDTO savedMeetingDTO = meetingService.save(meetingDTO);
 
-        return "redirect:/meeting/display/" + savedMeetingDTO.getId();
+
     }
 
     @DeleteMeeting
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 
-        meetingService.deleteById(id);
+        meetingRestService.deleteMeetingById(id);
 
         return "redirect:/meeting/list";
     }

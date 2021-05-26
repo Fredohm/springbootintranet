@@ -78,9 +78,13 @@ public class MeetingRoomController extends ErrorController {
             return "meeting-room/meeting-room-form";
         }
 
-        MeetingRoomDTO savedMeetingRoom = meetingRoomService.save(meetingRoomDTO);
-
-        return "redirect:/meeting-room/display/" + savedMeetingRoom.getId();
+        if (meetingRoomDTO.getId() == null) {
+            MeetingRoomDTO newMeetingRoomDTO = meetingRoomRestService.createNewMeetingRoom(meetingRoomDTO);
+            return "redirect:/meeting-room/display/" + newMeetingRoomDTO.getId();
+        } else {
+            meetingRoomRestService.patchMeetingRoom(meetingRoomDTO.getId(), meetingRoomDTO);
+            return "redirect:/meeting-room/display/" + meetingRoomDTO.getId();
+        }
     }
 
     @DeleteMeetingRoom

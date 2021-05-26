@@ -1,9 +1,6 @@
 package org.fredohm.springbootintranet.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
@@ -15,6 +12,7 @@ import java.time.OffsetDateTime;
 
 @Setter
 @Getter
+@ToString
 @NoArgsConstructor
 public class MeetingDTO extends BaseDTO {
 
@@ -39,30 +37,30 @@ public class MeetingDTO extends BaseDTO {
     }
 
     @NotBlank
-    String title;
+    private String title;
 
-    String contact;
+    private String contact;
 
     @NotNull
-    Integer membersNb;
+    private Integer membersNb;
 
     @NotNull
     @FutureOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate date;
+    private LocalDate date;
 
     @NotNull
     @DateTimeFormat(pattern = "HH:mm")
-    LocalTime start;
+    private LocalTime start;
 
     @NotNull
     @DateTimeFormat(pattern = "HH:mm")
-    LocalTime end;
+    private LocalTime end;
 
-    Boolean drinks;
-    Boolean food;
-    Boolean projection;
-    String notes;
+    private Boolean drinks;
+    private Boolean food;
+    private Boolean projection;
+    private String notes;
 
     private MeetingRoomDTO meetingRoomDTO;
 }
