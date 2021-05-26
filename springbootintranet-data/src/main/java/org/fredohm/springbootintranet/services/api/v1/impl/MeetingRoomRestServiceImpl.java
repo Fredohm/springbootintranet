@@ -2,6 +2,7 @@ package org.fredohm.springbootintranet.services.api.v1.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
+import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.ResourceNotFoundException;
 import org.fredohm.springbootintranet.mappers.MeetingRoomMapper;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
@@ -76,6 +77,10 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
 
     @Override
     public void deleteMeetingRoomById(Long id) {
+        if (meetingRoomRepository.findById(id).get().getMeetings() != null && meetingRoomRepository.findById(id).get().getMeetings().size() > 0) {
+            throw new ExistingMeetingsException("There is reservations schedulded in this meeting-room!");
+        }
+
         meetingRoomRepository.deleteById(id);
     }
 

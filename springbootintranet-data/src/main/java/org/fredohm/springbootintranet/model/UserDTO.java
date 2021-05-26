@@ -7,7 +7,6 @@ import org.fredohm.springbootintranet.validation.ValidEmail;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 @ToString
@@ -21,7 +20,6 @@ import javax.validation.constraints.Size;
 })
 public class UserDTO {
 
-    @Null
     private Long id;
 
     @NotBlank
