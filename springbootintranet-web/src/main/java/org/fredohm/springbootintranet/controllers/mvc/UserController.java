@@ -10,6 +10,7 @@ import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.model.UserDTO;
+import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
 import org.fredohm.springbootintranet.services.sdjpa.security.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,7 @@ import java.util.List;
 public class UserController extends ErrorController {
 
     private final UserService userService;
+    private final UserRestService userRestService;
     private final RoleService roleService;
 
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +38,7 @@ public class UserController extends ErrorController {
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("users", userService.findAllByOrderByUsernameAsc());
+        model.addAttribute("users", userRestService.getAllUsers());
 
         return "user/list";
     }
@@ -45,7 +47,7 @@ public class UserController extends ErrorController {
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userRestService.getUserById(id));
 
         return "user/display";
     }

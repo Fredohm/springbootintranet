@@ -17,7 +17,8 @@ public class MeetingRoomDTO extends BaseDTO {
     static final long serialVersionUID = -3950371084128873179L;
 
     @Builder
-    public MeetingRoomDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate, String name, Integer capacity, String location,
+    public MeetingRoomDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
+                          String name, Integer capacity, String location,
                           String description, boolean available, List<MeetingDTO> meetings) {
         super(id, version, createdDate, lastModifiedDate);
         this.name = name;

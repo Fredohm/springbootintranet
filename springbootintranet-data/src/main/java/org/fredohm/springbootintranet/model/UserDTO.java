@@ -8,19 +8,32 @@ import org.fredohm.springbootintranet.validation.ValidEmail;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.OffsetDateTime;
 
 @ToString
 @Setter
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @PasswordMatch.List({
         @PasswordMatch(password = "password", confirmedPassword = "matchingPassword", message = "Must match!")
 })
-public class UserDTO {
+public class UserDTO extends BaseDTO {
 
-    private Long id;
+    static final long serialVersionUID = 4013463579227569452L;
+
+    @Builder
+    public UserDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
+                   String username, String password, String matchingPassword, String firstName,
+                   String lastName, String email, Role role) {
+        super(id, version, createdDate, lastModifiedDate);
+        this.username = username;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    }
 
     @NotBlank
     @Size(min = 4, max = 12)
