@@ -5,15 +5,13 @@ import org.fredohm.springbootintranet.model.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(uses = DateMapper.class)
+@Mapper(uses = {DateMapper.class, RoleMapper.class})
 public interface UserMapper {
 
-    @Mapping(target = "role")
-    @Mapping(target = "role.id")
-    @Mapping(target = "role.users", ignore = true)
     @Mapping(target = "matchingPassword", ignore = true)
     UserDTO userToUserDTO(User user);
 
+    @Mapping(target = "role", ignore = true)
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "enabled", ignore = true)
     @Mapping(target = "credentialsNonExpired", ignore = true)

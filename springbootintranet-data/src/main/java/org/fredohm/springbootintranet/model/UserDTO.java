@@ -1,7 +1,6 @@
 package org.fredohm.springbootintranet.model;
 
 import lombok.*;
-import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.validation.PasswordMatch;
 import org.fredohm.springbootintranet.validation.ValidEmail;
 
@@ -9,11 +8,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @ToString
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @PasswordMatch.List({
         @PasswordMatch(password = "password", confirmedPassword = "matchingPassword", message = "Must match!")
 })
@@ -24,7 +25,7 @@ public class UserDTO extends BaseDTO {
     @Builder
     public UserDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                    String username, String password, String matchingPassword, String firstName,
-                   String lastName, String email, Role role) {
+                   String lastName, String email, List<RoleDTO> roles) {
         super(id, version, createdDate, lastModifiedDate);
         this.username = username;
         this.password = password;
@@ -32,7 +33,7 @@ public class UserDTO extends BaseDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
     }
 
     @NotBlank
@@ -59,5 +60,5 @@ public class UserDTO extends BaseDTO {
     @NotNull
     private String email;
 
-    private Role role;
+    private List<RoleDTO> roles;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-@Profile({"dev", "prod", "springdatajpa"})
+@Profile({"dev", "h2"})
 public class RoleSDJpaServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;

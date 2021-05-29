@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-@Profile({"dev", "prod", "springdatajpa"})
+@Profile({"dev", "h2"})
 public class UserSDJpaServiceImpl implements UserService {
 
     private final UserRepository userRepository;

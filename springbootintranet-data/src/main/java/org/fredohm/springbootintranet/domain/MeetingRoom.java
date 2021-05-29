@@ -43,6 +43,7 @@ public class MeetingRoom extends BaseEntity {
     @Column(name = "available")
     private boolean available;
 
+    @Singular
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "meetingRoom", fetch = FetchType.EAGER)
     private List<Meeting> meetings = new ArrayList<>();
 

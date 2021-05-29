@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Profile({"dev", "prod", "springdatajpa"})
+@Profile({"dev", "h2"})
 public class MeetingSDJpaServiceImpl implements MeetingSDJpaService {
 
     private final MeetingRepository meetingRepository;

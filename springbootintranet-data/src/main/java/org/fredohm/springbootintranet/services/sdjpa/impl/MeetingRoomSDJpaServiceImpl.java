@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Profile({"dev", "prod", "springdatajpa"})
+@Profile({"dev", "h2"})
 public class MeetingRoomSDJpaServiceImpl implements MeetingRoomSDJpaService {
 
     private final MeetingRoomRepository meetingRoomRepository;
