@@ -58,7 +58,6 @@ public class UserSDJpaServiceImpl implements UserService {
         return userToFind.get();
     }
 
-
     @Transactional
     @Override
     public User save(User user) {
