@@ -11,8 +11,6 @@ public interface UserMapper {
     @Mapping(target = "matchingPassword", ignore = true)
     UserDTO userToUserDTO(User user);
 
-    @Mapping(target = "role", ignore = true)
-    @Mapping(target = "roles", ignore = true)
     @Mapping(target = "enabled", ignore = true)
     @Mapping(target = "credentialsNonExpired", ignore = true)
     @Mapping(target = "accountNonLocked", ignore = true)

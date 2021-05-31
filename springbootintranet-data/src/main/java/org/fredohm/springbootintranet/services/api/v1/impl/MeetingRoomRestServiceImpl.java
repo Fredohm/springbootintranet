@@ -1,6 +1,7 @@
 package org.fredohm.springbootintranet.services.api.v1.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
 import org.fredohm.springbootintranet.exceptions.NotFoundException;
@@ -9,7 +10,7 @@ import org.fredohm.springbootintranet.mappers.MeetingRoomMapper;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
-@Primary
 @Service
+@Profile({"dev", "h2"})
 public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
 
     private final MeetingRoomMapper meetingRoomMapper;

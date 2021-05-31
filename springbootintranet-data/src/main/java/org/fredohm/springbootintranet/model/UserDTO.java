@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @ToString
 @Setter
@@ -25,7 +24,7 @@ public class UserDTO extends BaseDTO {
     @Builder
     public UserDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                    String username, String password, String matchingPassword, String firstName,
-                   String lastName, String email, List<RoleDTO> roles) {
+                   String lastName, String email, RoleDTO role) {
         super(id, version, createdDate, lastModifiedDate);
         this.username = username;
         this.password = password;
@@ -33,7 +32,7 @@ public class UserDTO extends BaseDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roles = roles;
+        this.role = role;
     }
 
     @NotBlank
@@ -60,5 +59,5 @@ public class UserDTO extends BaseDTO {
     @NotNull
     private String email;
 
-    private List<RoleDTO> roles;
+    private RoleDTO role;
 }

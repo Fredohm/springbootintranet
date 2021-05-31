@@ -4,14 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.security.Authority;
 import org.fredohm.springbootintranet.domain.security.Role;
-import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.mappers.RoleMapper;
 import org.fredohm.springbootintranet.model.MeetingDTO;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingSDJpaService;
+import org.fredohm.springbootintranet.model.UserDTO;
+import org.fredohm.springbootintranet.services.api.v1.MeetingRestService;
+import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
+import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.fredohm.springbootintranet.services.sdjpa.security.AuthorityService;
 import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
-import org.fredohm.springbootintranet.services.sdjpa.security.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -30,12 +31,14 @@ import java.util.Set;
 @Profile("h2")
 public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final MeetingRoomSDJpaService meetingRoomService;
-    private final MeetingSDJpaService meetingService;
+    private final MeetingRoomRestService meetingRoomService;
+    private final MeetingRestService meetingService;
 
     private final AuthorityService authorityService;
     private final RoleService roleService;
-    private final UserService userService;
+    private final UserRestService userService;
+
+    private final RoleMapper roleMapper;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -47,12 +50,12 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
             loadSecurityData();
         }
 
-        if (meetingRoomService.findAll().size() == 0L) {
+        if (meetingRoomService.getAllMeetingRooms().size() == 0L) {
             log.debug("Loading meeting-rooms");
             loadMeetingRooms();
         }
 
-        if (meetingService.findAll().size() == 0L) {
+        if (meetingService.getAllMeetings().size() == 0L) {
             log.debug("Loading meetings");
             loadMeetings();
         }
@@ -102,31 +105,31 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         roleService.save(managerRole);
         roleService.save(userRole);
 
-        userService.save(User.builder()
+        userService.createNewUser(UserDTO.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .firstName("Fred")
                 .lastName("Ohm")
                 .email("fredwaucquez@hotmail.fr")
-                .role(adminRole)
+                .role(roleMapper.roleToRoleDto(adminRole))
                 .build());
 
-        userService.save(User.builder()
+        userService.createNewUser(UserDTO.builder()
                 .username("manager")
                 .password(passwordEncoder.encode("manager"))
                 .firstName("Alice")
                 .lastName("Chouchou")
                 .email("achouchou@gmail.com")
-                .role(managerRole)
+                .role(roleMapper.roleToRoleDto(managerRole))
                 .build());
 
-        userService.save(User.builder()
+        userService.createNewUser(UserDTO.builder()
                 .username("user")
                 .password(passwordEncoder.encode("user"))
                 .firstName("Berte")
                 .lastName("Namibie")
                 .email("bena@ymail.co.jp")
-                .role(userRole)
+                .role(roleMapper.roleToRoleDto(userRole))
                 .build());
     }
 
@@ -138,7 +141,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleVerte.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleVerte.setLocation("Shinsekai");
         salleVerte.setMeetings(new ArrayList<>());
-        meetingRoomService.save(salleVerte);
+        meetingRoomService.createNewMeetingRoom(salleVerte);
 
         MeetingRoomDTO salleBleue = new MeetingRoomDTO();
         salleBleue.setName("Salle Bleue");
@@ -147,7 +150,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleBleue.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleBleue.setLocation("Shinsekai");
         salleBleue.setMeetings(new ArrayList<>());
-        meetingRoomService.save(salleBleue);
+        meetingRoomService.createNewMeetingRoom(salleBleue);
 
         MeetingRoomDTO salleRouge = new MeetingRoomDTO();
         salleRouge.setName("salle Rouge");
@@ -156,7 +159,7 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         salleRouge.setDescription("Création d'une salle test lors du premier démarrage de l'application");
         salleRouge.setLocation("Shinsekai");
         salleRouge.setMeetings(new ArrayList<>());
-        meetingRoomService.save(salleRouge);
+        meetingRoomService.createNewMeetingRoom(salleRouge);
     }
 
     private void loadMeetings() {
@@ -167,10 +170,10 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         staff1.setDate(LocalDate.now().plusDays(1));
         staff1.setStart(LocalTime.of(9,0));
         staff1.setEnd(LocalTime.of(10,30));
-        staff1.setMeetingRoomDTO(meetingRoomService.findById(1L));
+        staff1.setMeetingRoomDTO(meetingRoomService.getMeetingRoomById(1L));
         staff1.setProjection(false);
         staff1.setFood(false);
         staff1.setDrinks(true);
-        meetingService.save(staff1);
+        meetingService.createNewMeeting(staff1);
     }
 }

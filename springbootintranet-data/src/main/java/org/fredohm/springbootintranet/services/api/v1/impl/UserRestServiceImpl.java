@@ -1,13 +1,13 @@
 package org.fredohm.springbootintranet.services.api.v1.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.exceptions.ResourceNotFoundException;
 import org.fredohm.springbootintranet.mappers.UserMapper;
 import org.fredohm.springbootintranet.model.UserDTO;
 import org.fredohm.springbootintranet.repositories.security.UserRepository;
 import org.fredohm.springbootintranet.services.api.v1.UserRestService;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
-@Primary
 @Profile({"dev", "h2"})
 public class UserRestServiceImpl implements UserRestService {
 
