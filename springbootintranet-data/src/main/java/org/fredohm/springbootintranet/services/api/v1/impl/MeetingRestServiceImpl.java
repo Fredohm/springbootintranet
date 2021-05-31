@@ -1,7 +1,9 @@
 package org.fredohm.springbootintranet.services.api.v1.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.fredohm.springbootintranet.domain.Meeting;
+import org.fredohm.springbootintranet.exceptions.AlreadyBookedException;
 import org.fredohm.springbootintranet.exceptions.ResourceNotFoundException;
 import org.fredohm.springbootintranet.mappers.MeetingMapper;
 import org.fredohm.springbootintranet.mappers.MeetingRoomMapper;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Primary
 @Service
@@ -54,16 +57,26 @@ public class MeetingRestServiceImpl implements MeetingRestService {
     @Transactional
     @Override
     public MeetingDTO createNewMeeting(MeetingDTO meetingDTO) {
-        return saveAndReturnDTO(meetingMapper.meetingDtoToMeeting(meetingDTO));
+
+        if (isAvailable(meetingDTO)) {
+            return saveAndReturnDTO(meetingMapper.meetingDtoToMeeting(meetingDTO));
+        } else {
+            throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+        }
     }
 
     @Transactional
     @Override
     public MeetingDTO saveMeetingByDTO(Long id, MeetingDTO meetingDTO) {
-        Meeting meeting = meetingMapper.meetingDtoToMeeting(meetingDTO);
-        meeting.setId(id);
+        if (isAvailable(meetingDTO)) {
+            Meeting meeting = meetingMapper.meetingDtoToMeeting(meetingDTO);
+            meeting.setId(id);
 
-        return saveAndReturnDTO(meeting);
+            return saveAndReturnDTO(meeting);
+        } else {
+            throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
+        }
+
     }
 
     @Transactional
@@ -114,4 +127,22 @@ public class MeetingRestServiceImpl implements MeetingRestService {
 
         return meetingMapper.meetingToMeetingDTO(savedMeeting);
     }
+
+    private Boolean isAvailable(MeetingDTO meetingDTO) {
+        boolean bool = true;
+        List<MeetingDTO> existingMeetings =  meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
+        for (MeetingDTO meetingToCheck : existingMeetings) {
+            if ((meetingToCheck.getMeetingRoomDTO()).equals(meetingDTO.getMeetingRoomDTO())) {
+                if ((meetingToCheck.getDate()).equals(meetingDTO.getDate())) {
+                    log.debug("même salle, même jour");
+                    if ((meetingToCheck.getEnd().isAfter(meetingDTO.getStart()))) {
+                        log.error("la réunion précédente n'est pas terminée");
+                        bool = false;
+                    }
+                }
+            }
+        }
+        return bool;
+    }
+
 }

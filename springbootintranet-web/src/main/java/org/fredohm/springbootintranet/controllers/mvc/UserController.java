@@ -9,10 +9,11 @@ import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.domain.security.User;
+import org.fredohm.springbootintranet.mappers.RoleMapper;
+import org.fredohm.springbootintranet.mappers.UserMapper;
 import org.fredohm.springbootintranet.model.UserDTO;
 import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
-import org.fredohm.springbootintranet.services.sdjpa.security.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +29,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController extends ErrorController {
 
-    private final UserService userService;
     private final UserRestService userRestService;
     private final RoleService roleService;
+    private final UserMapper userMapper;
+    private final RoleMapper roleMapper;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -69,15 +71,16 @@ public class UserController extends ErrorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        userService.findById(id);
+        userRestService.getUserById(id);
         List<Role> roles = roleService.findAll();
 
         UserDTO userToUpdate = UserDTO.builder()
                 .id(id)
-                .username(userService.findById(id).getUsername())
-                .firstName(userService.findById(id).getFirstName())
-                .lastName(userService.findById(id).getLastName())
-                .email(userService.findById(id).getEmail())
+                .username(userRestService.getUserById(id).getUsername())
+                .firstName(userRestService.getUserById(id).getFirstName())
+                .lastName(userRestService.getUserById(id).getLastName())
+                .email(userRestService.getUserById(id).getEmail())
+
                 .build();
 
         model.addAttribute("userDTO", userToUpdate);
@@ -111,7 +114,7 @@ public class UserController extends ErrorController {
                 .email(userDTO.getEmail())
                 .role(roleService.findById(id))
                 .build();
-        userService.save(userToSave);
+        userRestService.createNewUser(userMapper.userToUserDTO(userToSave));
 
         return "redirect:/user/display/" + userToSave.getId();
     }
@@ -120,7 +123,7 @@ public class UserController extends ErrorController {
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 
-        userService.deleteById(id);
+        userRestService.deleteUserById(id);
 
         return "redirect:/user/list";
     }

@@ -8,6 +8,8 @@ public interface MeetingRoomRestService {
 
     List<MeetingRoomDTO> getAllMeetingRooms();
 
+    List<MeetingRoomDTO> getAllMeetingRoomsByAvailableIsTrueOrderByNameAsc();
+
     MeetingRoomDTO getMeetingRoomById(Long id);
 
     MeetingRoomDTO createNewMeetingRoom(MeetingRoomDTO meetingRoomDTO);

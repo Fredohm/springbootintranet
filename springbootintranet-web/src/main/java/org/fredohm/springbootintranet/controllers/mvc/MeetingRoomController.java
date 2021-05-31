@@ -10,7 +10,6 @@ import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,16 +23,13 @@ import javax.validation.Valid;
 @RequestMapping("/meeting-room")
 public class MeetingRoomController extends ErrorController {
 
-    private final MeetingRoomSDJpaService meetingRoomService;
     private final MeetingRoomRestService meetingRoomRestService;
-
-
 
     @ReadMeetingRoom
     @GetMapping("/list")
     public String list(Model model) {
 
-        model.addAttribute("meetingRooms", meetingRoomRestService.getAllMeetingRooms());
+        model.addAttribute("meetingRoomsDTO", meetingRoomRestService.getAllMeetingRooms());
 
         return "meeting-room/list";
     }
@@ -42,7 +38,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/display/{id}")
     public String display(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("meetingRoom", meetingRoomService.findById(id));
+        model.addAttribute("meetingRoomDTO", meetingRoomRestService.getMeetingRoomById(id));
 
         return "meeting-room/display";
     }
@@ -51,7 +47,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/add")
     public String addForm(Model model) {
 
-        model.addAttribute("meetingRoom", new MeetingRoom());
+        model.addAttribute("meetingRoomDTO", new MeetingRoom());
 
         return "meeting-room/meeting-room-form";
     }
@@ -60,7 +56,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("meetingRoom", meetingRoomRestService.getMeetingRoomById(id));
+        model.addAttribute("meetingRoomDTO", meetingRoomRestService.getMeetingRoomById(id));
 
         return "meeting-room/meeting-room-form";
     }
@@ -91,7 +87,7 @@ public class MeetingRoomController extends ErrorController {
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
 
-        meetingRoomService.deleteById(id);
+        meetingRoomRestService.deleteMeetingRoomById(id);
 
         return "redirect:/meeting-room/list";
     }

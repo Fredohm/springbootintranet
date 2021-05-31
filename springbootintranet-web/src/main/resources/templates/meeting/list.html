@@ -26,7 +26,7 @@
             <th sec:authorize="hasAuthority('meeting.update')">Update</th>
             <th sec:authorize="hasAuthority('meeting.delete')">Delete</th>
         </tr>
-        <tr th:each="meeting : ${meetings}">
+        <tr th:each="meeting : ${meetingsDTO}">
             <td th:text="${#temporals.format(meeting.date, 'dd/MM/yyyy')}">date</td>
             <td th:text="${#temporals.format(meeting.start, 'HH:mm')} + ' - ' + ${#temporals.format(meeting.end, 'HH:mm')}">Time</td>
             <td>

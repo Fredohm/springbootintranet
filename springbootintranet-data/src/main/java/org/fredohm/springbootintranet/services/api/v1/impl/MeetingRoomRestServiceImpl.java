@@ -3,6 +3,7 @@ package org.fredohm.springbootintranet.services.api.v1.impl;
 import lombok.RequiredArgsConstructor;
 import org.fredohm.springbootintranet.domain.MeetingRoom;
 import org.fredohm.springbootintranet.exceptions.ExistingMeetingsException;
+import org.fredohm.springbootintranet.exceptions.NotFoundException;
 import org.fredohm.springbootintranet.exceptions.ResourceNotFoundException;
 import org.fredohm.springbootintranet.mappers.MeetingRoomMapper;
 import org.fredohm.springbootintranet.model.MeetingRoomDTO;
@@ -10,9 +11,11 @@ import org.fredohm.springbootintranet.repositories.MeetingRoomRepository;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -31,8 +34,21 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    @Override
+    public List<MeetingRoomDTO> getAllMeetingRoomsByAvailableIsTrueOrderByNameAsc() {
+        return meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
+    }
+
     @Override
     public MeetingRoomDTO getMeetingRoomById(Long id) {
+
+        Optional<MeetingRoom> meetingRoomToFind = meetingRoomRepository.findById(id);
+
+        if (meetingRoomToFind.isEmpty()) {
+            throw new NotFoundException("meeting-room not found for ID value " + id);
+        }
+
         return meetingRoomMapper.meetingRoomToMeetingRoomDTO(meetingRoomRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new));
     }

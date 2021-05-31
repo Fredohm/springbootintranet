@@ -9,7 +9,7 @@ import org.fredohm.springbootintranet.config.permissions.meeting.UpdateMeeting;
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.model.MeetingDTO;
 import org.fredohm.springbootintranet.services.api.v1.MeetingRestService;
-import org.fredohm.springbootintranet.services.sdjpa.MeetingRoomSDJpaService;
+import org.fredohm.springbootintranet.services.api.v1.MeetingRoomRestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,13 +25,13 @@ import java.time.LocalDate;
 public class MeetingController extends ErrorController {
 
     private final MeetingRestService meetingRestService;
-    private final MeetingRoomSDJpaService meetingRoomService;
+    private final MeetingRoomRestService meetingRoomRestService;
 
     @ReadMeeting
     @GetMapping({"/list", "/list.html"})
     public String list(Model model) {
 
-        model.addAttribute("meetings", meetingRestService.getMeetingByDateAfterOrderByDateAsc(LocalDate.now()));
+        model.addAttribute("meetingsDTO", meetingRestService.getMeetingByDateAfterOrderByDateAsc(LocalDate.now()));
 
         return "meeting/list";
     }
@@ -52,7 +52,7 @@ public class MeetingController extends ErrorController {
         MeetingDTO meetingDTO = new MeetingDTO();
 
         model.addAttribute("meetingDTO", meetingDTO);
-        model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
+        model.addAttribute("meetingRoomListDTO", meetingRoomRestService.getAllMeetingRoomsByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
     }
@@ -62,7 +62,7 @@ public class MeetingController extends ErrorController {
     public String updateForm(@PathVariable Long id, Model model) {
 
         model.addAttribute("meetingDTO", meetingRestService.getMeetingById(id));
-        model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
+        model.addAttribute("meetingRoomListDTO", meetingRoomRestService.getAllMeetingRoomsByAvailableIsTrueOrderByNameAsc());
 
         return "meeting/meeting-form";
     }
@@ -78,14 +78,14 @@ public class MeetingController extends ErrorController {
                 log.debug(objectError.toString());
             });
 
-            model.addAttribute("meetingRoomList", meetingRoomService.findAllByAvailableIsTrueOrderByNameAsc());
+            model.addAttribute("meetingRoomListDTO", meetingRoomRestService.getAllMeetingRoomsByAvailableIsTrueOrderByNameAsc());
 
             return "meeting/meeting-form";
         }
 
-        meetingRoomService.findById(meetingRoomId).getMeetings().add(meetingDTO);
+        meetingRoomRestService.getMeetingRoomById(meetingRoomId).getMeetings().add(meetingDTO);
 
-        meetingDTO.setMeetingRoomDTO(meetingRoomService.findById(meetingRoomId));
+        meetingDTO.setMeetingRoomDTO(meetingRoomRestService.getMeetingRoomById(meetingRoomId));
         System.out.println(meetingDTO);
         if (meetingDTO.getId() == null) {
             MeetingDTO newMeetingDTO = meetingRestService.createNewMeeting(meetingDTO);

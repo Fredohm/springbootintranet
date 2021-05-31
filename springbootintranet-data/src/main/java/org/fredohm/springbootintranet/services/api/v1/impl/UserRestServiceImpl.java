@@ -8,7 +8,9 @@ import org.fredohm.springbootintranet.model.UserDTO;
 import org.fredohm.springbootintranet.repositories.security.UserRepository;
 import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,11 +18,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 @Primary
+@Profile({"dev", "h2"})
 public class UserRestServiceImpl implements UserRestService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll()
@@ -29,6 +33,7 @@ public class UserRestServiceImpl implements UserRestService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public UserDTO getUserById(Long id) {
         return userMapper.userToUserDTO(userRepository.findById(id)
@@ -36,11 +41,13 @@ public class UserRestServiceImpl implements UserRestService {
 
     }
 
+    @Transactional
     @Override
     public UserDTO createNewUser(UserDTO userDTO) {
         return saveAndReturnDTO(userMapper.userDtoToUser(userDTO));
     }
 
+    @Transactional
     @Override
     public UserDTO saveUserByDTO(Long id, UserDTO userDTO) {
         User user = userMapper.userDtoToUser(userDTO);
@@ -49,11 +56,13 @@ public class UserRestServiceImpl implements UserRestService {
         return saveAndReturnDTO(user);
     }
 
+    @Transactional
     @Override
     public UserDTO patchUser(Long id, UserDTO userDTO) {
         return null;
     }
 
+    @Transactional
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);

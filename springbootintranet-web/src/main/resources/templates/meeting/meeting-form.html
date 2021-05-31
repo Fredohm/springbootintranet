@@ -30,7 +30,7 @@
             <label class="col-sm-2" for="meetingRoom">Meeting room</label>
             <select id="meetingRoom" th:field="*{meetingRoomDTO.id}">
                 <option value="" th:text="choose...">choose...</option>
-                <option th:each="meetingRoomEach : ${meetingRoomList}"
+                <option th:each="meetingRoomEach : ${meetingRoomListDTO}"
                         th:value="${meetingRoomEach.id}"
                         th:text="${meetingRoomEach.name}">
                 </option>
