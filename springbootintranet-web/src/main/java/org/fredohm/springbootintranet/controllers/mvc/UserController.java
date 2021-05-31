@@ -114,9 +114,9 @@ public class UserController extends ErrorController {
                 .email(userDTO.getEmail())
                 .role(roleMapper.roleToRoleDto(roleService.findById(id)))
                 .build();
-        userRestService.createNewUser(userMapper.userToUserDTO(userToSave));
+        UserDTO newUser = userRestService.createNewUser(userToSave);
 
-        return "redirect:/user/display/" + userToSave.getId();
+        return "redirect:/user/display/" + newUser.getId();
     }
 
     @DeleteUser
