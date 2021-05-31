@@ -106,13 +106,13 @@ public class UserController extends ErrorController {
             return "user/user-form";
         }
 
-        User userToSave = User.builder()
+        UserDTO userToSave = UserDTO.builder()
                 .username(userDTO.getUsername())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .email(userDTO.getEmail())
-                .role(roleService.findById(id))
+                .role(roleMapper.roleToRoleDto(roleService.findById(id)))
                 .build();
         userRestService.createNewUser(userMapper.userToUserDTO(userToSave));
 

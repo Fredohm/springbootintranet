@@ -83,9 +83,9 @@ public class DataBootstrap implements ApplicationListener<ContextRefreshedEvent>
         Authority updateUser = authorityService.save(Authority.builder().role("user.update").build());
         Authority deleteUser = authorityService.save(Authority.builder().role("user.delete").build());
 
-        Role adminRole = roleService.save(roleMapper.roleDtoToRole(Role.builder().name("ADMIN").build()));
-        Role managerRole = roleService.save(roleMapper.roleDtoToRole(Role.builder().name("MANAGER").build()));
-        Role userRole = roleService.save(roleMapper.roleDtoToRole(Role.builder().name("USER").build()));
+        Role adminRole = roleService.save(Role.builder().name("ADMIN").build());
+        Role managerRole = roleService.save(Role.builder().name("MANAGER").build());
+        Role userRole = roleService.save(Role.builder().name("USER").build());
 
         adminRole.setAuthorities(new HashSet<>(Set.of(adminAuthority,
                 createMeetingRoom, readMeetingRoom, updateMeetingRoom, deleteMeetingRoom,
