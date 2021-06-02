@@ -26,7 +26,7 @@ public class UserUpdateDTO extends BaseDTO {
     @Builder
     public UserUpdateDTO(Long id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                    String username, String password, String matchingPassword, String firstName,
-                   String lastName, String email, List<RoleDTO> roles) {
+                   String lastName, String email, RoleDTO role) {
         super(id, version, createdDate, lastModifiedDate);
         this.username = username;
         this.password = password;
@@ -34,7 +34,7 @@ public class UserUpdateDTO extends BaseDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roles = roles;
+        this.role = role;
     }
 
     @NotBlank
@@ -59,7 +59,7 @@ public class UserUpdateDTO extends BaseDTO {
     @NotNull
     private String email;
 
-    private List<RoleDTO> roles;
+    private RoleDTO role;
 }
 
 
