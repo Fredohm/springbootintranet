@@ -71,8 +71,9 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
 
     @Override
     public MeetingRoomDTO patchMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO) {
-        System.out.println(id);
-        System.out.println(meetingRoomDTO);
+        log.debug(id.toString());
+        log.debug(meetingRoomDTO.toString());
+
         return meetingRoomRepository.findById(id).map(meetingRoom -> {
             if (meetingRoomDTO.getName() != null) {
                 meetingRoom.setName(meetingRoomDTO.getName());

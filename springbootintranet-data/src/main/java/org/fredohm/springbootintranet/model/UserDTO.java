@@ -43,8 +43,6 @@ public class UserDTO extends BaseDTO {
     @Size(min = 5)
     private String password;
 
-    @NotNull
-    @Size(min = 5)
     private String matchingPassword;
 
     @NotBlank

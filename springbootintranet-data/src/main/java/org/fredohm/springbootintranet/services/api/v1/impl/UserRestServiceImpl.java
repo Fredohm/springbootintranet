@@ -59,7 +59,26 @@ public class UserRestServiceImpl implements UserRestService {
     @Transactional
     @Override
     public UserDTO patchUser(Long id, UserDTO userDTO) {
-        return null;
+        log.debug(id.toString());
+        log.debug(userDTO.toString());
+
+        return userRepository.findById(id).map(user -> {
+            if (userDTO.getUsername() != null) {
+                user.setUsername(userDTO.getUsername());
+            }
+            if (userDTO.getFirstName() != null) {
+                user.setFirstName(userDTO.getFirstName());
+            }
+            if (userDTO.getLastName() != null) {
+                user.setLastName(userDTO.getLastName());
+            }
+            if (userDTO.getEmail() != null) {
+                user.setEmail(userDTO.getEmail());
+            }
+            userDTO.setPassword(user.getPassword());
+            userDTO.setMatchingPassword(user.getPassword());
+            return userMapper.userToUserDTO(userRepository.save(user));
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional

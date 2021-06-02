@@ -8,7 +8,6 @@ import org.fredohm.springbootintranet.config.permissions.user.ReadUser;
 import org.fredohm.springbootintranet.config.permissions.user.UpdateUser;
 import org.fredohm.springbootintranet.controllers.ErrorController;
 import org.fredohm.springbootintranet.domain.security.Role;
-import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.mappers.RoleMapper;
 import org.fredohm.springbootintranet.mappers.UserMapper;
 import org.fredohm.springbootintranet.model.UserDTO;
@@ -106,7 +105,8 @@ public class UserController extends ErrorController {
             return "user/user-form";
         }
 
-        UserDTO userToSave = UserDTO.builder()
+        if (userDTO.getId() == null) {
+            UserDTO userToSave = UserDTO.builder()
                 .username(userDTO.getUsername())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
@@ -114,9 +114,12 @@ public class UserController extends ErrorController {
                 .email(userDTO.getEmail())
                 .role(roleMapper.roleToRoleDto(roleService.findById(id)))
                 .build();
-        UserDTO newUser = userRestService.createNewUser(userToSave);
-
-        return "redirect:/user/display/" + newUser.getId();
+            UserDTO savedUser = userRestService.createNewUser(userToSave);
+            return "redirect:/user/display/" + savedUser.getId();
+        } else {
+            userRestService.patchUser(userDTO.getId(), userDTO);
+            return "redirect:/user/display/" + userDTO.getId();
+        }
     }
 
     @DeleteUser

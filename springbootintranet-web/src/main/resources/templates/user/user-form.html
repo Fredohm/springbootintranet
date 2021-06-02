@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" th:if="*{id == null}">
             <label class="col-sm-2" for="password">Password</label>
             <input type="password" id="password" class="form-control col-sm-4" th:field="*{password}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" th:if="*{id == null}">
             <label class="col-sm-2" for="matchingPassword">Confirm password</label>
             <input type="password" id="matchingPassword" class="form-control col-sm-4" th:field="*{matchingPassword}"/>
             <div class="cols-sm-6" th:class="${#fields.hasErrors('password')} ? 'col-sm-6 has-error' : 'col-sm-6'">
