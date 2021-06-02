@@ -6,12 +6,14 @@ import org.fredohm.springbootintranet.domain.security.User;
 import org.fredohm.springbootintranet.exceptions.ResourceNotFoundException;
 import org.fredohm.springbootintranet.mappers.UserMapper;
 import org.fredohm.springbootintranet.model.UserDTO;
+import org.fredohm.springbootintranet.repositories.security.RoleRepository;
 import org.fredohm.springbootintranet.repositories.security.UserRepository;
 import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,7 @@ public class UserRestServiceImpl implements UserRestService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     @Override
@@ -60,7 +63,7 @@ public class UserRestServiceImpl implements UserRestService {
     @Override
     public UserDTO patchUser(Long id, UserDTO userDTO) {
         log.debug(id.toString());
-        log.debug(userDTO.toString());
+        log.debug(userDTO.getRole().getId().toString());
 
         return userRepository.findById(id).map(user -> {
             if (userDTO.getUsername() != null) {
@@ -75,8 +78,8 @@ public class UserRestServiceImpl implements UserRestService {
             if (userDTO.getEmail() != null) {
                 user.setEmail(userDTO.getEmail());
             }
-            userDTO.setPassword(user.getPassword());
-            userDTO.setMatchingPassword(user.getPassword());
+            user.setRoles(Collections.singletonList(roleRepository.findById(userDTO.getRole().getId()).orElseThrow(null)));
+
             return userMapper.userToUserDTO(userRepository.save(user));
         }).orElseThrow(ResourceNotFoundException::new);
     }

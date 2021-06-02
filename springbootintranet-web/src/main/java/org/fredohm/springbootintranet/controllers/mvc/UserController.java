@@ -91,8 +91,8 @@ public class UserController extends ErrorController {
 
     @CreateUser
     @UpdateUser
-    @PostMapping("/processUserForm")
-    public String saveOrUpdateUser(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, @RequestParam("role.id") Long id, Model model) {
+    @PostMapping("/processSaveUserForm")
+    public String saveUser(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, @RequestParam("role.id") Long roleId, Model model) {
 
         List<Role> roles = roleService.findAll();
 
@@ -106,26 +106,22 @@ public class UserController extends ErrorController {
             return "user/user-form";
         }
 
-        if (userDTO.getId() == null) {
-            UserDTO userToSave = UserDTO.builder()
+        UserDTO userToSave = UserDTO.builder()
                 .username(userDTO.getUsername())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .email(userDTO.getEmail())
-                .role(roleMapper.roleToRoleDto(roleService.findById(id)))
+                .role(roleMapper.roleToRoleDto(roleService.findById(roleId)))
                 .build();
-            UserDTO savedUser = userRestService.createNewUser(userToSave);
-            return "redirect:/user/display/" + savedUser.getId();
-        } else {
-            userRestService.patchUser(userDTO.getId(), userDTO);
-            return "redirect:/user/display/" + userDTO.getId();
-        }
+        UserDTO savedUser = userRestService.createNewUser(userToSave);
+
+        return "redirect:/user/display/" + savedUser.getId();
     }
 
     @UpdateUser
-    @PostMapping("/processUserUpdateForm")
-    public String UpdateUser(@Valid @ModelAttribute UserUpdateDTO userUpdateDTO, BindingResult result, @RequestParam("role.id") Long id, Model model) {
+    @PostMapping("/processUpdateUserForm")
+    public String UpdateUser(@Valid @ModelAttribute UserUpdateDTO userUpdateDTO, BindingResult result, @RequestParam("role.id") Long roleId, Model model) {
 
         List<Role> roles = roleService.findAll();
 
@@ -144,10 +140,11 @@ public class UserController extends ErrorController {
                 .firstName(userUpdateDTO.getFirstName())
                 .lastName(userUpdateDTO.getLastName())
                 .email(userUpdateDTO.getEmail())
-                .role(userUpdateDTO.getRole())
+                .role(roleMapper.roleToRoleDto(roleService.findById(roleId)))
                 .build();
 
         userRestService.patchUser(userDTOToSave.getId(), userDTOToSave);
+
         return "redirect:/user/display/" + userDTOToSave.getId();
     }
 
