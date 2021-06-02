@@ -11,6 +11,7 @@ import org.fredohm.springbootintranet.domain.security.Role;
 import org.fredohm.springbootintranet.mappers.RoleMapper;
 import org.fredohm.springbootintranet.mappers.UserMapper;
 import org.fredohm.springbootintranet.model.UserDTO;
+import org.fredohm.springbootintranet.model.UserUpdateDTO;
 import org.fredohm.springbootintranet.services.api.v1.UserRestService;
 import org.fredohm.springbootintranet.services.sdjpa.security.RoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -120,6 +121,34 @@ public class UserController extends ErrorController {
             userRestService.patchUser(userDTO.getId(), userDTO);
             return "redirect:/user/display/" + userDTO.getId();
         }
+    }
+
+    @UpdateUser
+    @PostMapping("/processUserUpdateForm")
+    public String UpdateUser(@Valid @ModelAttribute UserUpdateDTO userUpdateDTO, BindingResult result, @RequestParam("role.id") Long id, Model model) {
+
+        List<Role> roles = roleService.findAll();
+
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+            model.addAttribute("userDTO", userUpdateDTO);
+            model.addAttribute("roles", roles);
+
+            return "user/user-form";
+        }
+        UserDTO userDTOToSave = UserDTO.builder()
+                .id(userUpdateDTO.getId())
+                .username(userUpdateDTO.getUsername())
+                .firstName(userUpdateDTO.getFirstName())
+                .lastName(userUpdateDTO.getLastName())
+                .email(userUpdateDTO.getEmail())
+                .role(userUpdateDTO.getRole())
+                .build();
+
+        userRestService.patchUser(userDTOToSave.getId(), userDTOToSave);
+        return "redirect:/user/display/" + userDTOToSave.getId();
     }
 
     @DeleteUser
