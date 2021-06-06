@@ -100,7 +100,8 @@
                 <select class="custom-select" id="inputGroupSelect01" th:field="*{role.id}">
                     <option th:each="role : ${roles}"
                             th:value="${role.id}"
-                            th:text="${role.name}">
+                            th:text="${role.name}"
+                            th:selected="${role.id} == *{role.id}">
                     </option>
                 </select>
             </div>

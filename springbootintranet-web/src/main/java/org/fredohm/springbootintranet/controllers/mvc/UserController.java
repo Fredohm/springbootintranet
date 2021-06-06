@@ -80,7 +80,7 @@ public class UserController extends ErrorController {
                 .firstName(userRestService.getUserById(id).getFirstName())
                 .lastName(userRestService.getUserById(id).getLastName())
                 .email(userRestService.getUserById(id).getEmail())
-
+                .role(userRestService.getUserById(id).getRole())
                 .build();
 
         model.addAttribute("userDTO", userToUpdate);
