@@ -67,24 +67,14 @@ public class MeetingRestServiceImpl implements MeetingRestService {
 
     @Transactional
     @Override
-    public MeetingDTO saveMeetingByDTO(Long id, MeetingDTO meetingDTO) {
-        if (isAvailable(meetingDTO)) {
-            Meeting meeting = meetingMapper.meetingDtoToMeeting(meetingDTO);
-            meeting.setId(id);
+    public MeetingDTO updateMeeting(Long id, MeetingDTO meetingDTO) {
 
-            return saveAndReturnDTO(meeting);
-        } else {
-            throw new AlreadyBookedException("Une autre réunion est réservée dans la même tranche horaire!");
-        }
-
+        return saveAndReturnDTO(meetingMapper.meetingDtoToMeeting(meetingDTO));
     }
 
     @Transactional
     @Override
     public MeetingDTO patchMeeting(Long id, MeetingDTO meetingDTO) {
-
-        System.out.println(id);
-        System.out.println(meetingDTO.toString());
 
         return meetingRepository.findById(id).map(meeting -> {
 
@@ -129,7 +119,7 @@ public class MeetingRestServiceImpl implements MeetingRestService {
     }
 
     private Boolean isAvailable(MeetingDTO meetingDTO) {
-        boolean bool = true;
+        boolean available = true;
         List<MeetingDTO> existingMeetings =  meetingRepository.findAll().stream().map(meetingMapper::meetingToMeetingDTO).collect(Collectors.toList());
         for (MeetingDTO meetingToCheck : existingMeetings) {
             if ((meetingToCheck.getMeetingRoomDTO()).equals(meetingDTO.getMeetingRoomDTO())) {
@@ -137,12 +127,12 @@ public class MeetingRestServiceImpl implements MeetingRestService {
                     log.debug("même salle, même jour");
                     if ((meetingToCheck.getEnd().isAfter(meetingDTO.getStart()))) {
                         log.error("la réunion précédente n'est pas terminée");
-                        bool = false;
+                        available = false;
                     }
                 }
             }
         }
-        return bool;
+        return available;
     }
 
 }

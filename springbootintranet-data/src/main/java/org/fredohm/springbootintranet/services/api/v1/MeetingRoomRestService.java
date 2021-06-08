@@ -14,7 +14,7 @@ public interface MeetingRoomRestService {
 
     MeetingRoomDTO createNewMeetingRoom(MeetingRoomDTO meetingRoomDTO);
 
-    MeetingRoomDTO saveMeetingRoomByDTO(Long id, MeetingRoomDTO meetingRoomDTO);
+    MeetingRoomDTO updateMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO);
 
     MeetingRoomDTO patchMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO);
 

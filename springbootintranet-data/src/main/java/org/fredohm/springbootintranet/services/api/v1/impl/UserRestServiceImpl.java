@@ -53,11 +53,9 @@ public class UserRestServiceImpl implements UserRestService {
 
     @Transactional
     @Override
-    public UserDTO saveUserByDTO(Long id, UserDTO userDTO) {
-        User user = userMapper.userDtoToUser(userDTO);
-        user.setId(id);
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
 
-        return saveAndReturnDTO(user);
+        return saveAndReturnDTO(userMapper.userDtoToUser(userDTO));
     }
 
     @Transactional

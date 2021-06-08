@@ -46,7 +46,7 @@ public class UserRestController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        return userRestService.saveUserByDTO(id, userDTO);
+        return userRestService.updateUser(id, userDTO);
     }
 
     @UpdateUser

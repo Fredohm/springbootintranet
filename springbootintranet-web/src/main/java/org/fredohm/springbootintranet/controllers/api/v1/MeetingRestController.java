@@ -18,14 +18,20 @@ import java.util.List;
 public class MeetingRestController {
 
     public static final String BASE_URL = "/api/v1/meetings";
+
+    public static final Integer DEFAULT_PAGE_NUMBER = 0;
+    public static final Integer DEFAULT_PAGE_SIZE =25;
+
     private final MeetingRestService meetingRestService;
 
     @ReadMeeting
-    @GetMapping
+    @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<MeetingDTO> getListOfMeeting() {
         return meetingRestService.getAllMeetings();
     }
+
+
 
     @ReadMeeting
     @GetMapping("/{id}")
@@ -45,7 +51,7 @@ public class MeetingRestController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MeetingDTO updateMeeting(@PathVariable Long id, @RequestBody MeetingDTO meetingDTO) {
-        return meetingRestService.saveMeetingByDTO(id, meetingDTO);
+        return meetingRestService.updateMeeting(id, meetingDTO);
     }
 
     @UpdateMeeting

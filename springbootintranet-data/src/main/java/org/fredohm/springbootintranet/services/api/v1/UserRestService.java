@@ -12,7 +12,7 @@ public interface UserRestService {
 
     UserDTO createNewUser(UserDTO userDTO);
 
-    UserDTO saveUserByDTO(Long id, UserDTO userDTO);
+    UserDTO updateUser(Long id, UserDTO userDTO);
 
     UserDTO patchUser(Long id, UserDTO userDTO);
 

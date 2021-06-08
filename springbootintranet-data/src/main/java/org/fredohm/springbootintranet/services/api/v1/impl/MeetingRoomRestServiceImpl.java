@@ -28,6 +28,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
     private final MeetingRoomMapper meetingRoomMapper;
     private final MeetingRoomRepository meetingRoomRepository;
 
+    @Transactional
     @Override
     public List<MeetingRoomDTO> getAllMeetingRooms() {
         return meetingRoomRepository.findAll()
@@ -42,6 +43,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
         return meetingRoomRepository.findAllByAvailableIsTrueOrderByNameAsc().stream().map(meetingRoomMapper::meetingRoomToMeetingRoomDTO).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public MeetingRoomDTO getMeetingRoomById(Long id) {
 
@@ -55,24 +57,23 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
                 .orElseThrow(ResourceNotFoundException::new));
     }
 
+    @Transactional
     @Override
     public MeetingRoomDTO createNewMeetingRoom(MeetingRoomDTO meetingRoomDTO) {
         meetingRoomDTO.setMeetings(new ArrayList<>());
         return saveAndReturnDTO(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO));
     }
 
+    @Transactional
     @Override
-    public MeetingRoomDTO saveMeetingRoomByDTO(Long id, MeetingRoomDTO meetingRoomDTO) {
-        MeetingRoom meetingRoom = meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO);
-        meetingRoom.setId(id);
+    public MeetingRoomDTO updateMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO) {
 
-        return saveAndReturnDTO(meetingRoom);
+        return saveAndReturnDTO(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO));
     }
 
+    @Transactional
     @Override
     public MeetingRoomDTO patchMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO) {
-        log.debug(id.toString());
-        log.debug(meetingRoomDTO.toString());
 
         return meetingRoomRepository.findById(id).map(meetingRoom -> {
             if (meetingRoomDTO.getName() != null) {
@@ -94,6 +95,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
         }).orElseThrow(ResourceNotFoundException::new);
     }
 
+    @Transactional
     @Override
     public void deleteMeetingRoomById(Long id) {
         if (meetingRoomRepository.findById(id).get().getMeetings() != null && meetingRoomRepository.findById(id).get().getMeetings().size() > 0) {

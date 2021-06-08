@@ -29,35 +29,35 @@ public class MeetingRoomRestController {
     }
 
     @ReadMeetingRoom
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MeetingRoomDTO getMeetingRoomById(@PathVariable Long id) {
         return meetingRoomRestService.getMeetingRoomById(id);
     }
 
     @CreateMeetingRoom
-    @PostMapping
+    @PostMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public MeetingRoomDTO createNewMeetingRoom(@RequestBody MeetingRoomDTO meetingRoomDTO) {
         return meetingRoomRestService.createNewMeetingRoom(meetingRoomDTO);
     }
 
     @UpdateMeetingRoom
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public MeetingRoomDTO updateMeetingRoom(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
-        return meetingRoomRestService.saveMeetingRoomByDTO(id, meetingRoomDTO);
+        return meetingRoomRestService.updateMeetingRoom(id, meetingRoomDTO);
     }
 
     @UpdateMeetingRoom
-    @PatchMapping("/{id}")
+    @PatchMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public MeetingRoomDTO patchMeetingRoom(@PathVariable Long id, @RequestBody MeetingRoomDTO meetingRoomDTO) {
         return meetingRoomRestService.patchMeetingRoom(id, meetingRoomDTO);
     }
 
     @DeleteMeetingRoom
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void deleteMeetingRoom(@PathVariable Long id) {
         meetingRoomRestService.deleteMeetingRoomById(id);
