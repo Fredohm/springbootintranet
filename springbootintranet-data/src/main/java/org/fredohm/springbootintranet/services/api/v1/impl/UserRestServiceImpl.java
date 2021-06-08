@@ -75,7 +75,9 @@ public class UserRestServiceImpl implements UserRestService {
             if (userDTO.getEmail() != null) {
                 user.setEmail(userDTO.getEmail());
             }
-            user.setRoles(roleToRoleListMapper.roleToList( roleMapper.roleDtoToRole( userDTO.getRole() ) ));
+            if (userDTO.getRole() != null) {
+                user.setRoles(roleToRoleListMapper.roleToList(roleMapper.roleDtoToRole(userDTO.getRole())));
+            }
 
             return userMapper.userToUserDTO(userRepository.save(user));
         }).orElseThrow(ResourceNotFoundException::new);
