@@ -59,13 +59,13 @@ public class Meeting extends BaseEntity {
     private LocalTime end;
 
     @Column(name = "drinks")
-    private boolean drinks;
+    private Boolean drinks;
 
     @Column(name = "food")
-    private boolean food;
+    private Boolean food;
 
     @Column(name = "projection")
-    private boolean projection;
+    private Boolean projection;
 
     @Column(name = "notes")
     private String notes;

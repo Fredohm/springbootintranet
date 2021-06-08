@@ -96,11 +96,15 @@ public class MeetingRestServiceImpl implements MeetingRestService {
             if (meeting.getEnd() != null) {
                 meeting.setEnd(meetingDTO.getEnd());
             }
-            meeting.setDrinks(meetingDTO.getDrinks());
-            meeting.setFood(meetingDTO.getFood());
-            meeting.setProjection(meetingDTO.getProjection());
-
-
+            if (meeting.getDrinks() != null) {
+                meeting.setDrinks(meetingDTO.getDrinks());
+            }
+            if (meeting.getFood() != null) {
+                meeting.setFood(meetingDTO.getFood());
+            }
+            if (meeting.getProjection() != null) {
+                meeting.setProjection(meetingDTO.getProjection());
+            }
             return meetingMapper.meetingToMeetingDTO(meetingRepository.save(meeting));
         }).orElseThrow(ResourceNotFoundException::new);
 
