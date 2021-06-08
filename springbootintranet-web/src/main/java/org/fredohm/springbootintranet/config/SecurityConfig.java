@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/index?logout")
                 .permitAll()
                 .and()
+                .csrf().disable() // For usage of postman and swagger only
                 .httpBasic();
     }
 }
