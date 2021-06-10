@@ -55,7 +55,15 @@ public class UserRestServiceImpl implements UserRestService {
     @Override
     public UserDTO updateUser(Long id, UserDTO userDTO) {
 
-        return saveAndReturnDTO(userMapper.userDtoToUser(userDTO));
+        User userToUpdate = userRepository.findById(id).get();
+        userToUpdate.setEmail(userMapper.userDtoToUser(userDTO).getEmail());
+        userToUpdate.setUsername(userMapper.userDtoToUser(userDTO).getUsername());
+        userToUpdate.setFirstName(userMapper.userDtoToUser(userDTO).getFirstName());
+        userToUpdate.setLastName(userMapper.userDtoToUser(userDTO).getLastName());
+        if(userMapper.userDtoToUser(userDTO).getPassword()!=null)userToUpdate.setPassword(userMapper.userDtoToUser(userDTO).getPassword());
+        userToUpdate.setRoles(roleToRoleListMapper.roleToList(roleMapper.roleDtoToRole(userDTO.getRole())));
+
+        return saveAndReturnDTO(userToUpdate);
     }
 
     @Transactional
