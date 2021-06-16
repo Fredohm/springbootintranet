@@ -68,7 +68,6 @@ public class MeetingRestServiceImpl implements MeetingRestService {
     @Transactional
     @Override
     public MeetingDTO updateMeeting(Long id, MeetingDTO meetingDTO) {
-
         return saveAndReturnDTO(meetingMapper.meetingDtoToMeeting(meetingDTO));
     }
 

@@ -20,11 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                // give access to mvc app static resources
+                .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources()
                         .atCommonLocations())
                 .permitAll()
                 .and()
+                // secure access to swagger-ui and postman
+                .authorizeRequests()
+                .antMatchers("/api/**")
+                .fullyAuthenticated()
+                .and()
+                // secure access to MVC application
                 .authorizeRequests(authorize -> {
                     authorize
                             .antMatchers("/", "/index", "/login")
@@ -44,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/index?logout")
                 .permitAll()
                 .and()
-                .csrf().disable() // For usage of postman and swagger only
                 .httpBasic();
+
+        // for securing postman use
+        http.cors();
     }
 }

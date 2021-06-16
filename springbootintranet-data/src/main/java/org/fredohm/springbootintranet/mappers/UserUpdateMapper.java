@@ -14,4 +14,7 @@ public interface UserUpdateMapper {
     @Mapping(target = "role", source = "roles")
     @Mapping(target = "matchingPassword", ignore = true)
     UserUpdateDTO userToUserUpdateDto(User user);
+
+    @Mapping(target = "role", source = "roles")
+    User userUpdateDtoToUser(User user);
 }

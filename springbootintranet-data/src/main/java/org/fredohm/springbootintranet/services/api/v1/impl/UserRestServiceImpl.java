@@ -60,7 +60,9 @@ public class UserRestServiceImpl implements UserRestService {
         userToUpdate.setUsername(userMapper.userDtoToUser(userDTO).getUsername());
         userToUpdate.setFirstName(userMapper.userDtoToUser(userDTO).getFirstName());
         userToUpdate.setLastName(userMapper.userDtoToUser(userDTO).getLastName());
-        if(userMapper.userDtoToUser(userDTO).getPassword()!=null)userToUpdate.setPassword(userMapper.userDtoToUser(userDTO).getPassword());
+        if (userMapper.userDtoToUser(userDTO).getPassword() != null) {
+            userToUpdate.setPassword(userMapper.userDtoToUser(userDTO).getPassword());
+        }
         userToUpdate.setRoles(roleToRoleListMapper.roleToList(roleMapper.roleDtoToRole(userDTO.getRole())));
 
         return saveAndReturnDTO(userToUpdate);

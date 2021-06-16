@@ -67,7 +67,7 @@ public class  MeetingRoomRestServiceImpl implements MeetingRoomRestService {
     @Transactional
     @Override
     public MeetingRoomDTO updateMeetingRoom(Long id, MeetingRoomDTO meetingRoomDTO) {
-
+        meetingRoomDTO.setId(id);
         return saveAndReturnDTO(meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDTO));
     }
 
