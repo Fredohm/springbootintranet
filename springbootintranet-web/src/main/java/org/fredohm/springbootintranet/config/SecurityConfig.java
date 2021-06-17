@@ -52,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/index?logout")
                 .permitAll()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .csrf().disable();
 
         // for securing postman use
         http.cors();
